@@ -1,6 +1,6 @@
-# 🌱🤝 GrassRoots App
+# 🌱 GrassRoots App 🤝
 
-## About
+## ℹ️ About
 
 Insert a blurb about this app.
 
@@ -12,11 +12,11 @@ Insert a blurb about this app.
 <img src="https://github.com/MithraPerera.png" width="60px;"/>
 </div>
 
-## App Demo
+## 💻 App Demo
 
 ### Features
 
-## Tech
+## 👾 Tech
 
 ### Tech Stack
 
@@ -30,6 +30,6 @@ Insert a blurb about this app.
 
 ### PostgreSQL ERD
 
-## Getting Started
+## 🏁 Getting Started
 
 ### Database & Application Setup
