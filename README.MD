@@ -1,0 +1,33 @@
+# GrassRoots App 🌱🤝
+
+## About
+
+Insert a blurb about this app.
+
+### Contributors
+
+<img src="https://github.com/swathij943.png" width="60px;"/>
+<img src="https://github.com/nahcg.png" width="60px;"/>
+<img src="https://github.com/MithraPerera.png" width="60px;"/>
+
+## App Demo
+
+### Features
+
+## Tech
+
+### Tech Stack
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=react,express,nodejs,postgres,materialui,tailwind,css" />
+  </a>
+</p>
+
+### Dependencies
+
+### PostgreSQL ERD
+
+## Getting Started
+
+### Database & Application Setup
