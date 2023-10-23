@@ -3,6 +3,7 @@ import "./App.css";
 
 import React, { Component } from "react";
 import { HashRouter, Route, Link } from "react-router-dom";
+import LoginButton from "./components/login";
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
             </a>
           </header>
         </div>
+        <LoginButton />
       </HashRouter>
     );
   }
