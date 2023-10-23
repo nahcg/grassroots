@@ -146,10 +146,4 @@ CREATE TABLE DiscussionPosts (
   Timestamp timestamp
 );
 
--- Create the Volunteers table
-CREATE TABLE Volunteers (
-  VolunteerID serial PRIMARY KEY,
-  UserID int REFERENCES Users(UserID),
-  CommunityID int REFERENCES Communities(CommunityID),
-  Joined timestamp
-);
+
