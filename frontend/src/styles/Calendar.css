@@ -1,20 +1,35 @@
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
+/* Updated styles in your Calendar.css file */
+
+.Calendar {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .calendar-container {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+  width: 80%; /* Set a percentage width for the calendar container */
+  max-width: 800px; /* Set a maximum width for the calendar container */
+  margin: 20px auto; /* Center the calendar container horizontally */
+}
+
+.react-calendar {
+  width: 100%; /* Make the calendar fill the entire width of its container */
+  max-width: 800px; /* Set a maximum width for the calendar */
+}
+
+.react-calendar__tile {
+  height: auto; /* Expand the tile height to accommodate events */
+  padding: 15px; /* Add some padding inside each tile */
+  font-size: 18px; /* Set the font size of the text inside each tile */
+}
+
+.react-calendar__tile--active {
+  background-color: #eaf6ff; /* Change the background color of the active (selected) tile */
 }
 
 .event-form {
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .events {
