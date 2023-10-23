@@ -1,95 +1,58 @@
 import React, { useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import '../styles/Calendar.css';
 
-const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-const Calendar = () => {
+const CalendarApp = () => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
+  const [eventText, setEventText] = useState('');
 
-  const currentMonth = date.getMonth();
-  const currentYear = date.getFullYear();
-
-  const getDaysInMonth = (month, year) => {
-    return new Date(year, month + 1, 0).getDate();
+  const handleDateChange = (newDate) => {
+    setDate(newDate);
   };
 
-  const getFirstDayOfMonth = (month, year) => {
-    return new Date(year, month, 1).getDay();
+  const handleEventInputChange = (e) => {
+    setEventText(e.target.value);
   };
 
-  const renderCalendar = () => {
-    const daysInMonth = getDaysInMonth(currentMonth, currentYear);
-    const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
-    const blanks = Array.from({ length: firstDay }, (_, index) => (
-      <div key={`blank-${index}`} className="calendar-day empty"></div>
-    ));
-
-    const days = Array.from({ length: daysInMonth }, (_, index) => {
-      const day = index + 1;
-      const eventCount = events.filter(event => {
-        const eventDate = new Date(event.date);
-        return (
-          eventDate.getFullYear() === currentYear &&
-          eventDate.getMonth() === currentMonth &&
-          eventDate.getDate() === day
-        );
-      }).length;
-
-      return (
-        <div key={`day-${index}`} className={`calendar-day ${eventCount > 0 ? 'has-events' : ''}`}>
-          {day}
-          {eventCount > 0 && <div className="event-count">{eventCount}</div>}
-        </div>
-      );
-    });
-
-    return [...blanks, ...days];
-  };
-
-  const prevMonth = () => {
-    setDate(new Date(currentYear, currentMonth - 1, 1));
-  };
-
-  const nextMonth = () => {
-    setDate(new Date(currentYear, currentMonth + 1, 1));
-  };
-
-  // Method to add a new event
   const addEvent = () => {
+    if (eventText.trim() === '') return;
     const newEvent = {
-      date: date.toISOString(),
-      // Other event properties can be added here
+      date: date,
+      text: eventText,
     };
     setEvents([...events, newEvent]);
+    setEventText('');
   };
 
   return (
-    <div className="calendar-container">
-      <div className="calendar-header">
-        <button className="calendar-nav" onClick={prevMonth}>
-          {'<'}
-        </button>
-        <h1 className="calendar-month">
-          {date.toLocaleString('en-US', { month: 'long', year: 'numeric' })}
-        </h1>
-        <button className="calendar-nav" onClick={nextMonth}>
-          {'>'}
-        </button>
-        <button className="add-event-button" onClick={addEvent}>
-          Add Event
-        </button>
+    <div className="Calendar">
+      <h1>Event Calendar</h1>
+      <div className="calendar-container">
+        <div className="event-form">
+          <input
+            type="text"
+            placeholder="Enter event..."
+            value={eventText}
+            onChange={handleEventInputChange}
+          />
+          <button onClick={addEvent}>Add Event</button>
+        </div>
+        <Calendar onChange={handleDateChange} value={date} />
+        <div className="events">
+          <h2>Events:</h2>
+          <ul>
+            {events.map((event, index) => (
+              <li key={index}>
+                {event.date.toDateString()} - {event.text}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="calendar-days-of-week">
-        {daysOfWeek.map(day => (
-          <div key={day} className="calendar-day-of-week">
-            {day}
-          </div>
-        ))}
-      </div>
-      <div className="calendar-days">{renderCalendar()}</div>
     </div>
   );
 };
 
-export default Calendar;
+export default CalendarApp;
