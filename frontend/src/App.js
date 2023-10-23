@@ -1,34 +1,36 @@
-import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import React, { Component } from "react";
-import { HashRouter, Route, Link } from "react-router-dom";
-import LoginButton from "./components/login";
+import Home from "./views/Home";
+import Community from "./views/Community";
+import Event from "./views/Event";
+import Register from "./views/Register";
+import Volunteer from "./views/Volunteer";
+import Profile from "./views/Profile";
 
-class App extends Component {
-  render() {
-    return (
-      <HashRouter basename="/">
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
-        <LoginButton />
-      </HashRouter>
-    );
-  }
+import Navbar from "./components/Navbar";
+import LoginButton from "./components/Login";
+import LogoutButton from "./components/Logout";
+
+function App() {
+  return (
+    <div className="wrapper">
+      <h1>Grassroots</h1>
+      <LoginButton />
+      <LogoutButton />
+      <Profile />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/event" element={<Event />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/volunteer" element={<Volunteer />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
