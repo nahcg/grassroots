@@ -22,7 +22,6 @@ CREATE TABLE Users (
   Email varchar,
   Password varchar,
   UserType varchar,
-  NotificationPreferences varchar
 );
 
 -- Create the Communities table
