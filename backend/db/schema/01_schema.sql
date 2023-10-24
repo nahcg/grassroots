@@ -85,32 +85,6 @@ CREATE TABLE Resources (
   ContactInformation varchar
 );
 
--- Create the Surveys table
-CREATE TABLE Surveys (
-  SurveyID serial PRIMARY KEY,
-  UserID int REFERENCES Users(UserID),
-  CommunityID int REFERENCES Communities(CommunityID),
-  Title varchar,
-  Description text,
-  Timestamp timestamp
-);
-
--- Create the SurveyQuestions table
-CREATE TABLE SurveyQuestions (
-  QuestionID serial PRIMARY KEY,
-  SurveyID int REFERENCES Surveys(SurveyID),
-  Question text
-);
-
--- Create the SurveyResponses table
-CREATE TABLE SurveyResponses (
-  ResponseID serial PRIMARY KEY,
-  UserID int REFERENCES Users(UserID),
-  QuestionID int REFERENCES SurveyQuestions(QuestionID),
-  Response text,
-  Timestamp timestamp
-);
-
 -- Create the Skills table
 CREATE TABLE Skills (
   SkillID serial PRIMARY KEY,
