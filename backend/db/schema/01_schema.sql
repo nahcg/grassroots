@@ -126,24 +126,3 @@ CREATE TABLE UserSkills (
   ExperienceLevel varchar
 );
 
-
--- Create the Discussions table
-CREATE TABLE Discussions (
-  DiscussionID serial PRIMARY KEY,
-  CommunityID int REFERENCES Communities(CommunityID),
-  Title varchar,
-  Description text,
-  Category varchar,
-  Timestamp timestamp
-);
-
--- Create the DiscussionPosts table
-CREATE TABLE DiscussionPosts (
-  PostID serial PRIMARY KEY,
-  DiscussionID int REFERENCES Discussions(DiscussionID),
-  UserID int REFERENCES Users(UserID),
-  Content text,
-  Timestamp timestamp
-);
-
-
