@@ -63,28 +63,6 @@ CREATE TABLE Events (
   Location varchar
 );
 
--- Create the Petitions table
-CREATE TABLE Petitions (
-  PetitionID serial PRIMARY KEY,
-  UserID int REFERENCES Users(UserID),
-  CommunityID int REFERENCES Communities(CommunityID),
-  Title varchar,
-  Description text,
-  SignatureCount int,
-  Deadline date
-);
-
--- Create the Resources table
-CREATE TABLE Resources (
-  ResourceID serial PRIMARY KEY,
-  UserID int REFERENCES Users(UserID),
-  Name varchar,
-  Category varchar,
-  Description text,
-  Location varchar,
-  ContactInformation varchar
-);
-
 -- Create the Skills table
 CREATE TABLE Skills (
   SkillID serial PRIMARY KEY,
