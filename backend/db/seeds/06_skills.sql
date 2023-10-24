@@ -1,4 +1,9 @@
-INSERT INTO Skills (Name, Description)
+INSERT INTO skills (name, description)
 VALUES
-  ('Skill A', 'Description for Skill A'),
-  ('Skill B', 'Description for Skill B');
+  ('Frontend - Web Development', 'Description for Skill A'),
+  ('Backend - Web Development', 'Description for Skill B'),
+  ('Full Stack - Web Development', 'Description for Skill B'),
+  ('Web Design - Web Development', 'Description for Skill B'),
+  ('Marketing', 'Description for Skill B'),
+  ('Photography', 'Description for Skill B'),
+  ('Videography', 'Description for Skill B');
