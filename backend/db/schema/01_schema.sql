@@ -21,7 +21,7 @@ CREATE TABLE Users (
   Username varchar,
   Email varchar,
   Password varchar,
-  UserType varchar,
+  UserType varchar
 );
 
 -- Create the Communities table
@@ -55,12 +55,10 @@ CREATE TABLE Posts (
 -- Create the Events table
 CREATE TABLE Events (
   EventID serial PRIMARY KEY,
-  UserID int REFERENCES Users(UserID),
   CommunityID int REFERENCES Communities(CommunityID),
   Title varchar,
-  Description text,
-  DateTime timestamp,
-  Location varchar
+  Details text,
+  Date Date
 );
 
 -- Create the Petitions table
