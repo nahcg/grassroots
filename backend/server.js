@@ -36,6 +36,7 @@ app.use(express.json());
 // const usersRoutes = require("./routes/users");
 const userApiRoutes = require("./routes/users");
 const communitiesApiRoutes = require("./routes/communities");
+const postsApiRoutes = require("./routes/posts");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -45,6 +46,7 @@ const communitiesApiRoutes = require("./routes/communities");
 // Note: mount other resources here, using the same pattern above
 app.use("/api/users", userApiRoutes);
 app.use("/api/communities", communitiesApiRoutes);
+app.use("/api/posts", postsApiRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!
