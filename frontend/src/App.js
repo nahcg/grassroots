@@ -14,7 +14,6 @@ import Profile from "./views/Profile";
 import Navbar from "./components/Navbar";
 import LoginButton from "./components/Login";
 import LogoutButton from "./components/Logout";
-import JoinCommunity from './components/JoinCommunity';
 
 function App() {
   return (
@@ -32,7 +31,6 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/join-community" element={<JoinCommunity />} />
       </Routes>
     </div>
   );

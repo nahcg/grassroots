@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import JoinCommunity from '../components/JoinCommunity'; // Import the JoinCommunity component
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   const { isAuthenticated } = useAuth0(); // Check if the user is authenticated
@@ -22,8 +21,16 @@ const Landing = () => {
         </div>
       )}
 
-      {/* "Join Communities" button using the JoinCommunity component */}
-      <JoinCommunity />
+      {/* "Join Communities" button that redirects to login or register */}
+      {!isAuthenticated ? (
+        <Link to="/login">
+          <button>Join Communities</button>
+        </Link>
+      ) : (
+        <Link to="/register">
+          <button>Join Communities</button>
+        </Link>
+      )}
     </div>
   );
 };
