@@ -63,7 +63,20 @@ router.get('/cause/:cause_id', (req, res) => {
 
 /* UPDATE */
 
-router.put('', (req, res) => {
+// Update the name of the community
+router.put('/name', (req, res) => {
+  const id = parseInt(req.body.id);
+  const newName = req.body.name;
+
+  communitiesQueries.updateCommunityName(id, newName)
+    .then((data) => {
+      // console.log("data params: ", data);
+      return res.json({ data });
+    })
+    .catch((e) => {
+      console.log("Error: ", e);
+      return res.status(500).send('Error adding new community');
+    });
 
 });
 

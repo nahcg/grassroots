@@ -42,4 +42,15 @@ const addNewCommunity = (name, description, location, cause, creation_date) => {
     });
 };
 
-module.exports = { getAllCommunities, getAllCauseCommunities, deleteCommunityById, addNewCommunity };
+const updateCommunityName = (id, name) => {
+  const qs = `
+  UPDATE communities SET name = $1 WHERE community_id = $2 RETURNING *
+  `;
+  return db.query(qs, [name, id])
+    .then(res => res.rows)
+    .catch((err) => {
+      return err;
+    });
+};
+
+module.exports = { getAllCommunities, getAllCauseCommunities, deleteCommunityById, addNewCommunity, updateCommunityName };
