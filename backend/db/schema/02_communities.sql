@@ -5,5 +5,6 @@ CREATE TABLE communities (
   name VARCHAR(255) NOT NULL,
   description TEXT,
   location VARCHAR(255) NOT NULL,
+  cause INT NOT NULL,
   creation_date DATE
 );
