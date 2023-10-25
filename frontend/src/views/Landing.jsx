@@ -5,11 +5,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 const Landing = () => {
   const { isAuthenticated } = useAuth0(); // Check if the user is authenticated
 
-
   return (
     <div>
       <h1>Welcome to Grassroots App</h1>
-      
+
       {/* Display "Login" and "Register" buttons if the user is not authenticated */}
       {!isAuthenticated && (
         <div>
