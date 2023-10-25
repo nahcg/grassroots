@@ -9,6 +9,7 @@ const Landing = () => {
   return (
     <div>
       <h1>Welcome to Grassroots App</h1>
+      
       {/* Display "Login" and "Register" buttons if the user is not authenticated */}
       {!isAuthenticated && (
         <div>
@@ -20,7 +21,7 @@ const Landing = () => {
           </Link>
         </div>
       )}
-      
+
       {/* "Join Communities" button */}
       <Link to={isAuthenticated ? '/community' : '/login'}>
         <button>Join Communities</button>
