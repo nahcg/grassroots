@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS skills CASCADE;
+
+CREATE TABLE skills (
+  skill_id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR NOT NULL,
+  description TEXT
+);

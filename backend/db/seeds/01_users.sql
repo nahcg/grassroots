@@ -1,7 +1,7 @@
-INSERT INTO Users (SubID, Username, Email, Password, UserType)
+INSERT INTO users (sub_id, username, first_name, last_name, email)
 VALUES
-  ('sub123', 'user1', 'user1@example.com', 'password1', 'Regular'),
-  ('sub456', 'user2', 'user2@example.com', 'password2', 'Admin'),
-  ('sub789', 'user3', 'user3@example.com', 'password3', 'Regular');
+('sub123', 'user1', 'Mithra', 'Perera', 'user1@example.com'),
+('sub456', 'user2', 'Claire', 'Rogers', 'user2@example.com'),
+('sub789', 'user3', 'Bob', 'Ross', 'user3@example.com');
 
 
