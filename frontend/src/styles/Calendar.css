@@ -1,5 +1,3 @@
-/* Updated styles in your Calendar.css file */
-
 .Calendar {
   text-align: center;
   margin-top: 20px;
@@ -7,13 +5,13 @@
 
 .calendar-container {
   width: 80%; /* Set a percentage width for the calendar container */
-  max-width: 800px; /* Set a maximum width for the calendar container */
+  max-width: 1000px; /* Set a maximum width for the calendar container */
   margin: 20px auto; /* Center the calendar container horizontally */
 }
 
 .react-calendar {
   width: 100%; /* Make the calendar fill the entire width of its container */
-  max-width: 800px; /* Set a maximum width for the calendar */
+  max-width: 1000px; /* Set a maximum width for the calendar */
 }
 
 .react-calendar__tile {
@@ -43,4 +41,6 @@ ul {
 
 li {
   margin-bottom: 10px;
+  padding: 10px; /* Add padding to the li elements */
+  border: 1px solid #ccc; /* Add a border to the li elements */
 }
