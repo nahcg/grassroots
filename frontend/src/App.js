@@ -2,6 +2,8 @@ import "./App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+
+import Landing from './views/Landing'; // Import the Landing component
 import Home from "./views/Home";
 import Community from "./views/Community";
 import Event from "./views/Event";
@@ -22,6 +24,7 @@ function App() {
       <Profile />
       <Navbar />
       <Routes>
+      <Route path="/" element={<Landing />} /> {/* Display the Landing page on the root URL */}
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/event" element={<Event />} />
