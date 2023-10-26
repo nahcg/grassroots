@@ -12,20 +12,14 @@ import Volunteer from "./views/Volunteer";
 import Profile from "./views/Profile";
 
 import Navbar from "./components/Navbar";
-import LoginButton from "./components/Login";
-import LogoutButton from "./components/Logout";
 
 function App() {
   return (
     <div className="wrapper">
-      <h1>Grassroots</h1>
-      <LoginButton />
-      <LogoutButton />
-      <Profile />
       <Navbar />
       <Routes>
-      <Route path="/" element={<Landing />} /> {/* Display the Landing page on the root URL */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Landing />} /> {/* Display the Landing page on the root URL */}
+        <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/event" element={<Event />} />
         <Route path="/community" element={<Community />} />

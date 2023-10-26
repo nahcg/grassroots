@@ -6,6 +6,7 @@ require("dotenv").config();
 // const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
+const cors = require('cors');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -19,6 +20,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.json());
+app.use(cors());
 // app.use(
 //   "/styles",
 //   sassMiddleware({
@@ -34,7 +36,7 @@ app.use(express.json());
 // Note: Feel free to replace the example routes below with your own
 // const widgetApiRoutes = require("./routes/widgets-api");
 // const usersRoutes = require("./routes/users");
-const userApiRoutes = require("./routes/users");
+// const userApiRoutes = require("./routes/users");
 const communitiesApiRoutes = require("./routes/communities");
 const postsApiRoutes = require("./routes/posts");
 const eventsApiRoutes = require("./routes/events");
@@ -46,7 +48,7 @@ const user_skills_ApiRoutes = require("./routes/userskills");
 // app.use("/api/widgets", widgetApiRoutes);
 // app.use("/users", usersRoutes);
 // Note: mount other resources here, using the same pattern above
-app.use("/api/users", userApiRoutes);
+// app.use("/api/users", userApiRoutes);
 app.use("/api/communities", communitiesApiRoutes);
 app.use("/api/posts", postsApiRoutes);
 app.use("/api/events", eventsApiRoutes);
