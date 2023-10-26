@@ -20,7 +20,6 @@ function Home() {
 			Hello
 			<div className='nav-links'>
 				<Link to='/home'>Home</Link>
-				<Link to='/register'>Register</Link>
 				<Link to='/community'>Communties</Link>
 				<Link to='/event'>Events</Link>
 				<Link to='/volunteer'>Volunteer</Link>
