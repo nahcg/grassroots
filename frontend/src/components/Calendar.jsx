@@ -9,9 +9,10 @@ const CalendarApp = () => {
   const [events, setEvents] = useState([]);
   const [eventTitle, setEventTitle] = useState('');
   const [eventDetails, setEventDetails] = useState('');
+  const [eventLocation, setEventLocation] = useState(''); // New state for event location
   const { id } = useParams(); // Get the ID parameter from the URL
 
-  //return array of objects 
+  // Return array of objects
   useEffect(() => {
     // Fetch events based on the ID parameter from the URL
     fetch(`http://localhost:8080/events/${id}`)
@@ -32,20 +33,22 @@ const CalendarApp = () => {
     setDate(newDate);
   };
 
-  //adds event based on date, title and details
+  // Adds event based on date, title, details, and location
   const addEvent = () => {
-    if (eventTitle.trim() === '' || eventDetails.trim() === '') return;
+    if (eventTitle.trim() === '' || eventDetails.trim() === '' || eventLocation.trim() === '') return;
     const newEvent = {
       date: date,
       title: eventTitle,
       details: eventDetails,
+      location: eventLocation, // Include location in the new event object
     };
     setEvents([...events, newEvent]);
     setEventTitle('');
     setEventDetails('');
+    setEventLocation(''); // Reset location field after adding event
   };
 
-  // renders event title and date onto calendar tile
+  // Renders event title, date, details, and location onto calendar tile
   const tileContent = ({ date, view }) => {
     if (view === 'month') {
       const matchingEvents = events.filter((event) => {
@@ -57,13 +60,13 @@ const CalendarApp = () => {
         }
         return false;
       });
-  
+
       if (matchingEvents.length > 0) {
         return (
           <ul>
             {matchingEvents.map((event, index) => (
               <li key={index}>
-                {event.title}
+                {event.title} at {event.location}
               </li>
             ))}
           </ul>
@@ -89,6 +92,12 @@ const CalendarApp = () => {
             value={eventDetails}
             onChange={(e) => setEventDetails(e.target.value)}
           />
+          <input
+            type="text"
+            placeholder="Event Location..." // Input field for event location
+            value={eventLocation}
+            onChange={(e) => setEventLocation(e.target.value)}
+          />
           <button onClick={addEvent}>Add Event</button>
         </div>
 
@@ -98,16 +107,16 @@ const CalendarApp = () => {
           tileContent={tileContent}
         />
 
-<div className="events">
-  <h2>Events:</h2>
-  <ul>
-    {events.map((event, index) => (
-      <li key={index}>
-        {new Date(event.date).toDateString()} - {event.title} - {event.details}
-      </li>
-    ))}
-  </ul>
-</div>
+        <div className="events">
+          <h2>Events:</h2>
+          <ul>
+            {events.map((event, index) => (
+              <li key={index}>
+                {new Date(event.date).toDateString()} - {event.title} - {event.details} - {event.location}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
