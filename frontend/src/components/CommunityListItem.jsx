@@ -1,18 +1,18 @@
 import React from "react";
 import "../styles/CommunityListItem.css";
 
-const testCommunity = {
-	name: "Anti-Justin Trudeau",
-	description:
-		"This community is to apose Justin Trudeau and discuss ways we can stop him from doing what he wants in this country.",
-	location: "Toronto, ON",
-	cause: 1,
-	creation_date: "2023-10-26",
-	community_picture:
-		"https://www.hilltimes.com/wp-content/uploads/2022/03/DSC04409.t62012ebb.m800.x3E3UulEE-1.jpg.webp",
-};
+// const testCommunity = {
+// 	name: "Anti-Justin Trudeau",
+// 	description:
+// 		"This community is to apose Justin Trudeau and discuss ways we can stop him from doing what he wants in this country.",
+// 	location: "Toronto, ON",
+// 	cause: 1,
+// 	creation_date: "2023-10-26",
+// 	community_picture:
+// 		"https://www.hilltimes.com/wp-content/uploads/2022/03/DSC04409.t62012ebb.m800.x3E3UulEE-1.jpg.webp",
+// };
 
-const CommunityListItem = ({ name, location, communityPicture }) => {
+const CommunityListItem = ({ name, location, communityPicture, cause_tag }) => {
 	return (
 		<div className='community-list__item'>
 			<img
@@ -23,6 +23,9 @@ const CommunityListItem = ({ name, location, communityPicture }) => {
 			<div className='community-list__info'>
 				<h4>{name}</h4>
 				<span>📍{location}</span>
+				{cause_tag === 1 && <div>Politics</div>}
+				{cause_tag === 2 && <div>Environment</div>}
+				{cause_tag === 3 && <div>Social</div>}
 			</div>
 		</div>
 	);

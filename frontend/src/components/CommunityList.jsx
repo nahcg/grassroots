@@ -8,9 +8,11 @@ const CommunityList = ({ communitiesList }) => {
 		<ul className='community-list'>
 			{communitiesList.map((community) => (
 				<CommunityListItem
+					key={community.community_id}
 					name={community.name}
 					location={community.location}
-					communityPicture={community.community_picture}
+					communityPicture={community.picture_url}
+					cause_tag={community.cause}
 				/>
 			))}
 		</ul>

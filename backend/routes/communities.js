@@ -17,8 +17,9 @@ router.post('/', (req, res) => {
   const location = req.body.location;
   const cause = req.body.cause;
   const creation_date = req.body.creation_date;
+  const picture_url = req.body.picture_url;
 
-  communitiesQueries.addNewCommunity(name, description, location, cause, creation_date)
+  communitiesQueries.addNewCommunity(name, description, location, cause, creation_date, picture_url)
     .then((data) => {
       // console.log("data params: ", data);
       return res.json({ data });
