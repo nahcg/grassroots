@@ -10,12 +10,12 @@ const CalendarApp = () => {
   const [eventTitle, setEventTitle] = useState('');
   const [eventDetails, setEventDetails] = useState('');
   const [eventLocation, setEventLocation] = useState(''); // New state for event location
-  const { id } = useParams(); // Get the ID parameter from the URL
+  const { CommunityId } = useParams(); // Get the ID parameter from the URL
 
   // Return array of objects
   useEffect(() => {
     // Fetch events based on the ID parameter from the URL
-    fetch(`http://localhost:8080/events/${id}`)
+    fetch(`http://localhost:8080/events/${CommunityId}`)
       .then((response) => response.json())
       .then((data) => {
         // Format dates before setting state
@@ -27,26 +27,56 @@ const CalendarApp = () => {
         setEvents(formattedEvents);
       })
       .catch((error) => console.error('Error fetching events', error));
-  }, [id]);
+  }, [CommunityId]);
+
 
   const handleDateChange = newDate => {
     setDate(newDate);
   };
 
-  // Adds event based on date, title, details, and location
-  const addEvent = () => {
-    if (eventTitle.trim() === '' || eventDetails.trim() === '' || eventLocation.trim() === '') return;
-    const newEvent = {
-      date: date,
-      title: eventTitle,
-      details: eventDetails,
-      location: eventLocation, // Include location in the new event object
-    };
-    setEvents([...events, newEvent]);
-    setEventTitle('');
-    setEventDetails('');
-    setEventLocation(''); // Reset location field after adding event
+// add event
+const addEvent = () => {
+  if (eventTitle.trim() === '' || eventDetails.trim() === '' || eventLocation.trim() === '') return;
+  
+  // Format the date to YYYY-MM-DD
+  const formattedDate = date.toISOString().split('T')[0];
+
+  const newEvent = {
+    CommunityId: CommunityId,
+    title: eventTitle,
+    details: eventDetails,
+    date: formattedDate, 
+    location: eventLocation
   };
+  console.log("newEvent", newEvent)
+
+  // Send a PUT request to update the events table with the new event
+  fetch(`http://localhost:8080/events/${CommunityId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newEvent),
+  })
+    .then((response) => response.json())
+    .then((updatedEvent) => {
+      console.log("updatedEvent", updatedEvent)
+      // Update the state with the new event returned from the server
+      setEvents([...events, updatedEvent]);
+      setEventTitle('');
+      setEventDetails('');
+      setEventLocation('');
+    })
+    .catch((error) => console.error('Error adding event', error));
+};
+
+
+
+
+
+
+
+
 
   // Renders event title, date, details, and location onto calendar tile
   const tileContent = ({ date, view }) => {

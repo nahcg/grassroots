@@ -58,7 +58,8 @@ CREATE TABLE Events (
   CommunityID int REFERENCES Communities(CommunityID),
   Title varchar,
   Details text,
-  Date Date
+  Date Date,
+  Location varchar
 );
 
 -- Create the Petitions table
