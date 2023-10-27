@@ -163,26 +163,20 @@
     {
       "img": "img/FindOpportunities.png",
       "icon": "fa fa-comments-o",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "title": "Find Opportunities",
+      "text": "GrassRoots offers a wide range of opportunities that match your skills."
     },
     {
       "img": "img/JoinCommunities.png",
       "icon": "fa fa-bullhorn",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "title": "Join Communities",
+      "text": "Joining communities is the first step towards making a real impact and connecting with people."
     },
     {
-      "img": "img/Support.png",
+      "img": "img/SupportCauses.png",
       "icon": "fa fa-group",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
-    },
-    {
-      "img": "img/SupportCauses.jpg",
-      "icon": "fa fa-magic",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "title": "Support Causes",
+      "text": "Support the causes that matter most to you and be a force for change in the world."
     }
   ]
 }
