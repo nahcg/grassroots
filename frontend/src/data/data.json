@@ -4,7 +4,7 @@
     "paragraph": "GrassRoots ensures that individuals can effectively come together, collaborate, and create positive change in their local and global communities."
   },
   "About": {
-    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "paragraph": "A versatile and user-friendly web application designed to facilitate engagement, communication, and collaboration among members of a particular community.",
     "Why": [
       "Lorem ipsum dolor",
       "Tempor incididunt",
@@ -152,9 +152,9 @@
     }
   ],
   "Contact": {
-    "address": "4321 California St, San Francisco, CA 12345 ",
-    "phone": "+1 123 456 1234",
-    "email": "info@company.com",
+    "email_1": "glor.chan@mail.utoronto.ca",
+    "email_2": "smpere7@gmail.com",
+    "email_3": "swathijayasree999@gmail.com",
     "facebook": "fb.com",
     "twitter": "twitter.com",
     "youtube": "youtube.com"
