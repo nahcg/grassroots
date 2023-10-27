@@ -47,21 +47,23 @@ import CommunityList from "../components/CommunityList";
 // 	},
 // ];
 
-const testCommunities = [];
-
 const Explore = () => {
 	const { user, isAuthenticated, isLoading } = useAuth0();
 	const [communitiesData, setCommunitiesData] = useState([]);
+	const [causeFilterSelection, setCauseFilterSelection] = useState(0);
 
 	const fetchData = () => {
-		return axios
-			.get("http://localhost:8080/api/communities/")
-			.then((res) => setCommunitiesData(res.data.communities));
+		axios
+			.get(`http://localhost:8080/api/communities/${causeFilterSelection}`)
+			.then((res) => {
+				console.log(res.data.communities);
+				setCommunitiesData(res.data.communities);
+			});
 	};
 
 	useEffect(() => {
-		fetchData();
-	}, []);
+		fetchData(causeFilterSelection);
+	}, [causeFilterSelection]);
 
 	return (
 		<div>
@@ -70,10 +72,12 @@ const Explore = () => {
 				<h2>Cause</h2>
 				<div className='explore-page_causes'>
 					<div>
-						<button>All</button>
-						<button>Politics</button>
-						<button>Environment</button>
-						<button>Social</button>
+						<button onClick={() => setCauseFilterSelection(0)}>All</button>
+						<button onClick={() => setCauseFilterSelection(1)}>Politics</button>
+						<button onClick={() => setCauseFilterSelection(2)}>
+							Environment
+						</button>
+						<button onClick={() => setCauseFilterSelection(3)}>Social</button>
 					</div>
 				</div>
 				<h2>Search</h2>

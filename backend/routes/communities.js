@@ -47,18 +47,30 @@ router.get('/', (req, res) => {
 });
 
 // Return all communities of a certain type
-router.get('/cause/:cause_id', (req, res) => {
+router.get('/:cause_id', (req, res) => {
   const cause = req.params.cause_id;
 
-  communitiesQueries.getAllCauseCommunities(cause)
-    .then(communities => {
-      res.json({ communities });
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+  if (cause == 0) {
+    communitiesQueries.getAllCommunities()
+      .then(communities => {
+        res.json({ communities });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  } else {
+    communitiesQueries.getAllCauseCommunities(cause)
+      .then(communities => {
+        res.json({ communities });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  }
 });
 
 
