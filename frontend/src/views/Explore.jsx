@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+import TextField from "@mui/material/TextField";
 
 import "../styles/Explore.css";
 import CommunityList from "../components/CommunityList";
@@ -51,19 +52,38 @@ const Explore = () => {
 	const { user, isAuthenticated, isLoading } = useAuth0();
 	const [communitiesData, setCommunitiesData] = useState([]);
 	const [causeFilterSelection, setCauseFilterSelection] = useState(0);
+	const [inputText, setInputText] = useState("");
 
-	const fetchData = () => {
+	useEffect(() => {
+		const fetchData = () => {
+			axios
+				.get(`http://localhost:8080/api/communities/${causeFilterSelection}`)
+				.then((res) => {
+					// console.log(res.data.communities);
+					setCommunitiesData(res.data.communities);
+				});
+		};
+		fetchData(causeFilterSelection);
+	}, [causeFilterSelection]);
+
+	const fetchDataSearchFilter = (inputText) => {
 		axios
-			.get(`http://localhost:8080/api/communities/${causeFilterSelection}`)
+			.get(`http://localhost:8080/api/communities/`, {
+				params: {
+					name: inputText,
+				},
+			})
 			.then((res) => {
-				console.log(res.data.communities);
 				setCommunitiesData(res.data.communities);
 			});
 	};
 
-	useEffect(() => {
-		fetchData(causeFilterSelection);
-	}, [causeFilterSelection]);
+	let inputHandler = (e) => {
+		//convert the input text to lower case
+		let lowerCase = e.target.value.toLowerCase();
+		setInputText(lowerCase);
+		fetchDataSearchFilter(lowerCase);
+	};
 
 	return (
 		<div>
@@ -82,8 +102,15 @@ const Explore = () => {
 				</div>
 				<h2>Search</h2>
 				<div className='explore-page_search-bar'>
-					<textarea value='Enter text here' onChange={() => {}}></textarea>
-					<button>Enter</button>
+					<div className='search'>
+						<TextField
+							id='outlined-basic'
+							onChange={inputHandler}
+							variant='outlined'
+							fullWidth
+							label='Search Name of Community'
+						/>
+					</div>
 				</div>
 				<div className='viewToggle'>
 					<span>View</span>

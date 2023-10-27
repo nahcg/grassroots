@@ -33,9 +33,10 @@ router.post('/', (req, res) => {
 
 /* READ */
 
-// Return All Communities
+// Return all communities with a given name
 router.get('/', (req, res) => {
-  communitiesQueries.getAllCommunities()
+  const { name } = req.query;
+  communitiesQueries.getAllCommunitiesWithName(name)
     .then(communities => {
       res.json({ communities });
     })

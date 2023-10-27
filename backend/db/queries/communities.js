@@ -10,6 +10,21 @@ const getAllCommunities = () => {
     });
 };
 
+const getAllCommunitiesWithName = (name) => {
+  return db.query(`
+    SELECT * FROM communities WHERE name ILIKE $1;
+  `, [`%${name}%`])
+    .then(res => {
+
+      console.log('res Rows', res.rows);
+      return res.rows;
+    }
+    )
+    .catch((e) => {
+      return e;
+    });
+};
+
 const getAllCauseCommunities = (cause) => {
   return db.query(`
     SELECT * FROM communities WHERE cause = $1
@@ -53,4 +68,4 @@ const updateCommunityName = (id, name) => {
     });
 };
 
-module.exports = { getAllCommunities, getAllCauseCommunities, deleteCommunityById, addNewCommunity, updateCommunityName };
+module.exports = { getAllCommunities, getAllCommunitiesWithName, getAllCauseCommunities, deleteCommunityById, addNewCommunity, updateCommunityName };
