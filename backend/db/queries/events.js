@@ -46,10 +46,10 @@ const getEventById = async (CommunityId, EventId) => {
 const editEvent = async (title, details, location, EventId, CommunityID) => {
   try {
     const event = await db.query(
-      `UPDATE events SET title=$1, details=$2, location=$3 WHERE EventId=$4 AND CommunityID=$5`,
+      `UPDATE events SET title=$1, details=$2, location=$3 WHERE EventId=$4 AND CommunityId=$5 RETURNING title, details, location, EventId, CommunityId`,
       [title, details, location, EventId, CommunityID]
     );
-    console.log("Fetched events:", event); // Log the fetched events
+    console.log("Fetched events from edit single event:", event); // Log the fetched events
     return event;
   } catch (error) {
     console.error("Error fetching events:", error); // Log any errors

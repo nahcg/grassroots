@@ -50,7 +50,7 @@ router.get("/:CommunityId/:EventId", (req, res) => {
 });
 
 //express route for editing an event
-router.put("/:CommunityId/:EventId", (req, res) => {
+router.post("/:CommunityId/:EventId", (req, res) => {
   const EventId = req.params.EventId;
   const CommunityId = req.params.CommunityId;
   const { title, details, location } = req.body;
@@ -65,7 +65,7 @@ router.put("/:CommunityId/:EventId", (req, res) => {
     ])
     .then((results) => {
       res.json(results.rows);
-      console.log("results from route", results.rows);
+      console.log("results from post route of edit", results.rows);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

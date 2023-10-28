@@ -9,8 +9,10 @@ const CalendarApp = () => {
   const [events, setEvents] = useState([]);
   const [eventTitle, setEventTitle] = useState('');
   const [eventDetails, setEventDetails] = useState('');
-  const [eventLocation, setEventLocation] = useState(''); // New state for event location
+  const [eventLocation, setEventLocation] = useState('');
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const { CommunityId } = useParams(); // Get the ID parameter from the URL
+  
 
   // Return array of objects
   useEffect(() => {
@@ -33,6 +35,8 @@ const CalendarApp = () => {
   const handleDateChange = newDate => {
     setDate(newDate);
   };
+
+
 
 // add event
 const addEvent = () => {
@@ -76,6 +80,94 @@ const addEvent = () => {
 
 
 
+const editEvent = (eventId) => {
+  // Find the selected event based on eventId
+  const eventToEdit = events.find((event) => event.eventid === Number(eventId));
+
+  if (eventToEdit) {
+    // Set the selected event for editing
+    setSelectedEvent(eventToEdit);
+    setEventTitle(eventToEdit.title);
+    setEventDetails(eventToEdit.details);
+    setEventLocation(eventToEdit.location);
+    console.log("eventToEdit", eventToEdit)
+  }
+};
+
+
+// Function to handle saving changes after editing the event
+const handleSave = () => {
+  if (!selectedEvent) return;
+
+  
+  const updatedEvent = {
+    title: eventTitle,
+    details: eventDetails,
+    location: eventLocation,
+    EventId: selectedEvent.eventid,
+    CommunityId: selectedEvent.communityid
+  };
+  console.log("selectedEvent", selectedEvent)
+  console.log("updatedEvent", updatedEvent)
+  
+  // Send a PUT request to update the event in the database
+  fetch(`http://localhost:8080/events/${CommunityId}/${updatedEvent.EventId}`, {
+    method: 'POST', // Use PUT instead of POST
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedEvent),
+  })
+    .then((response) => response.json())
+    .then((updatedEvent) => {
+      console.log("updatedEvent", updatedEvent)
+      // Update the state with the new event returned from the server
+      setEvents([...events, updatedEvent]);
+      
+      // Clear the form fields and selectedEvent state after saving changes
+      setEventTitle('');
+      setEventDetails('');
+      setEventLocation('');
+      setSelectedEvent(null);
+    })
+    .catch((error) => console.error('Error updating event', error));
+};
+
+
+
+
+
+
+
+const renderForm = () => {
+  if (selectedEvent) {
+    // Render the form with pre-filled inputs if an event is selected
+    return (
+      <div className="event-form">
+        <input
+          type="text"
+          placeholder="Event Title..."
+          value={eventTitle}
+          onChange={(e) => setEventTitle(e.target.value)}
+        />
+        <textarea
+          placeholder="Event Details..."
+          value={eventDetails}
+          onChange={(e) => setEventDetails(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Event Location..."
+          value={eventLocation}
+          onChange={(e) => setEventLocation(e.target.value)}
+        />
+        <button onClick={handleSave}>Save Changes</button>
+      </div>
+    );
+  }
+  return null; // Return null if no event is selected
+};
+
 
 
   // Renders event title, date, details, and location onto calendar tile
@@ -94,8 +186,8 @@ const addEvent = () => {
       if (matchingEvents.length > 0) {
         return (
           <ul>
-            {matchingEvents.map((event, index) => (
-              <li key={index}>
+            {matchingEvents.map((event, EventId) => (
+              <li key={EventId}>
                 {event.title} at {event.location}
               </li>
             ))}
@@ -139,12 +231,14 @@ const addEvent = () => {
 
         <div className="events">
           <h2>Events:</h2>
+          {renderForm()}
           <ul>
-            {events.map((event, index) => (
-              <li key={index}>
-                {new Date(event.date).toDateString()} - {event.title} - {event.details} - {event.location}
-              </li>
-            ))}
+          {events.map((event, index) => (
+  <li key={index}>
+    {new Date(event.date).toDateString()} - {event.title} at {event.location} <br/> {event.details}
+    <button onClick={() => editEvent(event.eventid)}>Edit</button> {/* Pass eventid as a parameter */}
+  </li>
+))}
           </ul>
         </div>
       </div>
