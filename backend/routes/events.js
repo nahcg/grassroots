@@ -50,26 +50,30 @@ router.get("/:CommunityId/:EventId", (req, res) => {
 });
 
 //express route for editing an event
-router.post("/:CommunityId/:EventId", (req, res) => {
+router.post("/:CommunityId/:EventId", async (req, res) => {
   const EventId = req.params.EventId;
   const CommunityId = req.params.CommunityId;
-  const { title, details, location } = req.body;
+  const { title, details, date, location } = req.body;
 
-  eventQueries
-    .editEvent([
+  try {
+    // Update the event and wait for the result
+    const updatedEvent = await eventQueries.editEvent(
       title,
       details,
+      date,
       location,
       parseInt(EventId),
-      parseInt(CommunityId),
-    ])
-    .then((results) => {
-      res.json(results.rows);
-      console.log("results from post route of edit", results.rows);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+      parseInt(CommunityId)
+    );
+
+    // Get the updated event by its ID
+    const event = await eventQueries.getEventById(CommunityId, EventId);
+
+    // Send the updated event back as a response
+    res.json(event.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;

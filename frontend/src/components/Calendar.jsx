@@ -10,6 +10,7 @@ const CalendarApp = () => {
   const [eventTitle, setEventTitle] = useState('');
   const [eventDetails, setEventDetails] = useState('');
   const [eventLocation, setEventLocation] = useState('');
+  const [eventDate, setEventDate] = useState('');
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { CommunityId } = useParams(); // Get the ID parameter from the URL
   
@@ -18,7 +19,7 @@ const CalendarApp = () => {
   useEffect(() => {
     // Fetch events based on the ID parameter from the URL
     fetch(`http://localhost:8080/events/${CommunityId}`)
-      .then((response) => response.json())
+    .then((response) => response.json())
       .then((data) => {
         // Format dates before setting state
         const formattedEvents = data.map((event) => ({
@@ -89,6 +90,7 @@ const editEvent = (eventId) => {
     setSelectedEvent(eventToEdit);
     setEventTitle(eventToEdit.title);
     setEventDetails(eventToEdit.details);
+    setEventDate(eventToEdit.date);
     setEventLocation(eventToEdit.location);
     console.log("eventToEdit", eventToEdit)
   }
@@ -99,31 +101,41 @@ const editEvent = (eventId) => {
 const handleSave = () => {
   if (!selectedEvent) return;
 
-  
   const updatedEvent = {
     title: eventTitle,
     details: eventDetails,
+    date: eventDate,
     location: eventLocation,
-    EventId: selectedEvent.eventid,
-    CommunityId: selectedEvent.communityid
+    eventid: selectedEvent.eventid, 
+    communityid: selectedEvent.communityid 
   };
-  console.log("selectedEvent", selectedEvent)
-  console.log("updatedEvent", updatedEvent)
-  
+  console.log("updatedEvent1", updatedEvent)
+
   // Send a PUT request to update the event in the database
-  fetch(`http://localhost:8080/events/${CommunityId}/${updatedEvent.EventId}`, {
-    method: 'POST', // Use PUT instead of POST
+  fetch(`http://localhost:8080/events/${CommunityId}/${updatedEvent.eventid}`, {
+    method: 'POST', 
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(updatedEvent),
   })
     .then((response) => response.json())
-    .then((updatedEvent) => {
-      console.log("updatedEvent", updatedEvent)
-      // Update the state with the new event returned from the server
-      setEvents([...events, updatedEvent]);
-      
+    .then((data) => {
+      console.log("updatedEventOld", data)
+      // Update the state with the updated event returned from the server
+      setEvents((prevEvents) => {
+        const updatedEvents = prevEvents.map((event) => {
+          if (event.eventid === updatedEvent.eventid) {
+            console.log("updatedEvent2", updatedEvent)
+            return updatedEvent;
+          }
+          console.log("event", event)
+          return event;
+        });
+        console.log("updatedEvents3", updatedEvents)
+        return updatedEvents;
+      });
+
       // Clear the form fields and selectedEvent state after saving changes
       setEventTitle('');
       setEventDetails('');
@@ -132,7 +144,6 @@ const handleSave = () => {
     })
     .catch((error) => console.error('Error updating event', error));
 };
-
 
 
 
