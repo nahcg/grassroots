@@ -1,0 +1,27 @@
+.community-grid__item {
+	/* background-color: rgb(221, 221, 221);
+	border-style: solid; */
+	height: 350px;
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+}
+
+.community-grid__item:hover {
+	/* background-color: rgb(221, 221, 221); */
+	/* border-style: solid; */
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.community-grid__image {
+	clip-path: circle();
+	height: 200px;
+	width: auto;
+	margin: 20px 0px;
+}
+
+.community-grid__info {
+	text-align: center;
+}

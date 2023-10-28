@@ -1,21 +1,26 @@
 import React from "react";
 import CommunityListItem from "./CommunityListItem";
-
 import "../styles/CommunityList.css";
 
-const CommunityList = ({ communitiesList }) => {
+const CommunityList = ({ communitiesData }) => {
+	console.log(
+		"communitiesData inside CommunityList component: ",
+		communitiesData
+	);
 	return (
-		<ul className='community-list'>
-			{communitiesList.map((community) => (
+		<div className='community-list'>
+			{communitiesData.map((community) => (
 				<CommunityListItem
 					key={community.community_id}
 					name={community.name}
+					description={community.description}
 					location={community.location}
-					communityPicture={community.picture_url}
 					cause_tag={community.cause}
+					created_on={community.creation_date}
+					communityPicture={community.picture_url}
 				/>
 			))}
-		</ul>
+		</div>
 	);
 };
 

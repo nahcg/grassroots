@@ -1,18 +1,15 @@
 import React from "react";
 import "../styles/CommunityListItem.css";
 
-// const testCommunity = {
-// 	name: "Anti-Justin Trudeau",
-// 	description:
-// 		"This community is to apose Justin Trudeau and discuss ways we can stop him from doing what he wants in this country.",
-// 	location: "Toronto, ON",
-// 	cause: 1,
-// 	creation_date: "2023-10-26",
-// 	community_picture:
-// 		"https://www.hilltimes.com/wp-content/uploads/2022/03/DSC04409.t62012ebb.m800.x3E3UulEE-1.jpg.webp",
-// };
-
-const CommunityListItem = ({ name, location, communityPicture, cause_tag }) => {
+const CommunityListItem = ({
+	key,
+	name,
+	description,
+	location,
+	cause_tag,
+	created_on,
+	communityPicture,
+}) => {
 	return (
 		<div className='community-list__item'>
 			<img
@@ -22,10 +19,14 @@ const CommunityListItem = ({ name, location, communityPicture, cause_tag }) => {
 			/>
 			<div className='community-list__info'>
 				<h4>{name}</h4>
-				<span>📍{location}</span>
-				{cause_tag === 1 && <div>Politics</div>}
-				{cause_tag === 2 && <div>Environment</div>}
-				{cause_tag === 3 && <div>Social</div>}
+				<p className='community-list__description'>
+					Description: {description}
+				</p>
+				<p>Location: {location}</p>
+				{cause_tag === 1 && <p>Cause: Politics</p>}
+				{cause_tag === 2 && <p>Cause: Environment</p>}
+				{cause_tag === 3 && <p>Cause: Social</p>}
+				<p>Created on: {created_on}</p>
 			</div>
 		</div>
 	);

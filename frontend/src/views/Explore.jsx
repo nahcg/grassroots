@@ -5,6 +5,7 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 
 import "../styles/Explore.css";
+import CommunityGrid from "../components/CommunityGrid";
 import CommunityList from "../components/CommunityList";
 
 // const testCommunities = [
@@ -52,7 +53,7 @@ const Explore = () => {
 	const { user, isAuthenticated, isLoading } = useAuth0();
 	const [communitiesData, setCommunitiesData] = useState([]);
 	const [causeFilterSelection, setCauseFilterSelection] = useState(0);
-	const [inputText, setInputText] = useState("");
+	const [viewState, setViewState] = useState("grid");
 
 	useEffect(() => {
 		const fetchData = () => {
@@ -81,7 +82,6 @@ const Explore = () => {
 	let inputHandler = (e) => {
 		//convert the input text to lower case
 		let lowerCase = e.target.value.toLowerCase();
-		setInputText(lowerCase);
 		fetchDataSearchFilter(lowerCase);
 	};
 
@@ -114,10 +114,15 @@ const Explore = () => {
 				</div>
 				<div className='viewToggle'>
 					<span>View</span>
-					<button>Grid</button>
-					<button>List</button>
+					<button onClick={() => setViewState("grid")}>Grid</button>
+					<button onClick={() => setViewState("list")}>List</button>
 				</div>
-				<CommunityList communitiesList={communitiesData} />
+				{viewState === "grid" && (
+					<CommunityGrid communitiesData={communitiesData} />
+				)}
+				{viewState === "list" && (
+					<CommunityList communitiesData={communitiesData} />
+				)}
 			</div>
 		</div>
 	);
