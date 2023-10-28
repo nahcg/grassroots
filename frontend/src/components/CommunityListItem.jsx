@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/CommunityListItem.css";
 
 const CommunityListItem = ({
-	key,
 	name,
 	description,
 	location,

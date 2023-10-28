@@ -3,10 +3,6 @@ import CommunityListItem from "./CommunityListItem";
 import "../styles/CommunityList.css";
 
 const CommunityList = ({ communitiesData }) => {
-	console.log(
-		"communitiesData inside CommunityList component: ",
-		communitiesData
-	);
 	return (
 		<div className='community-list'>
 			{communitiesData.map((community) => (
