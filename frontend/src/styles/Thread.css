@@ -1,7 +1,8 @@
+/* styles.css */
 .thread .comments {
-  display: none;
+  display: none; /* Hide comments by default */
 }
 
 .thread.active .comments {
-  display: block;
+  display: block; /* Show comments when thread is active */
 }

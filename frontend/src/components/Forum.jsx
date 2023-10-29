@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Thread from './Thread';
+import '../styles/Forum.css'
 
 const Forum = () => {
   const [threads, setThreads] = useState([]);
@@ -34,11 +35,13 @@ const Forum = () => {
           value={newThread}
           onChange={(e) => setNewThread(e.target.value)}
         />
+        <div className="thread-form content">
         <textarea
           placeholder="Thread Content"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
+        </div>
         <button onClick={addThread}>Add Thread</button>
       </div>
 
