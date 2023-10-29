@@ -85,7 +85,7 @@ const deleteEvent = async (EventId, CommunityId) => {
       `DELETE FROM events WHERE EventId = $1 AND CommunityId = $2`,
       [EventId, CommunityId]
     );
-    console.log("Fetched events:", event); // Log the fetched events
+    console.log("Fetched events1:", event); // Log the fetched events
     return event;
   } catch (error) {
     console.error("Error fetching events:", error); // Log any errors

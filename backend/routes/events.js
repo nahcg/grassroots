@@ -83,9 +83,8 @@ router.delete("/:CommunityId/:EventId", (req, res) => {
   eventQueries
     .deleteEvent(parseInt(CommunityId), parseInt(EventId))
     .then((results) => {
-      console.log("results", results);
-      res.json(results.rows);
-      console.log("results from route", results.rows);
+      console.log("Deleted event with EventId:", EventId);
+      res.json(results.rows); // expected empty
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
