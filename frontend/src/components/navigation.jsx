@@ -42,6 +42,7 @@ export const Navigation = (props) => {
             </li>
             <li>
               <LoginButton />
+              {/* <LogoutButton /> */}
             </li>
             <li>
               <a href="#contact" className="page-scroll">
