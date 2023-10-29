@@ -8,6 +8,7 @@ import Event from "./views/Event";
 import Register from "./views/Register";
 import Volunteer from "./views/Volunteer";
 import Profile from "./views/Profile";
+import Forum from "./components/Forum";
 
 import Navbar from "./components/Navbar";
 import LoginButton from "./components/Login";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/communities/community/:id" element={<Community />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/forum" element={<Forum />} />
       </Routes>
     </div>
   );

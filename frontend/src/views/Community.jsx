@@ -33,7 +33,6 @@ const Community = () => {
       <img src={community.picture_url} alt={community.name} />
       <p>{community.description}</p>
       <p>Location: {community.location}</p>
-      <p>Creation Date: {community.creation_date}</p>
     </div>
   );
 };

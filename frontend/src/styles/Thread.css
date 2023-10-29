@@ -1,0 +1,15 @@
+.thread {
+  /* other styles for thread container */
+
+  /* Initially hide the comments container */
+  .comments {
+    display: none;
+  }
+  
+  /* Show comments when thread is active */
+  &.active {
+    .comments {
+      display: block;
+    }
+  }
+}
