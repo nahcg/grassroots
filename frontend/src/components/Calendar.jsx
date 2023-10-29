@@ -96,7 +96,6 @@ const editEvent = (eventId) => {
   }
 };
 
-
 // Function to handle saving changes after editing the event
 const handleSave = () => {
   if (!selectedEvent) return;
@@ -145,7 +144,18 @@ const handleSave = () => {
     .catch((error) => console.error('Error updating event', error));
 };
 
-
+const deleteEvent = (EventId) => {
+  // Send a DELETE request to delete the event
+  fetch(`http://localhost:8080/events/${CommunityId}/${EventId}`, {
+    method: 'DELETE',
+  })
+    .then((response) => response.json())
+    .then(() => {
+      // Update the state to remove the deleted event from the events list
+      setEvents((prevEvents) => prevEvents.filter((event) => event.eventid !== EventId));
+    })
+    .catch((error) => console.error('Error deleting event', error));
+};
 
 
 
@@ -247,7 +257,8 @@ const renderForm = () => {
           {events.map((event, index) => (
   <li key={index}>
     {new Date(event.date).toDateString()} - {event.title} at {event.location} <br/> {event.details}
-    <button onClick={() => editEvent(event.eventid)}>Edit</button> {/* Pass eventid as a parameter */}
+    <button onClick={() => editEvent(event.eventid)}>Edit</button> 
+    <button onClick={() => deleteEvent(event.eventid)}>Delete</button>
   </li>
 ))}
           </ul>

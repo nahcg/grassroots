@@ -76,4 +76,20 @@ router.post("/:CommunityId/:EventId", async (req, res) => {
   }
 });
 
+//delete event
+router.delete("/:CommunityId/:EventId", (req, res) => {
+  const CommunityId = req.params.CommunityId;
+  const EventId = req.params.EventId;
+  eventQueries
+    .deleteEvent(parseInt(CommunityId), parseInt(EventId))
+    .then((results) => {
+      console.log("results", results);
+      res.json(results.rows);
+      console.log("results from route", results.rows);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;

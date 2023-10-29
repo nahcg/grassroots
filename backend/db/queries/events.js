@@ -79,4 +79,18 @@ const addEvent = async (CommunityID, Title, Details, Date, Location) => {
   }
 };
 
-module.exports = { getEvent, editEvent, getEventById, addEvent };
+const deleteEvent = async (EventId, CommunityId) => {
+  try {
+    const event = await db.query(
+      `DELETE FROM events WHERE EventId = $1 AND CommunityId = $2`,
+      [EventId, CommunityId]
+    );
+    console.log("Fetched events:", event); // Log the fetched events
+    return event;
+  } catch (error) {
+    console.error("Error fetching events:", error); // Log any errors
+    throw error;
+  }
+};
+
+module.exports = { getEvent, editEvent, getEventById, addEvent, deleteEvent };
