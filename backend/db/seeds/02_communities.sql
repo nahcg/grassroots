@@ -1,5 +1,6 @@
-INSERT INTO Communities (Name, Description, Location, CreationDate)
+INSERT INTO Communities (name, description, location, cause, creation_date, picture_url)
 VALUES
-  ('Community A', 'Description for Community A', 'Location A', '2023-01-15'),
-  ('Community B', 'Description for Community B', 'Location B', '2023-02-20'),
-  ('Community C', 'Description for Community C', 'Location C', '2023-02-20');
+  ('Homesteading', 'A lifestyle choice for individuals or families who aim for self-sufficiency by growing our own food, raising livestock, and becoming more independent from modern amenities and commercial goods. We practice sustainable living, renewable energy use, and various DIY (do-it-yourself) skills to reduce reliance on external resources.', 'Location A', 1, '2023-01-15', 'https://images.ctfassets.net/pujs1b1v0165/7dCa9XiclWMg0y118t23SN/5a38d993e615a3d187348e60206243a6/How_to_Plan_a_Homestead.jpg'),
+  ('Food Insecurity', 'Helping individuals, families, or entire communities overcome food insecurity. Food insecurity is the lack of consistent access to enough food for an active, healthy life for all household members. It is caused by various factors, including poverty, unemployment, low wages, lack of access to fresh and nutritious food, and social or political instability.', 'Location B', 2, '2023-02-20', 'https://training-conditioning.com/wp-content/uploads/2022/08/EXZCK2XADZJ5JB2PHSFURR45SM-768x432.jpeg'),
+  ('Digital Literacy', 'Digital literacy is essential for full participation in society, the economy, and education. Lack of digital literacy can create significant barriers in this technology-driven world. It can limit access to information, job opportunities, education, healthcare services, and social interactions', 'Location C', 3, '2023-02-20', 'https://theeducationdaily.com/wp-content/uploads/2023/02/Digital-literacy-and-media-education.jpg');
+

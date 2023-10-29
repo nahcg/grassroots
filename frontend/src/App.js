@@ -25,7 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/events/:CommunityId" element={<Event />} />
-        <Route path="/community" element={<Community />} />
+        <Route path="/communities/community/:id" element={<Community />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

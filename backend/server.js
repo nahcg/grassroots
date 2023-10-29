@@ -36,6 +36,7 @@ app.use(express.static("public"));
 const userApiRoutes = require("./routes/users-api");
 const usersRoutes = require("./routes/users");
 const eventsRoutes = require("./routes/events");
+const communitiesRoutes = require("./routes/communities");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -43,6 +44,7 @@ const eventsRoutes = require("./routes/events");
 app.use("/api/users", userApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/events", eventsRoutes);
+app.use("/communities", communitiesRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page

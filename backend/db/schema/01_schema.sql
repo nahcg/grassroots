@@ -26,13 +26,14 @@ CREATE TABLE Users (
 
 -- Create the Communities table
 CREATE TABLE Communities (
-  CommunityID serial PRIMARY KEY,
-  Name varchar,
-  Description text,
-  Location varchar,
-  CreationDate date
+  CommunityId SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  location VARCHAR(255) NOT NULL,
+  cause INT NOT NULL,
+  creation_date DATE,
+  picture_url VARCHAR(255) NOT NULL
 );
-
 -- Create the CommunityMembers table
 CREATE TABLE CommunityMembers (
   MembershipID serial PRIMARY KEY,
