@@ -24,6 +24,8 @@ CREATE TABLE Users (
   UserType varchar
 );
 
+INSERT INTO Communities (name, description, location, cause, creation_date, picture_url)
+
 -- Create the Communities table
 CREATE TABLE Communities (
   CommunityId SERIAL PRIMARY KEY NOT NULL,
@@ -43,14 +45,12 @@ CREATE TABLE CommunityMembers (
   Role varchar
 );
 
--- Create the Posts table
-CREATE TABLE Posts (
-  PostID serial PRIMARY KEY,
-  UserID int REFERENCES Users(UserID),
-  CommunityID int REFERENCES Communities(CommunityID),
-  Title varchar,
-  Context text,
-  Timestamp timestamp
+CREATE TABLE comments (
+  comment_id serial PRIMARY KEY NOT NULL,
+  post_id int REFERENCES posts(post_id),
+  user_id int REFERENCES users(userID),
+  comment TEXT,
+  timestamp time
 );
 
 -- Create the Events table

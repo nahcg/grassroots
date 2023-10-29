@@ -1,56 +1,56 @@
 import React, { useState } from 'react';
-import Thread from './Thread';
+import Post from './Post';
 import '../styles/Forum.css'
 
 const Forum = () => {
-  const [threads, setThreads] = useState([]);
-  const [newThread, setNewThread] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState('');
   const [newComment, setNewComment] = useState('');
 
-  const addThread = () => {
-    const thread = {
-      title: newThread,
+  const addPost = () => {
+    const post = {
+      title: newPost,
       content: newComment,
       comments: [],
     };
-    setThreads([...threads, thread]);
-    setNewThread('');
+    setPosts([...posts, post]);
+    setNewPost('');
     setNewComment('');
   };
 
-  const addCommentToThread = (threadIndex, comment) => {
-    const updatedThreads = [...threads];
-    updatedThreads[threadIndex].comments.push(comment);
-    setThreads(updatedThreads);
+  const addCommentToPost = (postIndex, comment) => {
+    const updatedPosts = [...posts];
+    updatedPosts[postIndex].comments.push(comment);
+    setPosts(updatedPosts);
   };
 
   return (
     <div className="forum">
   
       <h1>Forum</h1>
-      <div className="thread-form">
+      <div className="post-form">
         <input
           type="text"
-          placeholder="Thread Title"
-          value={newThread}
-          onChange={(e) => setNewThread(e.target.value)}
+          placeholder="Post Title"
+          value={newPost}
+          onChange={(e) => setNewPost(e.target.value)}
         />
-        <div className="thread-form content">
+        <div className="post-form content">
         <textarea
-          placeholder="Thread Content"
+          placeholder="Post Content"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
         </div>
-        <button onClick={addThread}>Add Thread</button>
+        <button onClick={addPost}>Add Post</button>
       </div>
 
-      <div className="threads">
-        {threads.map((thread, index) => (
-          <Thread
+      <div className="posts">
+        {posts.map((post, index) => (
+          <Post
             key={index}
-            thread={thread}
-            onAddComment={(comment) => addCommentToThread(index, comment)}
+            post={post}
+            onAddComment={(comment) => addCommentToPost(index, comment)}
           />
         ))}
       </div>

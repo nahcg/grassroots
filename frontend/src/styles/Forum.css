@@ -9,11 +9,11 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.thread-form {
+.post-form {
   margin-bottom: 20px;
 }
 
-.thread-form input[type="text"] {
+.post-form input[type="text"] {
   margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.thread-form textarea {
+.post-form textarea {
   margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
@@ -30,7 +30,7 @@
   resize: vertical;
 }
 
-.thread-form content {
+.post-form content {
   margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
@@ -38,13 +38,13 @@
   height: 350px;
 }
 
-.thread-form button {
+.post-form button {
   margin-bottom: 10px;
   padding: 10px 20px;
   font-size: 16px;
 }
 
-.threads .thread {
+.posts .post {
   margin-bottom: 20px;
   padding: 15px;
   background-color: #ffffff;
@@ -52,14 +52,14 @@
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
 }
 
-.threads .thread h2 {
+.posts .post h2 {
   margin-bottom: 10px;
   font-size: 18px;
   cursor: pointer;
   color: #007bff;
 }
 
-.threads .thread p {
+.posts .post p {
   font-size: 14px;
   margin-bottom: 15px;
 }

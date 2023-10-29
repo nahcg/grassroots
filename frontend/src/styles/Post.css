@@ -1,0 +1,9 @@
+.post-content,
+.comments {
+  display: none;
+}
+
+.post.active .post-content,
+.post.active .comments {
+  display: block;
+}

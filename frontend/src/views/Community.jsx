@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import '../styles/Community.css'; 
 
 const Community = () => {
@@ -16,6 +16,14 @@ const Community = () => {
       .catch((error) => console.error('Error fetching community', error));
   }, [id]);
 
+
+  const routes = [
+    { path: `/community/${id}/Forum`, label: 'Forum' },
+    { path: `/community/${id}/Events`, label: 'Events' },
+    { path: `/community/${id}/Volunteer Board`, label: 'Volunteer' },
+  ];
+  
+  
   // Log the community data when it changes
   useEffect(() => {
     if (community) {
@@ -28,11 +36,18 @@ const Community = () => {
   }
 
   return (
+    <div className="routes">
+          {routes.map((route, index) => (
+            <Link key={index} to={route.path}>
+              <button className="button">{route.label}</button>
+            </Link>
+          ))}
     <div className="community-container">
       <h1>{community.name}</h1>
       <img src={community.picture_url} alt={community.name} />
       <p>{community.description}</p>
       <p>Location: {community.location}</p>
+    </div>
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Comment from './Comment';
-import '../styles/Thread.css'; // Import your CSS file
+import '../styles/Post.css'; // Import your CSS file
 
-const Thread = ({ thread, onAddComment }) => {
+const Post = ({ post, onAddComment }) => {
   const [isActive, setIsActive] = useState(false);
   const [newComment, setNewComment] = useState('');
 
-  const handleThreadClick = () => {
-    setIsActive(!isActive); // Toggle active state on thread click
+  const handlePostClick = () => {
+    setIsActive(!isActive); // Toggle active state on post click
   };
 
   const handleCommentSubmit = () => {
@@ -20,11 +20,13 @@ const Thread = ({ thread, onAddComment }) => {
   };
 
   return (
-    <div className={`thread ${isActive ? 'active' : ''}`}>
-      <h2 onClick={handleThreadClick}>{thread.title}</h2>
-      <p>{thread.content}</p>
+    <div className={`post ${isActive ? 'active' : ''}`}>
+      <h2 onClick={handlePostClick}>{post.title}</h2>
+      <div className={`post-content ${isActive ? 'active' : ''}`}>
+        <p>{post.content}</p>
+      </div>
       <div className="comments">
-        {thread.comments.map((comment, index) => (
+        {post.comments.map((comment, index) => (
           <Comment key={index} comment={comment} />
         ))}
       </div>
@@ -43,4 +45,4 @@ const Thread = ({ thread, onAddComment }) => {
   );
 };
 
-export default Thread;
+export default Post;
