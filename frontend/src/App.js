@@ -29,7 +29,7 @@ function App() {
         <Route path="/communities/community/:id" element={<Community />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/forum" element={<Forum />} />
+        <Route path="/posts/:CommunityId" element={<Forum />} />
       </Routes>
     </div>
   );

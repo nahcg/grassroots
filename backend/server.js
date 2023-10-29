@@ -37,6 +37,7 @@ const userApiRoutes = require("./routes/users-api");
 const usersRoutes = require("./routes/users");
 const eventsRoutes = require("./routes/events");
 const communitiesRoutes = require("./routes/communities");
+const postsRoutes = require("./routes/posts");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -45,6 +46,7 @@ app.use("/api/users", userApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/events", eventsRoutes);
 app.use("/communities", communitiesRoutes);
+app.use("/posts", postsRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page

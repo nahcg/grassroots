@@ -6,15 +6,14 @@
 --   timestamp time
 -- );
 
-INSERT INTO comments (post_id, user_id, , title, context, timestamp)
+INSERT INTO comments (post_id, user_id, comment, timestamp)
 VALUES
-  (1, 1, '1', 'Content for Community A', '2023-01-30 12:00:00'),
-  (1, 2, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (1, 3, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (2, 1, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (2, 1, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (2, 2, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (3, 2, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (3, 3, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (3, 3, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (3, 3, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00');
+  (1, 1, 'Comment for Community', '2023-01-30 12:00:00'),
+  (1, 2, 'Comment for Community', '2023-02-28 14:30:00'),
+  (1, 3, 'Comment for Community', '2023-02-28 14:30:00'),
+  (2, 1, 'Comment for Community', '2023-02-28 14:30:00'),
+  (2, 2, 'Comment for Community', '2023-02-28 14:30:00'),
+  (2, 3, 'Comment for Community', '2023-02-28 14:30:00'),
+  (3, 1, 'Comment for Community', '2023-02-28 14:30:00'),
+  (3, 2, 'Comment for Community', '2023-02-28 14:30:00'),
+  (3, 2, 'Comment for Community', '2023-02-28 14:30:00');

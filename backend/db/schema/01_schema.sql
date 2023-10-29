@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS Users CASCADE;
-DROP TABLE IF EXISTS Communities CASCADE;
+DROP TABLE IF EXISTS communities CASCADE;
 DROP TABLE IF EXISTS CommunityMembers CASCADE;
-DROP TABLE IF EXISTS Posts CASCADE;
 DROP TABLE IF EXISTS Events CASCADE;
 DROP TABLE IF EXISTS Petitions CASCADE;
 DROP TABLE IF EXISTS Resources CASCADE;
@@ -13,6 +12,9 @@ DROP TABLE IF EXISTS UserSkills CASCADE;
 DROP TABLE IF EXISTS Discussions CASCADE;
 DROP TABLE IF EXISTS DiscussionPosts CASCADE;
 DROP TABLE IF EXISTS Volunteers CASCADE;
+DROP TABLE IF EXISTS posts CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
+
 
 -- Create the Users table
 CREATE TABLE Users (
@@ -24,11 +26,9 @@ CREATE TABLE Users (
   UserType varchar
 );
 
-INSERT INTO Communities (name, description, location, cause, creation_date, picture_url)
-
 -- Create the Communities table
 CREATE TABLE Communities (
-  CommunityId SERIAL PRIMARY KEY NOT NULL,
+  CommunityID SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   description TEXT,
   location VARCHAR(255) NOT NULL,
@@ -43,6 +43,15 @@ CREATE TABLE CommunityMembers (
   CommunityID int REFERENCES Communities(CommunityID),
   JoinDate date,
   Role varchar
+);
+
+CREATE TABLE posts (
+  post_id SERIAL PRIMARY KEY NOT NULL,
+  user_id VARCHAR NOT NULL,
+  CommunityID INT REFERENCES Communities(CommunityID) ON DELETE CASCADE NOT NULL,
+  title VARCHAR NOT NULL,
+  context TEXT,
+  timestamp TIMESTAMP
 );
 
 CREATE TABLE comments (
