@@ -1,7 +1,7 @@
 /*
  * All routes for Communities Data are defined here
- * Since this file is loaded in server.js into /api/communities,
- *   these routes are mounted onto /api/communities
+ * Since this file is loaded in server.js into /communities,
+ *   these routes are mounted onto /communities
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 

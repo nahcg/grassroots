@@ -2,6 +2,12 @@
 	padding: 0px 10vw;
 }
 
+.explore-page__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .viewToggle {
 	display: flex;
 	justify-content: end;
@@ -22,5 +28,11 @@
 }
 
 .search {
-	width: 30%;
+	width: 70%;
+	background-color: white;
+}
+
+.explore-page__options-section {
+	background-color: rgb(240, 238, 238);
+	padding: 3%;
 }
