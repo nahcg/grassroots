@@ -9,6 +9,7 @@ import Register from "./views/Register";
 import Volunteer from "./views/Volunteer";
 import Profile from "./views/Profile";
 import Forum from "./components/Forum";
+import Post from "./components/Post";
 
 import Navbar from "./components/Navbar";
 import LoginButton from "./components/Login";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/posts/:CommunityId" element={<Forum />} />
+        <Route path="/posts/comments/:post_id" element={<Post />} />
       </Routes>
     </div>
   );

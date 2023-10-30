@@ -8,8 +8,8 @@ const getPosts = async (CommunityId) => {
        WHERE CommunityID = $1;`,
       [CommunityId]
     );
-    console.log("Fetched posts:", post); // Log the fetched events
-    return post;
+    console.log("Fetched posts:", post.rows); // Log the fetched events
+    return post.rows;
   } catch (error) {
     console.error("Error fetching posts:", error); // Log any errors
     throw error;

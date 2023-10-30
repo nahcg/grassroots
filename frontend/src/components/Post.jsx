@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import Comment from './Comment';
-import '../styles/Post.css'; // Import your CSS file
+import '../styles/Post.css'; 
 
-const Post = ({ post, onAddComment }) => {
+const Post = ({ post, post_id, onAddComment }) => {
   const [isActive, setIsActive] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    if (isActive) {
-      // Fetch comments when the post is active
-      fetch(`/api/${post.CommunityID}/${post.post_id}`)
+      // Fetch comments for the specific post from the backend when the component mounts
+      fetch(`http://localhost:8080/posts/comments/${post_id}`)
         .then((response) => response.json())
-        .then((data) => {
-          setComments(data);
-        })
+        .then((data) => setComments(data))
         .catch((error) => console.error('Error fetching comments:', error));
-    }
-  }, [isActive, post.CommunityID, post.post_id]);
+  }, [post_id]);
+
+console.log("comments", comments)
+
 
   const handlePostClick = () => {
     setIsActive(!isActive); // Toggle active state on post click
@@ -36,7 +35,7 @@ const Post = ({ post, onAddComment }) => {
     <div className={`post ${isActive ? 'active' : ''}`}>
       <h2 onClick={handlePostClick}>{post.title}</h2>
       <div className={`post-content ${isActive ? 'active' : ''}`}>
-        <p>{post.context}</p> {/* Use post.context instead of post.content */}
+        <p>{post.context}</p>
       </div>
       <div className="comments">
         {comments.map((comment, index) => (

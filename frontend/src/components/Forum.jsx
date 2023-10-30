@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Post from './Post';
+import { useParams } from 'react-router-dom';
 import '../styles/Forum.css'
 
 const Forum = () => {
@@ -7,6 +8,20 @@ const Forum = () => {
   const [newPost, setNewPost] = useState('');
   const [newComment, setNewComment] = useState('');
 
+  const { CommunityId } = useParams();
+
+  useEffect(() => {
+    // Fetch posts from the backend when the component mounts
+    fetch(`http://localhost:8080/posts/${CommunityId}`) 
+      .then((response) => response.json())
+      .then((data) => setPosts(data))
+      .catch((error) => console.error('Error fetching posts:', error));
+  }, [CommunityId]); 
+
+  console.log("posts", posts)
+  
+  
+  
   const addPost = () => {
     const post = {
       title: newPost,
@@ -23,6 +38,7 @@ const Forum = () => {
     updatedPosts[postIndex].comments.push(comment);
     setPosts(updatedPosts);
   };
+
 
   return (
     <div className="forum">
@@ -46,13 +62,14 @@ const Forum = () => {
       </div>
 
       <div className="posts">
-        {posts.map((post, index) => (
-          <Post
-            key={index}
-            post={post}
-            onAddComment={(comment) => addCommentToPost(index, comment)}
-          />
-        ))}
+      {posts.map((post, index) => (
+  <Post
+    key={index}
+    post={post}
+    post_id={post.post_id} 
+    onAddComment={(comment) => addCommentToPost(index, comment)}
+  /> 
+))}
       </div>
     </div>
   );
