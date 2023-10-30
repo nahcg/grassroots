@@ -1,7 +1,7 @@
 /*
  * All routes for Communities Data are defined here
- * Since this file is loaded in server.js into /api/communities,
- *   these routes are mounted onto /api/communities
+ * Since this file is loaded in server.js into /communities,
+ *   these routes are mounted onto /communities
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -17,8 +17,9 @@ router.post('/', (req, res) => {
   const location = req.body.location;
   const cause = req.body.cause;
   const creation_date = req.body.creation_date;
+  const picture_url = req.body.picture_url;
 
-  communitiesQueries.addNewCommunity(name, description, location, cause, creation_date)
+  communitiesQueries.addNewCommunity(name, description, location, cause, creation_date, picture_url)
     .then((data) => {
       // console.log("data params: ", data);
       return res.json({ data });
@@ -32,9 +33,10 @@ router.post('/', (req, res) => {
 
 /* READ */
 
-// Return All Communities
+// Return all communities with a given name
 router.get('/', (req, res) => {
-  communitiesQueries.getAllCommunities()
+  const { name } = req.query;
+  communitiesQueries.getAllCommunitiesWithName(name)
     .then(communities => {
       res.json({ communities });
     })
@@ -46,18 +48,30 @@ router.get('/', (req, res) => {
 });
 
 // Return all communities of a certain type
-router.get('/cause/:cause_id', (req, res) => {
+router.get('/:cause_id', (req, res) => {
   const cause = req.params.cause_id;
 
-  communitiesQueries.getAllCauseCommunities(cause)
-    .then(communities => {
-      res.json({ communities });
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+  if (cause == 0) {
+    communitiesQueries.getAllCommunities()
+      .then(communities => {
+        res.json({ communities });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  } else {
+    communitiesQueries.getAllCauseCommunities(cause)
+      .then(communities => {
+        res.json({ communities });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  }
 });
 
 

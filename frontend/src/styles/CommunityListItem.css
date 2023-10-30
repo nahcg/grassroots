@@ -1,0 +1,31 @@
+.community-list__item {
+	border-style: solid;
+	height: 300px;
+	width: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1rem 0rem;
+}
+
+.community-list__item:hover {
+	box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.community-list__image {
+	width: 50%;
+	height: 100%;
+}
+
+.community-list__info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.community-list__description {
+	text-wrap: wrap;
+	width: 75%;
+}

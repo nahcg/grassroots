@@ -37,10 +37,10 @@ app.use(cors());
 // const widgetApiRoutes = require("./routes/widgets-api");
 // const usersRoutes = require("./routes/users");
 // const userApiRoutes = require("./routes/users");
-const communitiesApiRoutes = require("./routes/communities");
-const postsApiRoutes = require("./routes/posts");
-const eventsApiRoutes = require("./routes/events");
-const user_skills_ApiRoutes = require("./routes/userskills");
+const communitiesRoutes = require("./routes/communities");
+const postsRoutes = require("./routes/posts");
+const eventsRoutes = require("./routes/events");
+const user_skills_Routes = require("./routes/userskills");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -49,10 +49,10 @@ const user_skills_ApiRoutes = require("./routes/userskills");
 // app.use("/users", usersRoutes);
 // Note: mount other resources here, using the same pattern above
 // app.use("/api/users", userApiRoutes);
-app.use("/api/communities", communitiesApiRoutes);
-app.use("/api/posts", postsApiRoutes);
-app.use("/api/events", eventsApiRoutes);
-app.use("/api/user/skills", user_skills_ApiRoutes);
+app.use("/communities", communitiesRoutes);
+app.use("/posts", postsRoutes);
+app.use("/events", eventsRoutes);
+app.use("/user/skills", user_skills_Routes);
 
 // Home page
 // Warning: avoid creating more routes in this file!

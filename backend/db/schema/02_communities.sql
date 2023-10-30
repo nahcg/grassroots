@@ -6,5 +6,6 @@ CREATE TABLE communities (
   description TEXT,
   location VARCHAR(255) NOT NULL,
   cause INT NOT NULL,
-  creation_date DATE
+  creation_date DATE,
+  picture_url VARCHAR(255) NOT NULL
 );

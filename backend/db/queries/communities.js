@@ -10,6 +10,21 @@ const getAllCommunities = () => {
     });
 };
 
+const getAllCommunitiesWithName = (name) => {
+  return db.query(`
+    SELECT * FROM communities WHERE name ILIKE $1;
+  `, [`%${name}%`])
+    .then(res => {
+
+      console.log('res Rows', res.rows);
+      return res.rows;
+    }
+    )
+    .catch((e) => {
+      return e;
+    });
+};
+
 const getAllCauseCommunities = (cause) => {
   return db.query(`
     SELECT * FROM communities WHERE cause = $1
@@ -30,12 +45,12 @@ const deleteCommunityById = (id) => {
     });
 };
 
-const addNewCommunity = (name, description, location, cause, creation_date) => {
-  const qs = `INSERT INTO communities (name, description, location, cause, creation_date)
-    VALUES ($1, $2, $3, $4, $5)
+const addNewCommunity = (name, description, location, cause, creation_date, picture_url) => {
+  const qs = `INSERT INTO communities (name, description, location, cause, creation_date, picture_url)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
   `;
-  return db.query(qs, [name, description, location, cause, creation_date])
+  return db.query(qs, [name, description, location, cause, creation_date, picture_url])
     .then(res => res.rows)
     .catch((err) => {
       return err;
@@ -53,4 +68,4 @@ const updateCommunityName = (id, name) => {
     });
 };
 
-module.exports = { getAllCommunities, getAllCauseCommunities, deleteCommunityById, addNewCommunity, updateCommunityName };
+module.exports = { getAllCommunities, getAllCommunitiesWithName, getAllCauseCommunities, deleteCommunityById, addNewCommunity, updateCommunityName };
