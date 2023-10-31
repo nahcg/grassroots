@@ -16,7 +16,7 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <div className="wrapper">
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Landing />} /> {/* Display the Landing page on the root URL */}
         <Route path="/home" element={<Home />} />
