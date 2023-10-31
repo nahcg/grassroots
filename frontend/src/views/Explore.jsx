@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 import "../styles/Explore.css";
 import CommunityGrid from "../components/CommunityGrid";
@@ -91,25 +91,26 @@ const Explore = () => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	//React Hook Form State
-	const { register, handleSubmit } = useForm();
+	// const { register, handleSubmit } = useForm();
 
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-	});
+	// const [formData, setFormData] = useState({
+	// 	name: "",
+	// 	email: "",
+	// });
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setFormData({
-			...formData,
-			[name]: value,
-		});
-	};
-
-	// const handleSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	console.log("Form submitted:", formData);
+	// const handleChange = (e) => {
+	// 	const { name, value } = e.target;
+	// 	setFormData({
+	// 		...formData,
+	// 		[name]: value,
+	// 	});
 	// };
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const { name, description, location } = e.target.elements;
+		console.log("Form submitted:", name.value);
+	};
 
 	useEffect(() => {
 		const fetchData = () => {
@@ -172,19 +173,12 @@ const Explore = () => {
 								<Typography id='transition-modal-description' sx={{ mt: 2 }}>
 									Please fill out the below details to create your community:
 								</Typography>
-								<form
-									onSubmit={handleSubmit((data) => {
-										console.log(data);
-									})}
-								>
+								<form onSubmit={handleSubmit}>
 									<Stack>
-										<Input {...register("name")} placeholder='Community Name' />
-										<Input
-											{...register("description")}
-											placeholder='Description'
-										/>
+										<Input name='name' placeholder='Community Name' />
+										<Input name='description' placeholder='Description' />
 										<InputLabel>Location</InputLabel>
-										<Select {...register("location")}>
+										<Select name='location'>
 											<MenuItem value='Toronto'>Toronto</MenuItem>
 											<MenuItem value='Brampton'> Brampton</MenuItem>
 											<MenuItem value='Mississauga'> Mississauga</MenuItem>
@@ -194,7 +188,7 @@ const Explore = () => {
 											<MenuItem value='North York'> North York</MenuItem>
 										</Select>
 										<InputLabel>Cause</InputLabel>
-										<Select {...register("cause")}>
+										<Select name='cause'>
 											<MenuItem value='Political'>Political</MenuItem>
 											<MenuItem value='Environmental'>Environmental</MenuItem>
 											<MenuItem value='Social'>Social</MenuItem>
@@ -202,7 +196,7 @@ const Explore = () => {
 										<Input
 											type='text'
 											placeholder='Community Picture URL'
-											{...register("picture_url")}
+											name='picture_url'
 										/>
 									</Stack>
 									<Button type='submit'>Submit</Button>
