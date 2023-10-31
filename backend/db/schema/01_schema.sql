@@ -47,7 +47,6 @@ CREATE TABLE CommunityMembers (
 
 CREATE TABLE posts (
   post_id SERIAL PRIMARY KEY NOT NULL,
-  user_id VARCHAR NOT NULL,
   CommunityID INT REFERENCES Communities(CommunityID) ON DELETE CASCADE NOT NULL,
   title VARCHAR NOT NULL,
   context TEXT,
@@ -57,9 +56,8 @@ CREATE TABLE posts (
 CREATE TABLE comments (
   comment_id serial PRIMARY KEY NOT NULL,
   post_id int REFERENCES posts(post_id),
-  user_id int REFERENCES users(userID),
   comment TEXT,
-  timestamp time
+  timestamp TIMESTAMP
 );
 
 -- Create the Events table

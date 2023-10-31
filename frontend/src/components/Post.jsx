@@ -2,35 +2,70 @@ import React, { useState, useEffect} from 'react';
 import Comment from './Comment';
 import '../styles/Post.css'; 
 
-const Post = ({ post, post_id, onAddComment }) => {
+const Post = ({ post, post_id }) => {
   const [isActive, setIsActive] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
 
+  const currentTimestamp = new Date();
+
+
   useEffect(() => {
-      // Fetch comments for the specific post from the backend when the component mounts
+    // Fetch comments for the specific post from the backend when post_id and isActive change
+    if (post_id && isActive) {
       fetch(`http://localhost:8080/posts/comments/${post_id}`)
         .then((response) => response.json())
         .then((data) => setComments(data))
         .catch((error) => console.error('Error fetching comments:', error));
-  }, [post_id]);
-
-console.log("comments", comments)
+    }
+  }, [post_id, isActive]);
 
 
   const handlePostClick = () => {
     setIsActive(!isActive); // Toggle active state on post click
   };
 
+
   const handleCommentSubmit = () => {
-    if (newComment.trim() === '') {
-      return;
-    }
-    const comment = { text: newComment };
-    onAddComment(comment);
-    setNewComment('');
+    // Prepare the comment data
+    const newCommentData = {
+      post_id: post_id,
+      comment: newComment,
+      timestamp: currentTimestamp.toISOString(),
+    };
+    console.log("commentData", newCommentData);
+  
+    // Send a POST request to add the new comment
+    fetch(`http://localhost:8080/posts/comments/${post_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newCommentData),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        // Update the comments state
+        setComments((prevComments) => {
+          return [...prevComments, responseData];
+        });
+  
+        setNewComment('');
+  
+        // Fetch updated comments after adding a new comment
+        fetch(`http://localhost:8080/posts/comments/${post_id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Update the comments state with the updated comments
+            setComments(data);
+          })
+          .catch((error) => console.error('Error fetching comments after submission:', error));
+      })
+      .catch((error) => console.error('Error adding comment:', error));
   };
 
+
+  
   return (
     <div className={`post ${isActive ? 'active' : ''}`}>
       <h2 onClick={handlePostClick}>{post.title}</h2>

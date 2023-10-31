@@ -16,6 +16,22 @@ router.get("/:CommunityId", (req, res) => {
     });
 });
 
+//post new post
+router.post("/:CommunityId", (req, res) => {
+  const CommunityId = req.params.CommunityId;
+  const { title, context, timestamp } = req.body;
+
+  postQueries
+    .addPost(parseInt(CommunityId), title, context, timestamp)
+    .then((results) => {
+      res.json(results);
+      console.log("results from route", results);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 //express route for getting all comments for a post
 router.get("/comments/:post_id", (req, res) => {
   const post_id = req.params.post_id;
@@ -24,6 +40,21 @@ router.get("/comments/:post_id", (req, res) => {
     .then((results) => {
       res.json(results.rows);
       console.log("results from route", results.rows);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.post("/comments/:post_id", (req, res) => {
+  const post_id = req.params.post_id;
+  const { comment, timestamp } = req.body;
+
+  postQueries
+    .addComment(post_id, comment, timestamp)
+    .then((results) => {
+      res.json(results);
+      console.log("results from comment post", results);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

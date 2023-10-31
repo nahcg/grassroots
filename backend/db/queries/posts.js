@@ -16,6 +16,21 @@ const getPosts = async (CommunityId) => {
   }
 };
 
+// add post to community
+const addPost = async (CommunityID, title, context, timestamp) => {
+  try {
+    const post = await db.query(
+      `INSERT INTO posts (CommunityID, title, context, timestamp) VALUES($1, $2, $3, $4) RETURNING *`,
+      [CommunityID, title, context, timestamp]
+    );
+    console.log("Fetched post:", post); // Log the fetched events
+    return post;
+  } catch (error) {
+    console.error("Error fetching posts:", error); // Log any errors
+    throw error;
+  }
+};
+
 //get comments for post
 const getComments = async (post_id) => {
   try {
@@ -33,4 +48,18 @@ const getComments = async (post_id) => {
   }
 };
 
-module.exports = { getPosts, getComments };
+const addComment = async (post_id, comment, timestamp) => {
+  try {
+    const newComment = await db.query(
+      `INSERT INTO comments (post_id, comment, timestamp) VALUES($1, $2, $3) RETURNING *`,
+      [post_id, comment, timestamp]
+    );
+    console.log("Fetched added comment:", newComment); // Log the fetched comments
+    return newComment;
+  } catch (error) {
+    console.error("Error fetching comments:", error); // Log any errors
+    throw error;
+  }
+};
+
+module.exports = { getPosts, addPost, getComments, addComment };
