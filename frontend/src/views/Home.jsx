@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Navigation } from "../components/navigation";
 import LogoutButton from "../components/Logout";
+import CommunityScroller from "../components/community-scroller";
 
 function Home() {
 	const { user, isAuthenticated, isLoading } = useAuth0();
@@ -20,7 +21,7 @@ function Home() {
 	return (
 		isAuthenticated && (
 			<div>
-				<nav id="menu" className="navbar navbar-default navbar-fixed-top">
+				<nav id="menu" className="navbar navbar-default">
 				<div className="container">
 					<div className="navbar-header">
 						<button
@@ -44,15 +45,19 @@ function Home() {
 						className="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1"
 					>
-						<div>
-							<img src={user.picture} alt={user.name} />
+						<div className="profile-section">
+							<img src={user.picture} alt={user.name} className="profile-icon"/>
 							<h2>{user.name}</h2>
-							<p>{user.email}</p>
+							{/* <p className="login-email">{user.email}</p> */}
 							<LogoutButton />
 						</div>
 					</div>
 				</div>
 			</nav>
+			<div>
+				<h3>My Communities</h3>
+				<CommunityScroller/>
+			</div>
 		</div>
 		)
 	);
