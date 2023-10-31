@@ -6,6 +6,8 @@ require("dotenv").config();
 // const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
+
+const cors = require("cors");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 8080;
@@ -35,6 +37,11 @@ app.use(cors());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+const userApiRoutes = require("./routes/users-api");
+const usersRoutes = require("./routes/users");
+const eventsRoutes = require("./routes/events");
+const communitiesRoutes = require("./routes/communities");
+const postsRoutes = require("./routes/posts");
 // const widgetApiRoutes = require("./routes/widgets-api");
 // const usersRoutes = require("./routes/users");
 // const userApiRoutes = require("./routes/users");
@@ -49,6 +56,8 @@ const user_skills_Routes = require("./routes/userskills");
 app.use("/api/users", userApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/events", eventsRoutes);
+app.use("/communities", communitiesRoutes);
+app.use("/posts", postsRoutes);
 // Note: mount other resources here, using the same pattern above
 // app.use("/api/users", userApiRoutes);
 app.use("/communities", communitiesRoutes);
@@ -59,12 +68,12 @@ app.use("/user/skills", user_skills_Routes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
 // app.get("/", (req, res) => {
 //   res.render("index");
 // });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line linebreak-style
   // eslint-disable-next-line linebreak-style
   console.log(`Example app listening on port ${PORT}`);
 });

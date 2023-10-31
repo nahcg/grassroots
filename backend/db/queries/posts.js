@@ -1,27 +1,65 @@
 const db = require("../connection");
-
-// Return all posts for a given community id
-const getAllCommunityPosts = (community_id) => {
-  return db.query(`
-    SELECT * FROM posts WHERE community_id = $1
-  `, [community_id])
-    .then(res => res.rows)
-    .catch((e) => {
-      return e;
-    });
+// get all posts for a community id
+const getPosts = async (CommunityId) => {
+  try {
+    const post = await db.query(
+      `SELECT *
+       FROM posts 
+       WHERE CommunityID = $1;`,
+      [CommunityId]
+    );
+    console.log("Fetched posts:", post.rows); // Log the fetched events
+    return post.rows;
+  } catch (error) {
+    console.error("Error fetching posts:", error); // Log any errors
+    throw error;
+  }
 };
 
-// Add new post to the database and return the added post
-const addNewCommunityPost = (user_id, community_id, title, context, timestamp) => {
-  const qs = `INSERT INTO posts (user_id, community_id, title, context, timestamp)
-    VALUES ($1, $2, $3, $4, $5)
-    RETURNING *
-  `;
-  return db.query(qs, [user_id, community_id, title, context, timestamp])
-    .then(res => res.rows)
-    .catch((err) => {
-      return err;
-    });
+// add post to community
+const addPost = async (CommunityID, title, context, timestamp) => {
+  try {
+    const post = await db.query(
+      `INSERT INTO posts (CommunityID, title, context, timestamp) VALUES($1, $2, $3, $4) RETURNING *`,
+      [CommunityID, title, context, timestamp]
+    );
+    console.log("Fetched post:", post); // Log the fetched events
+    return post;
+  } catch (error) {
+    console.error("Error fetching posts:", error); // Log any errors
+    throw error;
+  }
 };
 
-module.exports = { getAllCommunityPosts, addNewCommunityPost };
+//get comments for post
+const getComments = async (post_id) => {
+  try {
+    const comments = await db.query(
+      `SELECT *
+       FROM comments
+       WHERE post_id = $1;`,
+      [post_id]
+    );
+    console.log("Fetched comments:", comments);
+    return comments;
+  } catch (error) {
+    console.error("Error fetching posts:", error); // Log any errors
+    throw error;
+  }
+};
+
+const addComment = async (post_id, comment, timestamp) => {
+  try {
+    const newComment = await db.query(
+      `INSERT INTO comments (post_id, comment, timestamp) VALUES($1, $2, $3) RETURNING *`,
+      [post_id, comment, timestamp]
+    );
+    console.log("Fetched added comment:", newComment); // Log the fetched comments
+    return newComment;
+  } catch (error) {
+    console.error("Error fetching comments:", error); // Log any errors
+    throw error;
+  }
+};
+
+module.exports = { getPosts, addPost, getComments, addComment };

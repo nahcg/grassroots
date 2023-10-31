@@ -8,6 +8,8 @@ import Community from "./views/Community";
 import Event from "./views/Event";
 import Volunteer from "./views/Volunteer";
 import Profile from "./views/Profile";
+import Forum from "./components/Forum";
+import Post from "./components/Post";
 import Explore from "./views/Explore";
 
 import Navbar from "./components/Navbar";
@@ -21,10 +23,12 @@ function App() {
         {/* Display the Landing page on the root URL */}
         <Route path="/home" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/events/:id" element={<Event />} />
-        <Route path="/community" element={<Community />} />
+        <Route path="/events/:ids/:CommunityId" element={<Event />} />
+        <Route path="/communities/community/:id" element={<Community />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/posts/:CommunityId" element={<Forum />} />
+        <Route path="/posts/comments/:post_id" element={<Post />} />
       </Routes>
     </div>
   );
