@@ -10,13 +10,13 @@ const db = require("../connection");
 
 // Get events by communityID
 // eslint-disable-next-line space-before-function-paren
-const getEvent = async (CommunityId) => {
+const getEvent = async (community_id) => {
   try {
     const event = await db.query(
       `SELECT *
        FROM Events 
-       WHERE CommunityID = $1;`,
-      [CommunityId]
+       WHERE community_id = $1;`,
+      [community_id]
     );
     console.log("Fetched events:", event); // Log the fetched events
     return event;
@@ -26,14 +26,14 @@ const getEvent = async (CommunityId) => {
   }
 };
 
-const getEventById = async (CommunityId, EventId) => {
+const getEventById = async (community_id, event_id) => {
   try {
     const event = await db.query(
       `SELECT *
        FROM Events 
-       WHERE CommunityID = $1
-       AND EventId = $2`,
-      [CommunityId, EventId]
+       WHERE community_id = $1
+       AND event_id = $2`,
+      [community_id, event_id]
     );
     console.log("Fetched events:", event); // Log the fetched events
     return event;
@@ -45,16 +45,16 @@ const getEventById = async (CommunityId, EventId) => {
 
 const editEvent = async (
   title,
-  details,
+  description,
   date,
   location,
-  EventId,
-  CommunityID
+  event_id,
+  community_id
 ) => {
   try {
     const event = await db.query(
-      `UPDATE events SET title=$1, details=$2, date=$3, location=$4 WHERE EventId=$5 AND CommunityId=$6 RETURNING *`,
-      [title, details, date, location, EventId, CommunityID]
+      `UPDATE events SET title=$1, description=$2, date=$3, location=$4 WHERE event_id=$5 AND community_id=$6 RETURNING *`,
+      [title, description, date, location, event_id, community_id]
     );
 
     // Return the updated event data
@@ -65,11 +65,11 @@ const editEvent = async (
   }
 };
 
-const addEvent = async (CommunityID, Title, Details, Date, Location) => {
+const addEvent = async (community_id, title, description, date, location) => {
   try {
     const event = await db.query(
-      `INSERT INTO events (CommunityID, Title, Details, Date, Location) VALUES($1, $2, $3, $4, $5) RETURNING *`,
-      [CommunityID, Title, Details, Date, Location]
+      `INSERT INTO events (community_id, title, description, date, location) VALUES($1, $2, $3, $4, $5) RETURNING *`,
+      [community_id, title, description, date, location]
     );
     console.log("Fetched events:", event); // Log the fetched events
     return event;
@@ -79,11 +79,11 @@ const addEvent = async (CommunityID, Title, Details, Date, Location) => {
   }
 };
 
-const deleteEvent = async (EventId, CommunityId) => {
+const deleteEvent = async (event_id, community_id) => {
   try {
     const event = await db.query(
-      `DELETE FROM events WHERE EventId = $1 AND CommunityId = $2`,
-      [EventId, CommunityId]
+      `DELETE FROM events WHERE event_id = $1 AND community_id = $2`,
+      [event_id, community_id]
     );
     console.log("Fetched events1:", event); // Log the fetched events
     return event;
@@ -94,58 +94,3 @@ const deleteEvent = async (EventId, CommunityId) => {
 };
 
 module.exports = { getEvent, editEvent, getEventById, addEvent, deleteEvent };
-const db = require("../connection");
-
-<<<<<<< HEAD
-// Return all events for a given community id
-const getAllCommunityEvents = (community_id) => {
-  return db.query(`
-    SELECT * FROM events WHERE community_id = $1
-  `, [community_id])
-    .then(res => res.rows)
-    .catch((e) => {
-      return e;
-    });
-};
-
-// Add new event to the database and return the added event
-const addNewCommunityEvent = (user_id, community_id, title, description, datetime, location) => {
-  const qs = `INSERT INTO events (user_id, community_id, title, description, datetime, location)
-    VALUES ($1, $2, $3, $4, $5, $6)
-    RETURNING *
-  `;
-  return db.query(qs, [user_id, community_id, title, description, datetime, location])
-    .then(res => res.rows)
-    .catch((err) => {
-      return err;
-    });
-};
-
-module.exports = { getAllCommunityEvents, addNewCommunityEvent };
-=======
-// id serial PRIMARY KEY,
-// CommunityID int REFERENCES Communities(id),
-// Title varchar,
-// Description text,
-// DateTime timestamp
-
-// Get events by communityID
-// eslint-disable-next-line space-before-function-paren
-const getEvent = async (id) => {
-  try {
-    const event = await db.query(
-      `SELECT *
-       FROM Events 
-       WHERE CommunityID = $1;`,
-      [id]
-    );
-    console.log("Fetched events:", event); // Log the fetched events
-    return event;
-  } catch (error) {
-    console.error("Error fetching events:", error); // Log any errors
-    throw error;
-  }
-};
-
-module.exports = { getEvent };
->>>>>>> 18ad89c (Calendar feature)

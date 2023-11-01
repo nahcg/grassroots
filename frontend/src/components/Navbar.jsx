@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/Navbar.css";
+import { Link } from 'react-router-dom';
 
 import LoginButton from "./Login";
 import LogoutButton from "./Logout";
@@ -7,6 +8,9 @@ import LogoutButton from "./Logout";
 const Navbar = () => {
   return (
     <nav className="navbar">
+      <h1>Grassroots</h1>
+			<LoginButton />
+			<LogoutButton />
       <div className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/register">Register</Link>
@@ -17,13 +21,8 @@ const Navbar = () => {
       </div>
     </nav>
   );
-	return (
-		<nav className='navbar'>
-			<h1>Grassroots</h1>
-			<LoginButton />
-			<LogoutButton />
-		</nav>
-	);
+
+
 };
 
 export default Navbar;

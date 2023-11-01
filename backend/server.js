@@ -8,7 +8,6 @@ const express = require("express");
 const morgan = require("morgan");
 
 const cors = require("cors");
-const cors = require("cors");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -37,7 +36,7 @@ app.use(cors());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const userApiRoutes = require("./routes/users-api");
+// const userApiRoutes = require("./routes/users-api");
 const usersRoutes = require("./routes/users");
 const eventsRoutes = require("./routes/events");
 const communitiesRoutes = require("./routes/communities");
@@ -45,15 +44,12 @@ const postsRoutes = require("./routes/posts");
 // const widgetApiRoutes = require("./routes/widgets-api");
 // const usersRoutes = require("./routes/users");
 // const userApiRoutes = require("./routes/users");
-const communitiesRoutes = require("./routes/communities");
-const postsRoutes = require("./routes/posts");
-const eventsRoutes = require("./routes/events");
 const user_skills_Routes = require("./routes/userskills");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
-app.use("/api/users", userApiRoutes);
+// app.use("/api/users", userApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/events", eventsRoutes);
 app.use("/communities", communitiesRoutes);

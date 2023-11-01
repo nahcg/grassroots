@@ -1,4 +1,4 @@
-INSERT INTO Events (CommunityID, Title, Details, Date, Location)
+INSERT INTO Events (community_id, title, description, date, location)
 VALUES
   (1, 'Event in Community A', 'Event description for Community A', '2023-02-10', 'Toronto Community Centre'),
   (1, 'Event in Community A', 'Event description for Community A', '2023-10-23', 'Toronto Park'),

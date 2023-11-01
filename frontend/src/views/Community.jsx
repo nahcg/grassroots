@@ -4,23 +4,22 @@ import '../styles/Community.css';
 
 const Community = () => {
   const [community, setCommunity] = useState(null);
-  const { id } = useParams();
+  const { community_id } = useParams();
 
   useEffect(() => {
     // Fetch community by name
-    fetch(`http://localhost:8080/communities/community/${id}`)
+    fetch(`http://localhost:8080/communities/community/${community_id}`)
       .then((response) => response.json())
       .then((data) => {
         setCommunity(data[0]);
       })
       .catch((error) => console.error('Error fetching community', error));
-  }, [id]);
+  }, [community_id]);
 
 
   const routes = [
-    { path: `/community/${id}/Forum`, label: 'Forum' },
-    { path: `/community/${id}/Events`, label: 'Events' },
-    { path: `/community/${id}/Volunteer Board`, label: 'Volunteer' },
+    { path: `/community/${community_id}/Forum`, label: 'Forum' },
+    { path: `/community/${community_id}/Events`, label: 'Events' },
   ];
   
   

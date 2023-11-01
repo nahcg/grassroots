@@ -8,30 +8,30 @@ const Forum = () => {
   const [newPost, setNewPost] = useState('');
   const [newContent, setNewContent] = useState('');
 
-  const { CommunityId } = useParams();
+  const { community_id } = useParams();
   const currentTimestamp = new Date();
 
   useEffect(() => {
     // Fetch posts from the backend when the component mounts
-    fetch(`http://localhost:8080/posts/${CommunityId}`)
+    fetch(`http://localhost:8080/posts/${community_id}`)
       .then((response) => response.json())
       .then((data) => setPosts(data))
       .catch((error) => console.error('Error fetching posts:', error));
-  }, [CommunityId]);
+  }, [community_id]);
 
   console.log("data", posts)
 
   const addPost = () => {
     // Prepare the post data with an empty comments array
     const postData = {
-      CommunityID: CommunityId,
+      community_id: community_id,
       title: newPost,
       context: newContent,
       timestamp: currentTimestamp.toISOString(),
     };
 
     // Send a POST request to add the new post
-    fetch(`http://localhost:8080/posts/${CommunityId}`, {
+    fetch(`http://localhost:8080/posts/${community_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

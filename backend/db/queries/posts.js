@@ -1,12 +1,12 @@
 const db = require("../connection");
 // get all posts for a community id
-const getPosts = async (CommunityId) => {
+const getPosts = async (community_id) => {
   try {
     const post = await db.query(
       `SELECT *
        FROM posts 
-       WHERE CommunityID = $1;`,
-      [CommunityId]
+       WHERE community_id = $1;`,
+      [community_id]
     );
     console.log("Fetched posts:", post.rows); // Log the fetched events
     return post.rows;
@@ -17,11 +17,11 @@ const getPosts = async (CommunityId) => {
 };
 
 // add post to community
-const addPost = async (CommunityID, title, context, timestamp) => {
+const addPost = async (community_id, title, context, timestamp) => {
   try {
     const post = await db.query(
-      `INSERT INTO posts (CommunityID, title, context, timestamp) VALUES($1, $2, $3, $4) RETURNING *`,
-      [CommunityID, title, context, timestamp]
+      `INSERT INTO posts (community_id, title, context, timestamp) VALUES($1, $2, $3, $4) RETURNING *`,
+      [community_id, title, context, timestamp]
     );
     console.log("Fetched post:", post); // Log the fetched events
     return post;

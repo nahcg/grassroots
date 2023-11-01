@@ -3,10 +3,10 @@ const router = express.Router();
 const postQueries = require("../db/queries/posts");
 
 //express route for getting all posts for a community
-router.get("/:CommunityId", (req, res) => {
-  const CommunityId = req.params.CommunityId;
+router.get("/:community_id", (req, res) => {
+  const community_id = req.params.community_id;
   postQueries
-    .getPosts(parseInt(CommunityId))
+    .getPosts(parseInt(community_id))
     .then((results) => {
       res.json(results);
       console.log("results from route", results);
@@ -17,12 +17,12 @@ router.get("/:CommunityId", (req, res) => {
 });
 
 //post new post
-router.post("/:CommunityId", (req, res) => {
-  const CommunityId = req.params.CommunityId;
+router.post("/:community_id", (req, res) => {
+  const community_id = req.params.community_id;
   const { title, context, timestamp } = req.body;
 
   postQueries
-    .addPost(parseInt(CommunityId), title, context, timestamp)
+    .addPost(parseInt(community_id), title, context, timestamp)
     .then((results) => {
       res.json(results);
       console.log("results from route", results);

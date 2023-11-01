@@ -4,10 +4,10 @@ const router = express.Router();
 const eventQueries = require("../db/queries/events");
 
 //express route for getting all events for a community
-router.get("/:CommunityId", (req, res) => {
-  const CommunityId = req.params.CommunityId;
+router.get("/:community_id", (req, res) => {
+  const community_id = req.params.community_id;
   eventQueries
-    .getEvent(parseInt(CommunityId))
+    .getEvent(parseInt(community_id))
     .then((results) => {
       res.json(results.rows);
       console.log("results from route", results.rows);
@@ -18,13 +18,13 @@ router.get("/:CommunityId", (req, res) => {
 });
 
 //add event to community
-router.post("/:CommunityId", (req, res) => {
-  const CommunityId = req.params.CommunityId;
+router.post("/:community_id", (req, res) => {
+  const community_id = req.params.community_id;
   const { title, details, location, date } = req.body;
   console.log("reqbody", req.body);
 
   eventQueries
-    .addEvent(parseInt(CommunityId), title, details, date, location)
+    .addEvent(parseInt(community_id), title, details, date, location)
     .then((results) => {
       res.json(results.rows[0]);
       console.log("results from route", results.rows);
@@ -35,11 +35,11 @@ router.post("/:CommunityId", (req, res) => {
 });
 
 //show individual event under community by ID
-router.get("/:CommunityId/:EventId", (req, res) => {
-  const CommunityId = req.params.CommunityId;
-  const EventId = req.params.EventId;
+router.get("/:community_id/:event_id", (req, res) => {
+  const community_id = req.params.community_id;
+  const event_id = req.params.event_id;
   eventQueries
-    .getEventById(parseInt(CommunityId), parseInt(EventId))
+    .getEventById(parseInt(community_id), parseInt(event_id))
     .then((results) => {
       res.json(results.rows);
       console.log("results from route", results.rows);
@@ -50,9 +50,9 @@ router.get("/:CommunityId/:EventId", (req, res) => {
 });
 
 //express route for editing an event
-router.post("/:CommunityId/:EventId", async (req, res) => {
-  const EventId = req.params.EventId;
-  const CommunityId = req.params.CommunityId;
+router.post("/:community_id/:event_id", async (req, res) => {
+  const event_id = req.params.event_id;
+  const community_id = req.params.community_id;
   const { title, details, date, location } = req.body;
 
   try {
@@ -62,12 +62,12 @@ router.post("/:CommunityId/:EventId", async (req, res) => {
       details,
       date,
       location,
-      parseInt(EventId),
-      parseInt(CommunityId)
+      parseInt(event_id),
+      parseInt(community_id)
     );
 
     // Get the updated event by its ID
-    const event = await eventQueries.getEventById(CommunityId, EventId);
+    const event = await eventQueries.getEventById(community_id, event_id);
 
     // Send the updated event back as a response
     res.json(event.rows[0]);
@@ -77,13 +77,13 @@ router.post("/:CommunityId/:EventId", async (req, res) => {
 });
 
 //delete event
-router.delete("/:CommunityId/:EventId", (req, res) => {
-  const CommunityId = req.params.CommunityId;
-  const EventId = req.params.EventId;
+router.delete("/:community_id/:event_id", (req, res) => {
+  const community_id = req.params.community_id;
+  const event_id = req.params.event_id;
   eventQueries
-    .deleteEvent(parseInt(CommunityId), parseInt(EventId))
+    .deleteEvent(parseInt(community_id), parseInt(event_id))
     .then((results) => {
-      console.log("Deleted event with EventId:", EventId);
+      console.log("Deleted event with EventId:", event_id);
       res.json(results.rows); // expected empty
     })
     .catch((err) => {

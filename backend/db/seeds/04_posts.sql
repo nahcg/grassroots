@@ -9,7 +9,7 @@
 --   timestamp TIMESTAMP
 -- );
 
-INSERT INTO posts (CommunityID, title, context, timestamp)
+INSERT INTO posts (community_id, title, context, timestamp)
 VALUES
   (1, 'FAQ for Homesteading', '1. What is homesteading?
 Homesteading is a lifestyle and set of practices where individuals or families strive for self-sufficiency by growing their own food, raising livestock, and reducing reliance on modern amenities and commercial goods. It involves sustainable living, renewable energy use, and various do-it-yourself (DIY) skills.

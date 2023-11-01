@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -9,17 +8,17 @@ const CalendarApp = () => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [eventTitle, setEventTitle] = useState('');
-  const [eventDetails, setEventDetails] = useState('');
+  const [eventDescription, setEventDescription] = useState('');
   const [eventLocation, setEventLocation] = useState('');
   const [eventDate, setEventDate] = useState('');
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const { CommunityId } = useParams(); // Get the ID parameter from the URL
+  const { community_id } = useParams(); // Get the ID parameter from the URL
   
 
   // Return array of objects
   useEffect(() => {
     // Fetch events based on the ID parameter from the URL
-    fetch(`http://localhost:8080/events/${CommunityId}`)
+    fetch(`http://localhost:8080/events/${community_id}`)
     .then((response) => response.json())
       .then((data) => {
         // Format dates before setting state
@@ -31,7 +30,7 @@ const CalendarApp = () => {
         setEvents(formattedEvents);
       })
       .catch((error) => console.error('Error fetching events', error));
-  }, [CommunityId]);
+  }, [community_id]);
 
 
   const handleDateChange = newDate => {
@@ -42,22 +41,22 @@ const CalendarApp = () => {
 
 // add event
 const addEvent = () => {
-  if (eventTitle.trim() === '' || eventDetails.trim() === '' || eventLocation.trim() === '') return;
+  if (eventTitle.trim() === '' || eventDescription.trim() === '' || eventLocation.trim() === '') return;
   
   // Format the date to YYYY-MM-DD
   const formattedDate = date.toISOString().split('T')[0];
 
   const newEvent = {
-    CommunityId: CommunityId,
+    community_id: community_id,
     title: eventTitle,
-    details: eventDetails,
+    description: eventDescription,
     date: formattedDate, 
     location: eventLocation
   };
   console.log("newEvent", newEvent)
 
   // Send a PUT request to update the events table with the new event
-  fetch(`http://localhost:8080/events/${CommunityId}`, {
+  fetch(`http://localhost:8080/events/${community_id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -70,7 +69,7 @@ const addEvent = () => {
       // Update the state with the new event returned from the server
       setEvents([...events, updatedEvent]);
       setEventTitle('');
-      setEventDetails('');
+      setEventDescription('');
       setEventLocation('');
     })
     .catch((error) => console.error('Error adding event', error));
@@ -79,18 +78,15 @@ const addEvent = () => {
 
 
 
-
-
-
-const editEvent = (eventId) => {
+const editEvent = (event_id) => {
   // Find the selected event based on eventId
-  const eventToEdit = events.find((event) => event.eventid === Number(eventId));
+  const eventToEdit = events.find((event) => event.event_id === Number(event_id));
 
   if (eventToEdit) {
     // Set the selected event for editing
     setSelectedEvent(eventToEdit);
     setEventTitle(eventToEdit.title);
-    setEventDetails(eventToEdit.details);
+    setEventDescription(eventToEdit.description);
     setEventDate(eventToEdit.date);
     setEventLocation(eventToEdit.location);
     console.log("eventToEdit", eventToEdit)
@@ -103,16 +99,16 @@ const handleSave = () => {
 
   const updatedEvent = {
     title: eventTitle,
-    details: eventDetails,
+    description: eventDescription,
     date: eventDate,
     location: eventLocation,
-    eventid: selectedEvent.eventid, 
-    communityid: selectedEvent.communityid 
+    event_id: selectedEvent.event_id, 
+    community_id: selectedEvent.community_id 
   };
   console.log("updatedEvent1", updatedEvent)
 
   // Send a PUT request to update the event in the database
-  fetch(`http://localhost:8080/events/${CommunityId}/${updatedEvent.eventid}`, {
+  fetch(`http://localhost:8080/events/${community_id}/${updatedEvent.event_id}`, {
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json',
@@ -125,7 +121,7 @@ const handleSave = () => {
       // Update the state with the updated event returned from the server
       setEvents((prevEvents) => {
         const updatedEvents = prevEvents.map((event) => {
-          if (event.eventid === updatedEvent.eventid) {
+          if (event.event_id === updatedEvent.event_id) {
             console.log("updatedEvent2", updatedEvent)
             return updatedEvent;
           }
@@ -138,22 +134,22 @@ const handleSave = () => {
 
       // Clear the form fields and selectedEvent state after saving changes
       setEventTitle('');
-      setEventDetails('');
+      setEventDescription('');
       setEventLocation('');
       setSelectedEvent(null);
     })
     .catch((error) => console.error('Error updating event', error));
 };
 
-const deleteEvent = (EventId) => {
+const deleteEvent = (event_id) => {
   // Send a DELETE request to delete the event
-  fetch(`http://localhost:8080/events/${CommunityId}/${EventId}`, {
+  fetch(`http://localhost:8080/events/${community_id}/${event_id}`, {
     method: 'DELETE',
   })
     .then((response) => response.json())
     .then(() => {
       // Update the state to remove the deleted event from the events list
-      setEvents((prevEvents) => prevEvents.filter((event) => event.eventid !== EventId));
+      setEvents((prevEvents) => prevEvents.filter((event) => event.event_id !== event_id));
     })
     .catch((error) => console.error('Error deleting event', error));
 };
@@ -174,8 +170,8 @@ const renderForm = () => {
         />
         <textarea
           placeholder="Event Details..."
-          value={eventDetails}
-          onChange={(e) => setEventDetails(e.target.value)}
+          value={eventDescription}
+          onChange={(e) => setEventDescription(e.target.value)}
         />
         <input
           type="text"
@@ -208,8 +204,8 @@ const renderForm = () => {
       if (matchingEvents.length > 0) {
         return (
           <ul>
-            {matchingEvents.map((event, EventId) => (
-              <li key={EventId}>
+            {matchingEvents.map((event, event_id) => (
+              <li key={event_id}>
                 {event.title} at {event.location}
               </li>
             ))}
@@ -233,8 +229,8 @@ const renderForm = () => {
           />
           <textarea
             placeholder="Event Details..."
-            value={eventDetails}
-            onChange={(e) => setEventDetails(e.target.value)}
+            value={eventDescription}
+            onChange={(e) => setEventDescription(e.target.value)}
           />
           <input
             type="text"
@@ -257,9 +253,9 @@ const renderForm = () => {
           <ul>
           {events.map((event, index) => (
   <li key={index}>
-    {new Date(event.date).toDateString()} - {event.title} at {event.location} <br/> {event.details}
-    <button onClick={() => editEvent(event.eventid)}>Edit</button> 
-    <button onClick={() => deleteEvent(event.eventid)}>Delete</button>
+    {new Date(event.date).toDateString()} - {event.title} at {event.location} <br/> {event.description}
+    <button onClick={() => editEvent(event.event_id)}>Edit</button> 
+    <button onClick={() => deleteEvent(event.event_id)}>Delete</button>
   </li>
 ))}
           </ul>
