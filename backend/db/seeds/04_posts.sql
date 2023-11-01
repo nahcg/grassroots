@@ -11,7 +11,7 @@
 
 INSERT INTO posts (community_id, title, context, timestamp)
 VALUES
-  (1, 'FAQ for Homesteading', '1. What is homesteading?
+  (2, 'FAQ for Homesteading', '1. What is homesteading?
 Homesteading is a lifestyle and set of practices where individuals or families strive for self-sufficiency by growing their own food, raising livestock, and reducing reliance on modern amenities and commercial goods. It involves sustainable living, renewable energy use, and various do-it-yourself (DIY) skills.
 
 2. What are the key principles of homesteading?
@@ -28,11 +28,15 @@ The amount of land needed for homesteading depends on the scale of your activiti
 
 6. How can I learn homesteading skills?
 You can learn homesteading skills through books, online resources, workshops, and hands-on experience. Local gardening clubs, agricultural extension offices, and community events are excellent places to connect with experienced homesteaders and learn practical skills.', '2023-01-30 12:00:00'),
-  (1, 'How to Start Your Own Garden', 'Topics may include organic gardening, permaculture, companion planting, and crop rotation', '2023-02-28 14:30:00'),
-  (1, 'Composting', 'Creating nutrient-rich compost from kitchen scraps and garden waste is an essential practice for homesteaders, promoting soil health.', '2023-02-28 14:30:00'),
-  (1, 'Off-Grid Living', 'Alternative energy systems and water management', '2023-02-28 14:30:00'),
-  (2, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
-  (2, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
+  (2, 'How to Start Your Own Garden', 'Topics may include organic gardening, permaculture, companion planting, and crop rotation', '2023-02-28 14:30:00'),
+  (2, 'Composting', 'Creating nutrient-rich compost from kitchen scraps and garden waste is an essential practice for homesteaders, promoting soil health.', '2023-02-28 14:30:00'),
+  (2, 'Off-Grid Living', 'Alternative energy systems and water management', '2023-02-28 14:30:00'),
+  (2, 'Government Transparency', 'Ideas reagarding pushing for open government initiatives, freedom of information laws, and transparency in decision-making processes to enhance public accountability.', '2023-02-28 14:30:00'),
+  (1, 'Post in Community B', 'Content for Community B', '2023-02-28 14:30:00'),
+  (1, 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
+  (1, 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
+  (1, 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
+  (3, 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
   (3, 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
   (3, 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
   (3, 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
