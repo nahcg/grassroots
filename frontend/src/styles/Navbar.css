@@ -1,57 +1,57 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #333;
+	color: white;
+	padding: 10px 20px;
 }
 
 .logo a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
+	color: white;
+	text-decoration: none;
+	font-size: 1.5rem;
+	font-weight: bold;
 }
 
 .nav-links a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
+	color: white;
+	text-decoration: none;
+	margin: 0 15px;
 }
 .container {
-  width: 100%;
-  display: flex;
+	width: 100%;
+	display: flex;
 }
-.profile-section h2{
-  font-weight: 500;
-  font-size: 18px;
-  text-transform: lowercase;
-  padding: 14px 0;
-  margin-bottom: 0;
+.profile-section h2 {
+	font-weight: 500;
+	font-size: 18px;
+	text-transform: lowercase;
+	padding: 14px 0;
+	margin-bottom: 0;
 }
-.container button{
-  background: none;
-  border: none;
-  font-weight: 600;
-  font-size: 18px;
-  color: black;
-  margin-top: 12px;
+.container button {
+	background: none;
+	border: none;
+	font-weight: 600;
+	font-size: 18px;
+	color: black;
+	margin-top: 12px;
 }
 .profile-section button {
-  margin-top: -7px;
+	margin-top: -7px;
 }
 .profile-icon {
-  width: 32px;
-  border-radius: 22px;
+	width: 32px;
+	border-radius: 22px;
 }
 .navbar-header {
-  width: 50%;
+	width: 50%;
 }
 .collapse {
-  width: 50%;
-  text-align: right;
+	width: 50%;
+	text-align: right;
 }
 .profile-section a.navbar-brand {
-  margin-top: 26px;
+	margin-top: 26px;
 }

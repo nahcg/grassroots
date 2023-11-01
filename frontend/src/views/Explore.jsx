@@ -106,6 +106,7 @@ const Explore = () => {
 	// 	});
 	// };
 
+	// TODO: Complete handling submit by doing a put request of the data into the database
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { name, description, location } = e.target.elements;

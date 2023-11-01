@@ -10,13 +10,12 @@ import Event from "./views/Event";
 import Volunteer from "./views/Volunteer";
 import Profile from "./views/Profile";
 import Explore from "./views/Explore";
-
-import Navbar from "./components/Navbar";
+import { Navigation } from "./components/Navigation";
 
 function App() {
   return (
     <div className="wrapper">
-      {/* <Navbar /> */}
+      <Navigation />
       <Routes>
         <Route path="/" element={<Landing />} /> {/* Display the Landing page on the root URL */}
         <Route path="/home" element={<Home />} />
