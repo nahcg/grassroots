@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/Calendar.css';
@@ -14,6 +14,11 @@ const CalendarApp = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { community_id } = useParams(); // Get the ID parameter from the URL
   
+  const routes = [
+    { path: `/posts/${community_id}`, label: 'Forum' },
+    { path: `/events/${community_id}`, label: 'Events' },
+  ];
+
 
   // Return array of objects
   useEffect(() => {
@@ -217,6 +222,12 @@ const renderForm = () => {
   };
 
   return (
+    <div className="routes">
+          {routes.map((route, index) => (
+            <Link key={index} to={route.path}>
+              <button className="button">{route.label}</button>
+            </Link>
+          ))}
     <div className="Calendar">
       <h1>Event Calendar</h1>
       <div className="calendar-container">
@@ -261,6 +272,7 @@ const renderForm = () => {
           </ul>
         </div>
       </div>
+    </div>
     </div>
   );
 };

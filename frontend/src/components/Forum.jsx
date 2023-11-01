@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Post from './Post';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import '../styles/Forum.css';
 
 const Forum = () => {
@@ -10,6 +10,12 @@ const Forum = () => {
 
   const { community_id } = useParams();
   const currentTimestamp = new Date();
+
+
+  const routes = [
+    { path: `/posts/${community_id}`, label: 'Forum' },
+    { path: `/events/${community_id}`, label: 'Events' },
+  ];
 
   useEffect(() => {
     // Fetch posts from the backend when the component mounts
@@ -60,6 +66,12 @@ const Forum = () => {
   };
 
   return (
+    <div className="routes">
+          {routes.map((route, index) => (
+            <Link key={index} to={route.path}>
+              <button className="button">{route.label}</button>
+            </Link>
+          ))}
     <div className="forum">
       <h1>Forum</h1>
       <div className="post-form">
@@ -89,6 +101,7 @@ const Forum = () => {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 };

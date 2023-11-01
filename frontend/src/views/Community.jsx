@@ -18,8 +18,8 @@ const Community = () => {
 
 
   const routes = [
-    { path: `/community/${community_id}/Forum`, label: 'Forum' },
-    { path: `/community/${community_id}/Events`, label: 'Events' },
+    { path: `/posts/${community_id}`, label: 'Forum' },
+    { path: `/events/${community_id}`, label: 'Events' },
   ];
   
   

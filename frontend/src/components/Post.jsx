@@ -10,6 +10,7 @@ const Post = ({ post, post_id }) => {
   const currentTimestamp = new Date();
 
 
+
   useEffect(() => {
     // Fetch comments for the specific post from the backend when post_id and isActive change
     if (post_id && isActive) {
