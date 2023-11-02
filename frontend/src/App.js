@@ -13,13 +13,11 @@ import Forum from "./components/Forum";
 import Post from "./components/Post";
 import Explore from "./views/Explore";
 import Navigation from "./components/Navigation";
-import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="wrapper">
       <Navigation />
-      <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />{" "}
         {/* Display the Landing page on the root URL */}

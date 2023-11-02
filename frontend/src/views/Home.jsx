@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import CommunityScroller from "../components/community-scroller";
+import Navbar from "../components/Navbar";
 
 function Home() {
 	const { user, isAuthenticated, isLoading } = useAuth0();
@@ -19,7 +20,7 @@ function Home() {
 	return (
 		isAuthenticated && (
 			<div>
-				<nav id='menu' className='navbar navbar-default'>
+				{/* <nav id='menu' className='navbar navbar-default'>
 					<div className='container'>
 						<div className='navbar-header'>
 							<button
@@ -53,7 +54,8 @@ function Home() {
 							</div>
 						</div>
 					</div>
-				</nav>
+				</nav> */}
+				<Navbar />
 				<div>
 					<h3>My Communities</h3>
 					<CommunityScroller />

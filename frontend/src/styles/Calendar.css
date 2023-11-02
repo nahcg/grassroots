@@ -1,46 +1,52 @@
+.routes {
+	margin-top: 5rem;
+}
+
 .Calendar {
-  text-align: center;
-  margin-top: 20px;
+	text-align: center;
+	margin-top: 5rem;
 }
 
 .calendar-container {
-  width: 80%; /* Set a percentage width for the calendar container */
-  max-width: 1000px; /* Set a maximum width for the calendar container */
-  margin: 20px auto; /* Center the calendar container horizontally */
+	width: 80%; /* Set a percentage width for the calendar container */
+	max-width: 1000px; /* Set a maximum width for the calendar container */
+	margin: 20px auto; /* Center the calendar container horizontally */
 }
 
 .react-calendar {
-  width: 100%; /* Make the calendar fill the entire width of its container */
-  max-width: 1000px; /* Set a maximum width for the calendar */
+	width: 100%; /* Make the calendar fill the entire width of its container */
+	max-width: 1000px; /* Set a maximum width for the calendar */
 }
 
 .react-calendar__tile {
-  height: auto; /* Expand the tile height to accommodate events */
-  padding: 15px; /* Add some padding inside each tile */
-  font-size: 18px; /* Set the font size of the text inside each tile */
+	height: auto; /* Expand the tile height to accommodate events */
+	padding: 15px; /* Add some padding inside each tile */
+	font-size: 18px; /* Set the font size of the text inside each tile */
 }
 
 .react-calendar__tile--active {
-  background-color: #eaf6ff; /* Change the background color of the active (selected) tile */
+	background-color: #eaf6ff; /* Change the background color of the active (selected) tile */
 }
 
 .event-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
 }
 
 .events {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
+/*Change the below to selectors to class based to avoid css confusion in app */
+
 ul {
-  list-style: none;
-  padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 li {
-  margin-bottom: 10px;
-  padding: 10px; /* Add padding to the li elements */
-  border: 1px solid #ccc; /* Add a border to the li elements */
+	margin-bottom: 10px;
+	padding: 10px; /* Add padding to the li elements */
+	border: 1px solid #ccc; /* Add a border to the li elements */
 }
