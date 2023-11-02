@@ -1,0 +1,87 @@
+/* Forum.css */
+
+.forum {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-form {
+  margin-bottom: 20px;
+}
+
+.post-form input[type="text"] {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  width: 95%;
+  align-items: center;
+}
+
+.post-form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  width: 95%; 
+  height: 350px; 
+  resize: vertical;
+}
+
+.post-form content {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%; 
+  height: 350px;
+}
+
+.post-form button {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.posts .post {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.posts .post h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.posts .post p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.comments {
+  margin-top: 15px;
+}
+
+.comment {
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.comment p {
+  font-size: 14px;
+}
+
+.comment-form input,
+.comment-form button {
+  margin-top: 10px;
+}
+
+
