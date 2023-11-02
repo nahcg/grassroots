@@ -38,6 +38,8 @@
 	margin-top: 20px;
 }
 
+/*Change the below to selectors to class based to avoid css confusion in app */
+
 ul {
 	list-style: none;
 	padding: 0;
