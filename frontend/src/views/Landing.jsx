@@ -45,7 +45,7 @@ const Landing = () => {
 
 	return (
 		<div>
-			<Navigation />
+			{/* <Navigation /> */}
 			<Header data={landingPageData.Header} />
 			<Features data={landingPageData.Features} />
 			<About data={landingPageData.About} />

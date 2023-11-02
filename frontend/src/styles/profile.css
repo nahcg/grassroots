@@ -1,0 +1,17 @@
+.profile-section {
+  display: flex;
+}
+.profile-section img {
+  margin-right: 26px; 
+}
+.profile-count-section {
+  display: flex;
+  justify-content: space-between;
+}
+.profile-section h2 {
+	font-weight: 500;
+	font-size: 18px;
+	text-transform: lowercase;
+	padding: 14px 0;
+	margin-bottom: 0;
+}
