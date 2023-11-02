@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Post from './Post';
 import { useParams, Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 import '../styles/Forum.css';
 
 const Forum = () => {
@@ -11,8 +12,10 @@ const Forum = () => {
   const { community_id } = useParams();
   const currentTimestamp = new Date();
 
+  const { user } = useAuth0();
 
   const routes = [
+    { path: `/community/communities/${community_id}`, label: 'About' },
     { path: `/posts/${community_id}`, label: 'Forum' },
     { path: `/events/${community_id}`, label: 'Events' },
   ];
@@ -30,11 +33,14 @@ const Forum = () => {
   const addPost = () => {
     // Prepare the post data with an empty comments array
     const postData = {
+      user_id: user.name,
       community_id: community_id,
       title: newPost,
       context: newContent,
       timestamp: currentTimestamp.toISOString(),
     };
+
+    console.log("postData", postData)
 
     // Send a POST request to add the new post
     fetch(`http://localhost:8080/posts/${community_id}`, {
@@ -97,6 +103,7 @@ const Forum = () => {
             key={index}
             post={post}
             post_id={post.post_id}
+            user_id={post.user_id}
             onAddComment={(comment) => addCommentToPost(index, comment)}
           />
         ))}

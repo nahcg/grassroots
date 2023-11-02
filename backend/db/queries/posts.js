@@ -17,11 +17,11 @@ const getPosts = async (community_id) => {
 };
 
 // add post to community
-const addPost = async (community_id, title, context, timestamp) => {
+const addPost = async (user_id, community_id, title, context, timestamp) => {
   try {
     const post = await db.query(
-      `INSERT INTO posts (community_id, title, context, timestamp) VALUES($1, $2, $3, $4) RETURNING *`,
-      [community_id, title, context, timestamp]
+      `INSERT INTO posts (user_id, community_id, title, context, timestamp) VALUES($1, $2, $3, $4, $5) RETURNING *`,
+      [user_id, community_id, title, context, timestamp]
     );
     console.log("Fetched post:", post); // Log the fetched events
     return post;

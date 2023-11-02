@@ -1,8 +1,9 @@
 import React, { useState, useEffect} from 'react';
 import Comment from './Comment';
 import '../styles/Post.css'; 
+import { Link } from 'react-router-dom';
 
-const Post = ({ post, post_id }) => {
+const Post = ({ post, post_id, user_id }) => {
   const [isActive, setIsActive] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
@@ -72,6 +73,9 @@ const Post = ({ post, post_id }) => {
       <h2 onClick={handlePostClick}>{post.title}</h2>
       <div className={`post-content ${isActive ? 'active' : ''}`}>
         <p>{post.context}</p>
+        <Link to={`/profile/${user_id}`} key={user_id}>
+        <p>@{user_id}</p>
+        </Link>
       </div>
       <div className="comments">
         {comments.map((comment, index) => (
