@@ -27,6 +27,8 @@ const Post = ({ post, post_id, user_id }) => {
     setIsActive(!isActive); // Toggle active state on post click
   };
 
+  console.log("stuff", post_id, user_id, post)
+
 
   const handleCommentSubmit = () => {
     // Prepare the comment data

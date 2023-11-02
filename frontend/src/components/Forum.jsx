@@ -35,13 +35,14 @@ const Forum = () => {
     const postData = {
       user_id: user.name,
       community_id: community_id,
-      title: newPost,
+      title: newPost,  // Update the local state with the new post title first
       context: newContent,
       timestamp: currentTimestamp.toISOString(),
     };
-
-    console.log("postData", postData)
-
+  
+    // Update the local state with the new post title
+    setPosts((prevPosts) => [...prevPosts, postData]);
+  
     // Send a POST request to add the new post
     fetch(`http://localhost:8080/posts/${community_id}`, {
       method: 'POST',
@@ -52,16 +53,16 @@ const Forum = () => {
     })
       .then((response) => response.json())
       .then((postData) => {
-        // Update the posts state using the functional form of setPosts
-        setPosts((prevPosts) => [...prevPosts, postData]);
-
-        // Clear the input fields
+        // Handle the API response if needed
+        // Clear the input fields if the API call is successful
         setNewPost('');
         setNewContent('');
       })
-      .catch((error) => console.error('Error adding post:', error));
+      .catch((error) => {
+        // Handle errors if the API call fails
+        console.error('Error adding post:', error);
+      });
   };
-  
   
   
 
