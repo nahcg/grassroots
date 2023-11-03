@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../styles/Community.css";
 import Navbar from "../components/Navbar";
+import MemberButton from "../components/MemberButton";
 
 const Community = () => {
 	const [community, setCommunity] = useState(null);
@@ -22,6 +23,7 @@ const Community = () => {
 		{ path: `/events/${community_id}`, label: "Events" },
 	];
 
+
 	// Log the community data when it changes
 	useEffect(() => {
 		if (community) {
@@ -36,6 +38,7 @@ const Community = () => {
 	return (
 		<div className='routes'>
 			<Navbar />
+			<MemberButton />
 			{routes.map((route, index) => (
 				<Link key={index} to={route.path}>
 					<button className='button'>{route.label}</button>

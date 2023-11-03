@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 const Profile = () => {
 	const { user, isAuthenticated, isLoading } = useAuth0();
 
+console.log("user", user)
+
 	if (isLoading) {
 		return <div>Loading ...</div>;
 	}
