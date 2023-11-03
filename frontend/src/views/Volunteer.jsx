@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/Volunteer.css";
+import SkillSwapList from "../components/SkillSwapList";
 
 function Volunteer() {
 	const [activeContentIndex, setActiveContentIndex] = useState(0);
@@ -8,7 +9,7 @@ function Volunteer() {
 	return (
 		<div>
 			<Navbar />
-			<div id='tabs'>
+			<div className='tabs'>
 				<menu>
 					<button
 						className={activeContentIndex === 0 ? "active" : ""}
@@ -26,7 +27,7 @@ function Volunteer() {
 						className={activeContentIndex === 2 ? "active" : ""}
 						onClick={() => setActiveContentIndex(2)}
 					>
-						In Consideration
+						In Progress
 					</button>
 					<button
 						className={activeContentIndex === 3 ? "active" : ""}
@@ -35,8 +36,9 @@ function Volunteer() {
 						Completed
 					</button>
 				</menu>
-				<div id='tab-content'>
-					<ul>{}</ul>
+				<div className='tab-content'>
+					{/* <ul>{}</ul> */}
+					{activeContentIndex === 0 && <SkillSwapList />}
 				</div>
 			</div>
 		</div>
