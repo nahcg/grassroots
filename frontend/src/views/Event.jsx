@@ -3,10 +3,12 @@ import { Route, Routes } from "react-router-dom";
 import Calendar from "../components/Calendar";
 import EventForm from "../components/EventForm";
 import EventDetails from "../components/EventDetails";
+import Navbar from '../components/Navbar'
 
 const Event = () => {
 	return (
 		<div className='App'>
+			<Navbar />
 			<Calendar />
 			<Routes>
 				<Route path='/' exact component={Calendar} />
