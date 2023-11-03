@@ -131,3 +131,10 @@ a:focus,
 	outline: none;
 	outline-offset: none;
 }
+
+.navigation__profile-pic {
+	height: 30px;
+	width: auto;
+	clip-path: circle();
+	margin-right: 1rem;
+}

@@ -55,6 +55,18 @@ const Navigation = (props) => {
 								</a>
 							</li>
 						)}
+						{isAuthenticated && (
+							<li>
+								<div>
+									<img
+										src={user.picture}
+										alt='profile'
+										className='navigation__profile-pic'
+									/>
+									{user.name}
+								</div>
+							</li>
+						)}
 						<li>
 							{!isAuthenticated && <LoginButton />}
 							{isAuthenticated && <LogoutButton />}
