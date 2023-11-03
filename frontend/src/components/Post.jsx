@@ -1,6 +1,7 @@
-import React, { useState, useEffect} from 'react';
-import Comment from './Comment';
-import '../styles/Post.css'; 
+import React, { useState, useEffect } from "react";
+import Comment from "./Comment";
+import "../styles/Post.css";
+import Navbar from "../components/Navbar";
 import { Link } from 'react-router-dom';
 
 const Post = ({ post, post_id, user_id }) => {
@@ -8,20 +9,17 @@ const Post = ({ post, post_id, user_id }) => {
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
 
-  const currentTimestamp = new Date();
+	const currentTimestamp = new Date();
 
-
-
-  useEffect(() => {
-    // Fetch comments for the specific post from the backend when post_id and isActive change
-    if (post_id && isActive) {
-      fetch(`http://localhost:8080/posts/comments/${post_id}`)
-        .then((response) => response.json())
-        .then((data) => setComments(data))
-        .catch((error) => console.error('Error fetching comments:', error));
-    }
-  }, [post_id, isActive]);
-
+	useEffect(() => {
+		// Fetch comments for the specific post from the backend when post_id and isActive change
+		if (post_id && isActive) {
+			fetch(`http://localhost:8080/posts/comments/${post_id}`)
+				.then((response) => response.json())
+				.then((data) => setComments(data))
+				.catch((error) => console.error("Error fetching comments:", error));
+		}
+	}, [post_id, isActive]);
 
   const handlePostClick = () => {
     setIsActive(!isActive); // Toggle active state on post click

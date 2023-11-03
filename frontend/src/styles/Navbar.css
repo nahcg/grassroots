@@ -1,29 +1,33 @@
-.navbar {
+.app-navbar {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: center;
-	background-color: #333;
-	color: white;
-	padding: 120px 10px;
+	background-color: #2e2e2e;
+	color: black;
+	height: 10rem;
+	border-radius: 25px;
+	margin-top: 15rem;
+	margin-bottom: 5rem;
 }
 
-.logo a {
+/* .logo a {
 	color: white;
 	text-decoration: none;
 	font-size: 1.5rem;
 	font-weight: bold;
-}
+} */
 
-.nav-links a {
+/* .nav-links a {
 	color: white;
 	text-decoration: none;
 	margin: 0 10px;
-}
-.container {
+} */
+
+/* .container {
 	width: 100%;
 	display: flex;
-}
-.profile-section h2 {
+} */
+/* .profile-section h2 {
 	font-weight: 500;
 	font-size: 18px;
 	text-transform: lowercase;
@@ -54,4 +58,4 @@
 }
 .profile-section a.navbar-brand {
 	margin-top: 26px;
-}
+} */

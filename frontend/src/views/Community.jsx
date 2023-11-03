@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import '../styles/Community.css'; 
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import "../styles/Community.css";
+import Navbar from "../components/Navbar";
+import MemberButton from "../components/MemberButton";
 
 const Community = () => {
-  const [community, setCommunity] = useState(null);
-  const { community_id } = useParams();
+	const [community, setCommunity] = useState(null);
+	const { community_id } = useParams();
 
-  useEffect(() => {
-    // Fetch community by name
-    fetch(`http://localhost:8080/communities/community/${community_id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCommunity(data[0]);
-      })
-      .catch((error) => console.error('Error fetching community', error));
-  }, [community_id]);
-
+	useEffect(() => {
+		// Fetch community by name
+		fetch(`http://localhost:8080/communities/community/${community_id}`)
+			.then((response) => response.json())
+			.then((data) => {
+				setCommunity(data[0]);
+			})
+			.catch((error) => console.error("Error fetching community", error));
+	}, [community_id]);
 
   const routes = [
     { path: `/communities/community/${community_id}`, label: 'About' },
@@ -31,25 +32,27 @@ const Community = () => {
     }
   }, [community]);
 
-  if (!community) {
-    return <div>Loading community information...</div>;
-  }
+	if (!community) {
+		return <div>Loading community information...</div>;
+	}
 
-  return (
-    <div className="routes">
-          {routes.map((route, index) => (
-            <Link key={index} to={route.path}>
-              <button className="button">{route.label}</button>
-            </Link>
-          ))}
-    <div className="community-container">
-      <h1>{community.name}</h1>
-      <img src={community.picture_url} alt={community.name} />
-      <p>{community.description}</p>
-      <p>Location: {community.location}</p>
-    </div>
-    </div>
-  );
+	return (
+		<div className='routes'>
+			<Navbar />
+			<MemberButton />
+			{routes.map((route, index) => (
+				<Link key={index} to={route.path}>
+					<button className='button'>{route.label}</button>
+				</Link>
+			))}
+			<div className='community-container'>
+				<h1>{community.name}</h1>
+				<img src={community.picture_url} alt={community.name} />
+				<p>{community.description}</p>
+				<p>Location: {community.location}</p>
+			</div>
+		</div>
+	);
 };
 
 export default Community;

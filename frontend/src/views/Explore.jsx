@@ -6,6 +6,7 @@ import axios from "axios";
 import "../styles/Explore.css";
 import CommunityGrid from "../components/CommunityGrid";
 import CommunityList from "../components/CommunityList";
+import Navbar from "../components/Navbar";
 
 // Imports for MaterialUi Modal
 import {
@@ -146,6 +147,7 @@ const Explore = () => {
 	return (
 		<div>
 			<div className='explore-page'>
+				<Navbar />
 				<div className='explore-page__head'>
 					<h1>Find a Community</h1>
 					<button onClick={handleOpen}>Create New</button>

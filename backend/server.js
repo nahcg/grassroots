@@ -48,6 +48,7 @@ const postsRoutes = require("./routes/posts");
 // const userApiRoutes = require("./routes/users");
 const user_skills_Routes = require("./routes/userskills");
 const profileRoutes = require("./routes/profile");
+const memberRoutes = require("./routes/member");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -64,6 +65,7 @@ app.use("/posts", postsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/user/skills", user_skills_Routes);
 app.use("/profile", profileRoutes);
+app.use("/member", memberRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!
