@@ -4,16 +4,17 @@ import EventList from '../components/EventList';
 import '../styles/Calendar.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from '../components/Navbar';
+import HomePosts from '../components/HomePosts';
 
 const Home = () => {
   const [events, setEvents] = useState([]);
-  const [isCalendarView, setIsCalendarView] = useState(true); // State to manage calendar view
+  const [posts, setPosts] = useState([]); 
+  const [isCalendarView, setIsCalendarView] = useState(true); 
   const { user } = useAuth0();
-  const user_id = user.email;
 
-  // Fetch events based on the ID parameter from the URL
+  // Fetch events based on the user.email
   useEffect(() => {
-    fetch(`http://localhost:8080/home?user_id=${user.email}`, {
+    fetch(`http://localhost:8080/home/events?user_id=${user.email}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -30,6 +31,27 @@ const Home = () => {
       })
       .catch((error) => console.error('Error fetching events', error));
   }, [user.email]);
+
+
+  // Fetch posts based on the user.email
+  useEffect(() => {
+    fetch(`http://localhost:8080/home/posts?user_id=${user.name}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPosts(data); // Update posts state with fetched data
+      })
+      .catch((error) => console.error('Error fetching posts', error));
+  }, [user.name]);
+
+
+
+
+  
 
   const toggleView = () => {
     setIsCalendarView(!isCalendarView); // Toggle between calendar and event list view
@@ -80,7 +102,9 @@ const tileContent = ({ date, view }) => {
         <button onClick={toggleView}>Event List View</button>
       </div>
       {renderView()}
+      <HomePosts posts={posts} />
     </div>
+    
   );
 };
 
