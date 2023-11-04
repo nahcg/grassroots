@@ -3,7 +3,7 @@ const db = require("../connection");
 const getPosts = async (community_id) => {
   try {
     const post = await db.query(
-      `SELECT *
+      `SELECT *, CASE WHEN is_pinned = 'TRUE' THEN true ELSE false END as is_pinned
        FROM posts 
        WHERE community_id = $1;`,
       [community_id]
@@ -17,11 +17,18 @@ const getPosts = async (community_id) => {
 };
 
 // add post to community
-const addPost = async (user_id, community_id, title, context, timestamp) => {
+const addPost = async (
+  user_id,
+  community_id,
+  title,
+  context,
+  timestamp,
+  is_pinned
+) => {
   try {
     const post = await db.query(
-      `INSERT INTO posts (user_id, community_id, title, context, timestamp) VALUES($1, $2, $3, $4, $5) RETURNING *`,
-      [user_id, community_id, title, context, timestamp]
+      `INSERT INTO posts (user_id, community_id, title, context, timestamp, is_pinned) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [user_id, community_id, title, context, timestamp, is_pinned]
     );
     console.log("Fetched post:", post); // Log the fetched events
     return post;
@@ -62,4 +69,18 @@ const addComment = async (post_id, comment, timestamp) => {
   }
 };
 
-module.exports = { getPosts, addPost, getComments, addComment };
+const togglePin = async (post_id, isPinned) => {
+  try {
+    const result = await db.query(
+      `UPDATE posts SET is_pinned = $1 WHERE post_id = $2 RETURNING *`,
+      [isPinned ? "TRUE" : "FALSE", post_id]
+    );
+    console.log("Toggled pin for post_id:", post_id);
+    return result.rows[0];
+  } catch (error) {
+    console.error("Error toggling pin:", error);
+    throw error;
+  }
+};
+
+module.exports = { getPosts, addPost, getComments, addComment, togglePin };

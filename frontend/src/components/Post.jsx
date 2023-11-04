@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 import "../styles/Post.css";
-import Navbar from "../components/Navbar";
 import { Link } from 'react-router-dom';
+
 
 const Post = ({ post, post_id, user_id }) => {
   const [isActive, setIsActive] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
+  const [isPinned, setIsPinned] = useState(post.is_pinned);
+  
 
-	const currentTimestamp = new Date();
+  useEffect(() => {
+    // Fetch comments for the specific post from the backend when post_id and isActive change
+    if (post_id && isActive) {
+      fetch(`http://localhost:8080/posts/comments/${post_id}`)
+        .then((response) => response.json())
+        .then((data) => setComments(data))
+        .catch((error) => console.error("Error fetching comments:", error));
+    }
+  }, [post_id, isActive]);
 
-	useEffect(() => {
-		// Fetch comments for the specific post from the backend when post_id and isActive change
-		if (post_id && isActive) {
-			fetch(`http://localhost:8080/posts/comments/${post_id}`)
-				.then((response) => response.json())
-				.then((data) => setComments(data))
-				.catch((error) => console.error("Error fetching comments:", error));
-		}
-	}, [post_id, isActive]);
+  const currentTimestamp = new Date(post.timestamp);
+  const formattedTimestamp = `${currentTimestamp.toLocaleString('default', { month: 'long' })} ${currentTimestamp.getDate()}, ${currentTimestamp.getFullYear()}`;
+
 
   const handlePostClick = () => {
     setIsActive(!isActive); // Toggle active state on post click
@@ -67,15 +71,33 @@ const Post = ({ post, post_id, user_id }) => {
   };
 
 
+  const togglePin = () => {
+    fetch(`http://localhost:8080/posts/post/${post_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ isPinned: !isPinned }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setIsPinned(!isPinned);
+      })
+      .catch((error) => console.error('Error toggling pin:', error));
+  };
+
+
   
   return (
     <div className={`post ${isActive ? 'active' : ''}`}>
-      <h2 onClick={handlePostClick}>{post.title}</h2>
-      <div className={`post-content ${isActive ? 'active' : ''}`}>
-        <p>{post.context}</p>
-        <Link to={`/profile/${user_id}`} key={user_id}>
-        <p>@{user_id}</p>
-        </Link>
+      <div className="post-content-container">
+      <div onClick={togglePin} className={`pin ${isPinned ? 'pinned' : ''}`}></div>
+      </div>
+    <h2 onClick={handlePostClick}>{post.title}</h2>
+    <div className={`post-content ${isActive ? 'active' : ''}`}>
+      <p>{post.context}</p>
+      <p>Authored by: <Link to={`/profile/${user_id}`} key={user_id}>{user_id}</Link></p>
+        <p>{formattedTimestamp}</p>
       </div>
       <div className="comments">
         {comments.map((comment, index) => (

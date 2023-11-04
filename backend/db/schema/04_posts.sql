@@ -6,7 +6,8 @@ CREATE TABLE posts (
   community_id INT REFERENCES communities(community_id) ON DELETE CASCADE NOT NULL ,
   title VARCHAR NOT NULL,
   context TEXT,
-  timestamp TIMESTAMP
+  timestamp TIMESTAMP,
+  is_pinned BOOLEAN
 );
 -- DROP TABLE IF EXISTS posts CASCADE;
 

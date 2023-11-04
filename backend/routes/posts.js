@@ -61,4 +61,19 @@ router.post("/comments/:post_id", (req, res) => {
     });
 });
 
+router.post("/post/:post_id", (req, res) => {
+  const post_id = req.params.post_id;
+  const { isPinned } = req.body;
+
+  postQueries
+    .togglePin(post_id, isPinned)
+    .then((results) => {
+      res.json(results);
+      console.log("Post pinned/unpinned successfully");
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;

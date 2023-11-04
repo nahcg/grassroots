@@ -9,36 +9,28 @@
 --   timestamp TIMESTAMP
 -- );
 
-INSERT INTO posts (community_id, user_id, title, context, timestamp)
+INSERT INTO posts (community_id, user_id, title, context, timestamp, is_pinned)
 VALUES
-  (2, 'Mithra P', 'FAQ for Homesteading', '1. What is homesteading?
-Homesteading is a lifestyle and set of practices where individuals or families strive for self-sufficiency by growing their own food, raising livestock, and reducing reliance on modern amenities and commercial goods. It involves sustainable living, renewable energy use, and various do-it-yourself (DIY) skills.
-
-2. What are the key principles of homesteading?
-Homesteading principles include growing your own food, raising animals for meat, milk, and other products, preserving food through canning and drying, producing renewable energy, reducing waste, and embracing sustainable agricultural practices.
-
-3. Is homesteading a self-sufficient lifestyle?
-While homesteading aims for self-sufficiency, complete self-reliance is challenging in the modern world. Homesteaders often supplement their lifestyle with some modern conveniences, but the goal is to reduce dependence on external resources.
-
-4. What skills are essential for homesteading?
-Essential skills for homesteading include gardening, animal husbandry, food preservation, carpentry, basic plumbing and electrical work, sewing, and knowledge of renewable energy sources. Adaptability and problem-solving skills are also crucial.
-
-5. Do I need a lot of land to start homesteading?
-The amount of land needed for homesteading depends on the scale of your activities. Some homesteaders operate on a few acres, while others may require larger plots for extensive farming and livestock. It is essential to plan your activities based on the available land.
-
-6. How can I learn homesteading skills?
-You can learn homesteading skills through books, online resources, workshops, and hands-on experience. Local gardening clubs, agricultural extension offices, and community events are excellent places to connect with experienced homesteaders and learn practical skills.', '2023-01-30 12:00:00'),
-  (2, 'Gloria C', 'How to Start Your Own Garden', 'Topics may include organic gardening, permaculture, companion planting, and crop rotation', '2023-02-28 14:30:00'),
-  (2, 'Swathi J', 'Composting', 'Creating nutrient-rich compost from kitchen scraps and garden waste is an essential practice for homesteaders, promoting soil health.', '2023-02-28 14:30:00'),
-  (2, 'Mithra P', 'Off-Grid Living', 'Alternative energy systems and water management', '2023-02-28 14:30:00'),
-  (1, 'Gloria C', 'Government Transparency', 'Ideas reagarding pushing for open government initiatives, freedom of information laws, and transparency in decision-making processes to enhance public accountability.', '2023-02-28 14:30:00'),
-  (1, 'Swathi J', 'Civic Education', 'Promoting political literacy, critical thinking, and understanding of democratic processes through education initiatives to empower citizens.B', '2023-02-28 14:30:00'),
-  (1, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
-  (1, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
-  (1, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
-  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
-  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
-  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
-  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00'),
-  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00');
+  (2, 'Mithra P', 'FAQ for Homesteading', '1. Research and Education
+2. Evaluate Your Skills and Interests
+3. Start Small
+4. Plan Your Homestead
+5. Develop Self-Sufficiency
+6. Embrace Sustainability
+7. Community and Networking
+8. Prepare for Challenges
+9. Stay Patient and Persistent', '2023-01-30 12:00:00', 'FALSE'),
+  (2, 'Gloria C', 'How to Start Your Own Garden', 'Topics may include organic gardening, permaculture, companion planting, and crop rotation', '2023-02-28 14:30:00', 'FALSE'),
+  (2, 'Swathi J', 'Composting', 'Creating nutrient-rich compost from kitchen scraps and garden waste is an essential practice for homesteaders, promoting soil health.', '2023-02-28 14:30:00', 'FALSE'),
+  (2, 'Mithra P', 'Off-Grid Living', 'Alternative energy systems and water management', '2023-02-28 14:30:00', 'FALSE'),
+  (1, 'Gloria C', 'Government Transparency', 'Ideas reagarding pushing for open government initiatives, freedom of information laws, and transparency in decision-making processes to enhance public accountability.', '2023-02-28 14:30:00', 'FALSE'),
+  (1, 'Swathi J', 'Civic Education', 'Promoting political literacy, critical thinking, and understanding of democratic processes through education initiatives to empower citizens.B', '2023-02-28 14:30:00', 'FALSE'),
+  (1, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE'),
+  (1, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE'),
+  (1, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE'),
+  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE'),
+  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE'),
+  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE'),
+  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE'),
+  (3, 'Swathi J', 'Post in Community C', 'Content for Community C', '2023-02-28 14:30:00', 'FALSE');
 

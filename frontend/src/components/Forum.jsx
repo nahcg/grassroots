@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Post from './Post';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import '../styles/Forum.css';
 
 const Forum = () => {
-	const [posts, setPosts] = useState([]);
-	const [newPost, setNewPost] = useState("");
-	const [newContent, setNewContent] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState("");
+  const [newContent, setNewContent] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [filterTitle, setFilterTitle] = useState("");
 
   const { community_id } = useParams();
-  const currentTimestamp = new Date();
-
   const { user } = useAuth0();
 
   const routes = [
@@ -21,29 +21,49 @@ const Forum = () => {
     { path: `/events/${community_id}`, label: 'Events' },
   ];
 
-	useEffect(() => {
-		// Fetch posts from the backend when the component mounts
-		fetch(`http://localhost:8080/posts/${community_id}`)
-			.then((response) => response.json())
-			.then((data) => setPosts(data))
-			.catch((error) => console.error("Error fetching posts:", error));
-	}, [community_id]);
+  useEffect(() => {
+    // Fetch posts from the backend when the component mounts
+    fetch(`http://localhost:8080/posts/${community_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Sort posts by pinned status (pinned posts first) and then by date
+        const sortedPosts = data.sort((a, b) => {
+          if (b.is_pinned && !a.is_pinned) return 1;
+          if (!b.is_pinned && a.is_pinned) return -1;
+          return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        setPosts(sortedPosts);
+        setFilteredPosts(sortedPosts);
+      })
+      .catch((error) => console.error("Error fetching posts:", error));
+  }, [community_id]);
 
-	console.log("data", posts);
+
+
+
+
+  useEffect(() => {
+    // Filter posts by title when filterTitle changes
+    const filtered = posts.filter((post) =>
+      post.title.toLowerCase().includes(filterTitle.toLowerCase())
+    );
+    setFilteredPosts(filtered);
+  }, [filterTitle, posts]);
 
   const addPost = () => {
     // Prepare the post data with an empty comments array
     const postData = {
       user_id: user.name,
       community_id: community_id,
-      title: newPost,  // Update the local state with the new post title first
+      title: newPost,
       context: newContent,
-      timestamp: currentTimestamp.toISOString(),
+      timestamp: new Date().toISOString(),
+      is_pinned: 'FALSE',
     };
-  
+
     // Update the local state with the new post title
     setPosts((prevPosts) => [...prevPosts, postData]);
-  
+
     // Send a POST request to add the new post
     fetch(`http://localhost:8080/posts/${community_id}`, {
       method: 'POST',
@@ -73,6 +93,10 @@ const Forum = () => {
 		setPosts(updatedPosts);
 	};
 
+
+
+
+
 	return (
 		<div className='routes'>
 			<Navbar />
@@ -83,7 +107,6 @@ const Forum = () => {
 			))}
 			<div className='forum'>
 				<h1>Forum</h1>
-				<div className='post-form'>
 					<input
 						type='text'
 						placeholder='Post Title'
@@ -99,19 +122,23 @@ const Forum = () => {
 					</div>
 					<button onClick={addPost}>Add Post</button>
 				</div>
-
-      <div className="posts">
-        {posts.map((post, index) => (
-          <Post
-            key={index}
-            post={post}
-            post_id={post.post_id}
-            user_id={post.user_id}
-            onAddComment={(comment) => addCommentToPost(index, comment)}
-          />
+<input
+          type='text'
+          placeholder='Filter by Title'
+          value={filterTitle}
+          onChange={(e) => setFilterTitle(e.target.value)}
+        />
+        <div className="posts">
+          {filteredPosts.map((post, index) => (
+            <Post
+              key={index}
+              post={post}
+              post_id={post.post_id}
+              user_id={post.user_id}
+              onAddComment={(comment) => addCommentToPost(index, comment)}
+            />
         ))}
       </div>
-    </div>
     </div>
   );
 };
