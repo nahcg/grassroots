@@ -7,4 +7,5 @@ VALUES
   ('smpere7@gmail.com', 5, '2023-01-20', FALSE),
   ('artisticallyfree@gmail.com', 1, '2023-03-25', FALSE),
   ('artisticallyfree@gmail.com', 2, '2023-03-25', FALSE),
-  ('artisticallyfree@gmail.com', 7, '2023-03-25', FALSE);
+  ('artisticallyfree@gmail.com', 6, '2023-03-25', FALSE),  ('artisticallyfree@gmail.com', 5, '2023-03-25', FALSE),  ('artisticallyfree@gmail.com', 7, '2023-03-25', FALSE);
+  

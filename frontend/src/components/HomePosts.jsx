@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 
 const HomePosts = ({ posts, allPosts }) => {
-  const [comments, setComments] = useState({}); // Initialize comments as an object
-  console.log("posts in HomePosts component:", posts);
+  const [comments, setComments] = useState({});
+  const [expandedPosts, setExpandedPosts] = useState([]); // Track expanded post IDs
 
   useEffect(() => {
     const fetchCommentsForPosts = async () => {
@@ -13,7 +13,6 @@ const HomePosts = ({ posts, allPosts }) => {
           posts.map(async (post) => {
             const response = await fetch(`http://localhost:8080/posts/comments/${post.post_id}`);
             const data = await response.json();
-            console.log(`Comments for post ${post.post_id}:`, data); // Log the comments data
             commentsData[post.post_id] = data;
           })
         );
@@ -22,47 +21,59 @@ const HomePosts = ({ posts, allPosts }) => {
         console.error("Error fetching comments:", error);
       }
     };
-    
 
     fetchCommentsForPosts();
   }, [posts]);
 
-  console.log("comments", comments);
+  console.log("comments from HomePost", comments)
 
-
-
+  const handlePostClick = (postId) => {
+    if (expandedPosts.includes(postId)) {
+      setExpandedPosts(expandedPosts.filter((id) => id !== postId));
+    } else {
+      setExpandedPosts([...expandedPosts, postId]);
+    }
+  };
 
   return (
     <div className="posts-container">
       <h2>Your Posts: </h2>
       {posts.map((post, index) => (
-        <div key={index} className="post-item">
+        <div key={index} className="post-item" onClick={() => handlePostClick(post.post_id)}>
           <h3>{post.title}</h3>
-          <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
-          <p>Author: {post.user_id}</p>
-          <p>{post.context}</p>
-          <div className="comments">
-            {comments[post.post_id] &&
-              comments[post.post_id].map((comment, commentIndex) => (
-                <Comment key={commentIndex} comment={comment} />
-              ))}
-          </div>
+          {expandedPosts.includes(post.post_id) && (
+            <div>
+              <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
+              <p>Author: {post.user_id}</p>
+              <p>{post.context}</p>
+              <div className="comments">
+                {comments[post.post_id] &&
+                  comments[post.post_id].map((comment, commentIndex) => (
+                    <Comment key={commentIndex} comment={comment} />
+                  ))}
+              </div>
+            </div>
+          )}
         </div>
       ))}
       <div className="all-posts-box">
         <h2>All Posts:</h2>
         {allPosts.map((post, index) => (
-          <div key={index} className="post-item">
+          <div key={index} className="post-item" onClick={() => handlePostClick(post.post_id)}>
             <h3>{post.title}</h3>
             <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
-            <p>Author: {post.user_id}</p>
-            <p>{post.context}</p>
-            <div className="comments">
-            {comments[post.post_id] &&
-              comments[post.post_id].map((comment, commentIndex) => (
-                <Comment key={commentIndex} comment={comment} />
-              ))}
-          </div>
+                <p>Author: {post.user_id}</p>
+                <p>{post.context}</p>
+            {expandedPosts.includes(post.post_id) && (
+              <div>
+                <div className="comments">
+                  {comments[post.post_id] &&
+                    comments[post.post_id].map((comment, commentIndex) => (
+                      <Comment key={commentIndex} comment={comment} />
+                    ))}
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
