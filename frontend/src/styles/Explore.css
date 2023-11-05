@@ -33,6 +33,20 @@
 }
 
 .explore-page__options-section {
-	background-color: rgb(240, 238, 238);
-	padding: 3%;
+	margin-top: 3rem;
+	padding: 2%;
+	background: rgb(2, 0, 36);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 0, 36, 1) 0%,
+		rgba(9, 9, 121, 1) 35%,
+		rgba(0, 212, 255, 1) 100%
+	);
+	border-radius: 8px 8px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+		rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.explore-page__search-headings {
+	color: white;
 }

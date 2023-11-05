@@ -209,7 +209,7 @@ const Explore = () => {
 					</Modal>
 				</div>
 				<div className='explore-page__options-section'>
-					<h2>Cause</h2>
+					<h2 className='explore-page__search-headings'>Cause</h2>
 					<div className='explore-page_causes'>
 						<div>
 							<button onClick={() => setCauseFilterSelection(0)}>All</button>
@@ -222,7 +222,7 @@ const Explore = () => {
 							<button onClick={() => setCauseFilterSelection(3)}>Social</button>
 						</div>
 					</div>
-					<h2>Search</h2>
+					<h2 className='explore-page__search-headings'>Search</h2>
 					<div className='explore-page_search-bar'>
 						<div className='search'>
 							<TextField

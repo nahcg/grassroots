@@ -1,6 +1,6 @@
 .skillswap-list-item__container {
 	background-color: white;
-	width: 50%;
+	width: 70%;
 	height: auto;
 	padding: 4rem 0;
 	display: flex;
@@ -8,12 +8,14 @@
 	justify-content: center;
 	align-items: center;
 	border-radius: 8px 8px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+	position: relative;
 }
 
-button.skillswap-list-item__join-button {
-	background-color: green;
-	border-radius: 8px 8px;
-	margin-top: 2rem;
+.skillswap-list-item__header {
+	text-align: center;
 }
 
 .skillswap-list-item__info {
@@ -23,11 +25,31 @@ button.skillswap-list-item__join-button {
 	margin-top: 4rem;
 }
 
+.skillswap-list-item__dates {
+	display: flex;
+	gap: 5rem;
+	margin: 5rem 0;
+}
+
 .skillswap-list-item__status {
 	width: fit-content;
 	height: auto;
 	background-color: yellow;
 	padding: 1rem 2rem;
 	border: solid;
+}
+
+.skillswap-list-item__status {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+button.skillswap-list-item__join-button {
+	background-color: green;
 	border-radius: 8px 8px;
+	margin: 2rem 0;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }

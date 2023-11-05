@@ -4,6 +4,7 @@ import LoginButton from "./Login";
 import LogoutButton from "./Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import "../styles/Navigation.css";
+import logo from "../Grassroots.png";
 
 const Navigation = (props) => {
 	const { user, isAuthenticated, isLoading } = useAuth0();
@@ -24,9 +25,9 @@ const Navigation = (props) => {
 						<span className='icon-bar'></span>{" "}
 						<span className='icon-bar'></span>{" "}
 					</button>
-					<a className='navbar-brand page-scroll' href='#page-top'>
-						GrassRoots
-					</a>{" "}
+					<a className='navbar-brand page-scroll logo' href='#page-top'>
+						<img src={logo} />
+					</a>
 				</div>
 
 				<div

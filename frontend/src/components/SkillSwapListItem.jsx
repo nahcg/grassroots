@@ -13,22 +13,39 @@ const volunteerData = {
 	volunteersSignedUp: 23,
 };
 
-const SkillSwapListItem = () => {
+const SkillSwapListItem = ({
+	name,
+	description,
+	status,
+	location,
+	cause,
+	creation_date,
+	start_date,
+	end_date,
+	volunteersNeeded,
+}) => {
 	return (
 		<div className='skillswap-list-item__container'>
-			<h2>{volunteerData.name}</h2>
-			<p>{volunteerData.description}</p>
+			<div className='skillswap-list-item__status'>{status}</div>
+			<div className='skillswap-list-item__header'>
+				<h2>{name}</h2>
+				<p>ℹ️ {description}</p>
+			</div>
 			<div className='skillswap-list-item__info'>
-				<div className='skillswap-list-item__status'>
-					{volunteerData.status}
-				</div>
-				<div>{volunteerData.cause}</div>
-				<p>
-					{volunteerData.volunteersSignedUp} out of{" "}
-					{volunteerData.volunteersNeeded}
-				</p>
+				<p>📍 {location}</p>
+				{cause === 1 && <p>Politics</p>}
+				{cause === 2 && <p>Environment</p>}
+				{cause === 3 && <p>Social</p>}
+			</div>
+			<div className='skillswap-list-item__dates'>
+				<p>Posted On: {creation_date}</p>
+				<p>Start: {start_date}</p>
+				<p>End: {end_date}</p>
 			</div>
 			<button className='skillswap-list-item__join-button'>Join</button>
+			<p>
+				{} out of {volunteersNeeded}
+			</p>
 		</div>
 	);
 };

@@ -138,3 +138,9 @@ a:focus,
 	clip-path: circle();
 	margin-right: 1rem;
 }
+
+.logo {
+	padding: 0.5rem 0;
+	width: 200px; /* or any custom size */
+	height: 50px;
+}

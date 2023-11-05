@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	background-color: #282f33;
+	background-color: rgba(2, 0, 36, 1);
 	color: black;
 	height: 10rem;
 	border-radius: 8px 8px;

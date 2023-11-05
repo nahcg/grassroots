@@ -10,7 +10,7 @@
 --   volunteers_needed INT NOT NULL
 -- );
 
-INSERT INTO volunteer_board (name, description, location, cause, creation_date, start_date, end_date, volunteers_needed)
+INSERT INTO volunteer_board (name, description, status, location, cause, creation_date, start_date, end_date, volunteers_needed)
 VALUES
-  ('Full Stack Developer', 'Looking for a full stack developer to help build a website for our community.', 'Toronto, ON', 1, '2023-11-01 12:00:00', '2023-11-07 12:00:00', '2023-12-07 12:00:00', 3),
-  ('Videographer', 'Looking for a videographer that can also edit videos to help film some content of our protest.', 'Montreal, ON', 2, '2023-11-01 13:00:00', '2024-02-28 14:30:00', '2024-02-28 17:30:00', 5);
+  ('Full Stack Developer', 'Looking for a full stack developer to help build a website for our community.', 'Open','Toronto, ON', 1, '2023-11-01 12:00:00', '2023-11-07 12:00:00', '2023-12-07 12:00:00', 3),
+  ('Videographer', 'Looking for a videographer that can also edit videos to help film some content of our protest.',  'In Progress', 'Montreal, ON', 2, '2023-11-01 13:00:00', '2023-11-05 14:30:00', '2024-11-08 17:30:00', 5);

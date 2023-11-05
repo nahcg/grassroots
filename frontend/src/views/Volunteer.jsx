@@ -5,44 +5,47 @@ import SkillSwapList from "../components/SkillSwapList";
 import axios from "axios";
 
 // TEST DATA
-const skillSwapData = [
-	{
-		name: "Test Volunteer Position",
-		description:
-			"Need volunteers to design and build the frontend of our website.",
-		status: "Open",
-		skills: [1, 4],
-		cause: 1,
-		volunteersNeeded: 40,
-		volunteersSignedUp: 23,
-	},
-	{
-		name: "Test Volunteer Position",
-		description:
-			"Need volunteers to design and build the frontend of our website.",
-		status: "Open",
-		skills: [1, 4],
-		cause: 1,
-		volunteersNeeded: 40,
-		volunteersSignedUp: 23,
-	},
-	{
-		name: "Test Volunteer Position",
-		description:
-			"Need volunteers to design and build the frontend of our website.",
-		status: "Open",
-		skills: [1, 4],
-		cause: 1,
-		volunteersNeeded: 40,
-		volunteersSignedUp: 23,
-	},
-];
+// const skillSwapData = [
+// 	{
+// 		name: "Test Volunteer Position",
+// 		description:
+// 			"Need volunteers to design and build the frontend of our website.",
+// 		status: "Open",
+// 		skills: [1, 4],
+// 		cause: 1,
+// 		volunteersNeeded: 40,
+// 		volunteersSignedUp: 23,
+// 	},
+// 	{
+// 		name: "Test Volunteer Position",
+// 		description:
+// 			"Need volunteers to design and build the frontend of our website.",
+// 		status: "Open",
+// 		skills: [1, 4],
+// 		cause: 1,
+// 		volunteersNeeded: 40,
+// 		volunteersSignedUp: 23,
+// 	},
+// 	{
+// 		name: "Test Volunteer Position",
+// 		description:
+// 			"Need volunteers to design and build the frontend of our website.",
+// 		status: "Open",
+// 		skills: [1, 4],
+// 		cause: 1,
+// 		volunteersNeeded: 40,
+// 		volunteersSignedUp: 23,
+// 	},
+// ];
 
 function Volunteer() {
 	const [activeContentIndex, setActiveContentIndex] = useState(0);
+	const [volunteerData, setVolunteerData] = useState([]);
 
 	useState(() => {
-		console.log("Getting and refreshing the data.");
+		axios.get(`http://localhost:8080/volunteer`).then((res) => {
+			setVolunteerData(res.data);
+		});
 	}, [activeContentIndex]);
 
 	return (
@@ -54,7 +57,7 @@ function Volunteer() {
 						className={activeContentIndex === 0 ? "active" : ""}
 						onClick={() => setActiveContentIndex(0)}
 					>
-						Skill Swap
+						All Skill Swaps
 					</button>
 					<button
 						className={activeContentIndex === 1 ? "active" : ""}
@@ -78,7 +81,7 @@ function Volunteer() {
 				<div className='tab-content'>
 					{/* <ul>{}</ul> */}
 					{activeContentIndex === 0 && (
-						<SkillSwapList skillSwapData={skillSwapData} />
+						<SkillSwapList volunteerData={volunteerData} />
 					)}
 				</div>
 			</div>
