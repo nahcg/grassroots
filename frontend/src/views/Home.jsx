@@ -127,6 +127,7 @@ const tileContent = ({ date, view }) => {
   return null;
 };
 
+
   return (
     <div className='Home'>
       <Navbar />
@@ -147,7 +148,7 @@ const tileContent = ({ date, view }) => {
       </div>
       {renderView()}
       <div className="posts">
-  <HomePosts posts={posts} user={user} allPosts={allPosts}/>
+  <HomePosts posts={posts} allPosts={allPosts}/>
 </div>
     </div>
     

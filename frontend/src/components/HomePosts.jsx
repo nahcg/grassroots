@@ -3,26 +3,23 @@ import Comment from "./Comment";
 
 const HomePosts = ({ posts, allPosts }) => {
   const [comments, setComments] = useState({});
-  const [expandedPosts, setExpandedPosts] = useState([]); // Track expanded post IDs
 
-  const updateCommentData = (post_id, updatedComments) => {
-    setComments((prevComments) => ({
-      ...prevComments,
-      [post_id]: updatedComments,
-    }));
-  };
 
+  
   useEffect(() => {
     const fetchCommentsForPosts = async () => {
       try {
+        const post_ids = [...posts, ...allPosts].map((post) => post.post_id);
         const commentsData = {};
+
         await Promise.all(
-          posts.map(async (post) => {
-            const response = await fetch(`http://localhost:8080/posts/comments/${post.post_id}`);
+          post_ids.map(async (post_id) => {
+            const response = await fetch(`http://localhost:8080/posts/comments/${post_id}`);
             const data = await response.json();
-            commentsData[post.post_id] = data;
+            commentsData[post_id] = data;
           })
         );
+
         setComments(commentsData);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -30,38 +27,34 @@ const HomePosts = ({ posts, allPosts }) => {
     };
 
     fetchCommentsForPosts();
-  }, [posts]);
+  }, [posts, allPosts]);
 
-  console.log("comments from HomePost", comments)
 
-  const handlePostClick = (postId) => {
-    if (expandedPosts.includes(postId)) {
-      setExpandedPosts(expandedPosts.filter((id) => id !== postId));
-    } else {
-      setExpandedPosts([...expandedPosts, postId]);
-    }
-  };
 
+
+  
   console.log("posts", posts)
+  console.log("allPosts", allPosts)
+  console.log("comments from HomePost", comments)
+  
 
   return (
     <div className="posts-container">
       <h2>Your Posts: </h2>
       {posts.map((post, index) => (
-        <div key={index} className="post-item" onClick={() => handlePostClick(post.post_id)}>
+        <div key={index} className="post-item">
           <h3>{post.title}</h3>
-          {expandedPosts.includes(post.post_id) && (
-            <div>
-              <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
+          <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
               <p>Author: {post.user_id}</p>
               <p>{post.context}</p>
+          {posts.includes(post.post_id) && (
+            <div>
               <div className="comments">
             {comments[post.post_id] &&
-              comments[post.post_id].map((comment, commentIndex) => (
+              comments[post.post_id].map((comment, index) => (
                 <Comment
-                  key={commentIndex}
+                  key={index}
                   comment={comment}
-                  updateCommentData={(updatedComments) => updateCommentData(post.post_id, updatedComments)}
                 />
               ))}
           </div>
@@ -72,20 +65,19 @@ const HomePosts = ({ posts, allPosts }) => {
       <div className="all-posts-box">
         <h2>All Posts:</h2>
         {allPosts.map((post, index) => (
-          <div key={index} className="post-item" onClick={() => handlePostClick(post.post_id)}>
+          <div key={index} className="post-item">
             <h3>{post.title}</h3>
             <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
                 <p>Author: {post.user_id}</p>
                 <p>{post.context}</p>
-            {expandedPosts.includes(post.post_id) && (
+            {allPosts.includes(post.post_id) && (
               <div>
                 <div className="comments">
             {comments[post.post_id] &&
-              comments[post.post_id].map((comment, commentIndex) => (
+              comments[post.post_id].map((comment, index) => (
                 <Comment
-                  key={commentIndex}
+                  key={index}
                   comment={comment}
-                  updateCommentData={(updatedComments) => updateCommentData(post.post_id, updatedComments)}
                 />
               ))}
           </div>
