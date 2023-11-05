@@ -71,7 +71,7 @@ router.post('/submitSkills/', (req, res) => {
 
   profileQueries.saveUserSkills(user_id, JSON.parse(skills))
     .then(savedSkills => {
-      console.log(savedSkills);
+      // console.log(savedSkills);
       res.json({ message: 'Skills saved successfully', savedSkills });
     })
     .catch(err => {

@@ -3,13 +3,20 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import "../styles/profile.css";
 const Profile = () => {
+
 	const { user, isAuthenticated, isLoading } = useAuth0();
 	const [community, setCommunity] = useState("");
 	const [event, setEvent] = useState("");
 	const [checkedSkills, setCheckedSkills] = useState([]);
 
+
+	//todo: ADD experience_level to skillsList 
+	//todo: Grab experience_level from SQL and add a place to show it on this page 
+	// todo: eventually this skillsList will all be from the database and you can remove it from here ... So create a const [skillsList, setSkillsList] = useState([]); <== This data is populated from the SQL server 
+
 	const skillsList = [
 		{
+			experience_level: "",
 			name: "Frontend - Web Development",
 			description: "Description for Skill A",
 			id: 1
@@ -65,15 +72,15 @@ const Profile = () => {
 
 		const toSendSkills = JSON.stringify(selectedSkills);
 
-		console.log(user.name)
+		// console.log(user.name)
 
 		axios.post('http://localhost:8080/profile/submitSkills/', 
 		{
-			user_id:user.name,
+			user_id: user.name,
 			skills: toSendSkills })
 			.then(function (response) {
 				// Handle the response from the backend if needed
-				console.log(response.data);
+				// console.log(response.data);
 			})
 			.catch(function (error) {
 				console.error('Error:', error);
@@ -82,6 +89,11 @@ const Profile = () => {
 	}
 
 	useEffect(() => {
+
+		// populate user field so it isn't undefined
+		// user = useAuth0();
+		 
+		
 		const fetchData = () => {
 			axios
 				.get(`http://localhost:8080/profile/event-count`)
@@ -98,8 +110,22 @@ const Profile = () => {
 					res.data && setEvent(res.data);
 				});
 		};
+
+		// FIGURE OUT HOW TO PUT THIS BELOW INTO THE WEBSITE SOMEHOW ...
+		// HINT 	const [skillsData, setSkillsData] = useState([]);
+ 
+		const fetchSkillsData = () => {
+			axios
+				.get(`http://localhost:8080/profile/skills`)
+				.then((res) => {
+					console.log(res.data, "skills data");
+				});
+		};
+
+
 		fetchData();
 		fetchDataEvent();
+		fetchSkillsData();
 	}, [])
 	if (isLoading) {
 		return <div>Loading ...</div>;

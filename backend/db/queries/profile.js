@@ -46,13 +46,16 @@ const getAllDistinctCausesJoined = (user_id) => {
 
 // to save user's skills
 const saveUserSkills = (user_id, skills) => {
-  const values = skills.map(skill => `(${user_id}, ${skill.id}, ${3})`).join(', ');
-  console.log(values)
+  const values = skills.map(skill => `(${user_id}, ${skill.id}, 3)`).join(', ');
   return db.query(
     `INSERT INTO user_skills(user_id, skill_id, experience_level) VALUES ${values} RETURNING *;`
-  );
+  ).then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 };
-
 
 // to retrieve user's saved skills
 const getUserSkills = (user_id) => {
