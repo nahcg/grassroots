@@ -64,4 +64,27 @@ const getAllPosts = async (user_id) => {
   }
 };
 
-module.exports = { getEvents, getPosts, getCommunities, getAllPosts };
+//get comments from post_id
+const getAllComments = async (post_id) => {
+  try {
+    const comments = await db.query(
+      `SELECT *
+       FROM comments
+       WHERE post_id = $1;`,
+      [post_id]
+    );
+    console.log("Fetched comments:", comments);
+    return comments;
+  } catch (error) {
+    console.error("Error fetching posts:", error); // Log any errors
+    throw error;
+  }
+};
+
+module.exports = {
+  getEvents,
+  getPosts,
+  getCommunities,
+  getAllPosts,
+  getAllComments,
+};
