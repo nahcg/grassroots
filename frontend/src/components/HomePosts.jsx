@@ -5,6 +5,13 @@ const HomePosts = ({ posts, allPosts }) => {
   const [comments, setComments] = useState({});
   const [expandedPosts, setExpandedPosts] = useState([]); // Track expanded post IDs
 
+  const updateCommentData = (post_id, updatedComments) => {
+    setComments((prevComments) => ({
+      ...prevComments,
+      [post_id]: updatedComments,
+    }));
+  };
+
   useEffect(() => {
     const fetchCommentsForPosts = async () => {
       try {
@@ -35,6 +42,8 @@ const HomePosts = ({ posts, allPosts }) => {
     }
   };
 
+  console.log("posts", posts)
+
   return (
     <div className="posts-container">
       <h2>Your Posts: </h2>
@@ -47,11 +56,15 @@ const HomePosts = ({ posts, allPosts }) => {
               <p>Author: {post.user_id}</p>
               <p>{post.context}</p>
               <div className="comments">
-                {comments[post.post_id] &&
-                  comments[post.post_id].map((comment, commentIndex) => (
-                    <Comment key={commentIndex} comment={comment} />
-                  ))}
-              </div>
+            {comments[post.post_id] &&
+              comments[post.post_id].map((comment, commentIndex) => (
+                <Comment
+                  key={commentIndex}
+                  comment={comment}
+                  updateCommentData={(updatedComments) => updateCommentData(post.post_id, updatedComments)}
+                />
+              ))}
+          </div>
             </div>
           )}
         </div>
@@ -67,11 +80,15 @@ const HomePosts = ({ posts, allPosts }) => {
             {expandedPosts.includes(post.post_id) && (
               <div>
                 <div className="comments">
-                  {comments[post.post_id] &&
-                    comments[post.post_id].map((comment, commentIndex) => (
-                      <Comment key={commentIndex} comment={comment} />
-                    ))}
-                </div>
+            {comments[post.post_id] &&
+              comments[post.post_id].map((comment, commentIndex) => (
+                <Comment
+                  key={commentIndex}
+                  comment={comment}
+                  updateCommentData={(updatedComments) => updateCommentData(post.post_id, updatedComments)}
+                />
+              ))}
+          </div>
               </div>
             )}
           </div>
