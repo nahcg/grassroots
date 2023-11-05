@@ -1,43 +1,87 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import "../styles/profile.css";
 const Profile = () => {
 	const { user, isAuthenticated, isLoading } = useAuth0();
-	const [community,setCommunity]= useState("");
-	const [event,setEvent]= useState("");
+	const [community, setCommunity] = useState("");
+	const [event, setEvent] = useState("");
+	const [checkedSkills, setCheckedSkills] = useState([]);
 
-	const skillsList = [{
-		name: "Frontend - Web Development', 'Description for Skill A",
-		id: 1
-	},
-	{
-		name: "Backend - Web Development', 'Description for Skill B",
-		id: 2
-	},
-	{
-		name: "Full Stack - Web Development', 'Description for Skill B",
-		id: 3
-	},
-	{
-		name: "Web Design - Web Development', 'Description for Skill B",
-		id: 4
-	},
-	{
-		name: "Marketing', 'Description for Skill B",
-		id: 5
-	},
-	{
-		name: "Photography', 'Description for Skill B",
-		id: 6
-	},
-	{
-		name: "Videography', 'Description for Skill B",
-		id: 7
+	const skillsList = [
+		{
+			name: "Frontend - Web Development",
+			description: "Description for Skill A",
+			id: 1
+		},
+		{
+			name: "Backend - Web Development",
+			description: "Description for Skill B for Skill B",
+			id: 1
+		},
+		// {
+		// 	name: "Full Stack - Web Development', 'Description for Skill B",
+		// 	id: 3
+		// },
+		// {
+		// 	name: "Web Design - Web Development', 'Description for Skill B",
+		// 	id: 4
+		// },
+		// {
+		// 	name: "Marketing', 'Description for Skill B",
+		// 	id: 5
+		// },
+		// {
+		// 	name: "Photography', 'Description for Skill B",
+		// 	id: 6
+		// },
+		// {
+		// 	name: "Videography', 'Description for Skill B",
+		// 	id: 7
+		// }
+	];
+
+	const handleSkillChange = (id) => {
+
+		const isChecked = checkedSkills.includes(id);
+
+		if (isChecked) {
+			// If it's already checked, you uncheck it => filter it out of array
+			setCheckedSkills(checkedSkills.filter((skillId) => skillId !== id))
+		}
+		else {
+			setCheckedSkills([...checkedSkills, id])
+		}
 	}
-];
-	
-	useEffect(()=> {
+
+	// Send the checked skills to the backend using Axios
+	const handleSubmitSkills = () => {
+		// Extract the selected skill based on the ID 
+		const selectedSkills = skillsList
+			.filter((skill) => checkedSkills.includes(skill.id))
+			.map(({ name, description, id}) => ({name, description, id})) ;
+			
+		// this is a ARRAY let's JSON this 
+
+		const toSendSkills = JSON.stringify(selectedSkills);
+
+		console.log(user.name)
+
+		axios.post('http://localhost:8080/profile/submitSkills/', 
+		{
+			user_id:user.name,
+			skills: toSendSkills })
+			.then(function (response) {
+				// Handle the response from the backend if needed
+				console.log(response.data);
+			})
+			.catch(function (error) {
+				console.error('Error:', error);
+			});
+
+	}
+
+	useEffect(() => {
 		const fetchData = () => {
 			axios
 				.get(`http://localhost:8080/profile/event-count`)
@@ -79,12 +123,16 @@ const Profile = () => {
 					<div className="skills-container">
 						{skillsList.map((item, index) => (
 							<div key={index}>
-								<input value={item.name} type="checkbox" />
+								<input
+									value={item.name}
+									type="checkbox"
+									onChange={() => handleSkillChange(item.id)}
+								/>
 								<span className="checkbox-label">{item.name}</span>
 							</div>
 						))}
 					</div>
-					<button className="skill-save">Save</button>
+					<button className="skill-save" onClick={handleSubmitSkills}>Save</button>
 				</div>
 			</div>
 		)

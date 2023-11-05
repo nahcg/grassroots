@@ -35,6 +35,36 @@ const getAllDistinctCausesJoined = (user_id) => {
     });
 };
 
+// to save user's skills
+// const saveUserSkills = (user_id, skills) => {
+//   return db.query(
+//     'INSERT INTO user_skills(user_id, skill_id, experience_level) VALUES ($2, ) ',
+//     [skills, user_id]
+//   );
+// };
 
 
-module.exports = { getCountOfCommunitiesJoined, getCountOfEventsJoined, getAllDistinctCausesJoined };
+// to save user's skills
+const saveUserSkills = (user_id, skills) => {
+  const values = skills.map(skill => `(${user_id}, ${skill.id}, ${3})`).join(', ');
+  console.log(values)
+  return db.query(
+    `INSERT INTO user_skills(user_id, skill_id, experience_level) VALUES ${values} RETURNING *;`
+  );
+};
+
+
+// to retrieve user's saved skills
+const getUserSkills = (user_id) => {
+  return db.query('SELECT skills FROM users WHERE id = $1', [user_id])
+    .then((result) => {
+      return result.rows[0] ? result.rows[0].skills : null; // Retrieve the skills or return null if no skills found
+    })
+    .catch((error) => {
+      return error;
+    });
+};
+
+
+
+module.exports = { getCountOfCommunitiesJoined, getCountOfEventsJoined, getAllDistinctCausesJoined, saveUserSkills, getUserSkills  };

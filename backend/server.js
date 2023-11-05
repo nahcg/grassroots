@@ -55,6 +55,8 @@ app.use("/posts", postsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/user/skills", user_skills_Routes);
 app.use("/profile", profileRoutes);
+app.use("/profile/skills", user_skills_Routes);
+app.use("/profile/submitSkills", profileRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!
