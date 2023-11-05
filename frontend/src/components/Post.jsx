@@ -21,6 +21,8 @@ const Post = ({ post, post_id, user_id }) => {
     }
   }, [post_id, isActive]);
 
+  console.log("comments",comments)
+
   const currentTimestamp = new Date(post.timestamp);
   const formattedTimestamp = `${currentTimestamp.toLocaleString('default', { month: 'long' })} ${currentTimestamp.getDate()}, ${currentTimestamp.getFullYear()}`;
 
@@ -29,7 +31,6 @@ const Post = ({ post, post_id, user_id }) => {
     setIsActive(!isActive); // Toggle active state on post click
   };
 
-  console.log("stuff", post_id, user_id, post)
 
 
   const handleCommentSubmit = () => {

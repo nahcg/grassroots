@@ -5,12 +5,17 @@ import '../styles/Calendar.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from '../components/Navbar';
 import HomePosts from '../components/HomePosts';
+import "../styles/Home.css"
 
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [posts, setPosts] = useState([]); 
+  const [allPosts, setAllPosts] = useState([]); 
+  const [communities, setCommunities] = useState([]); 
   const [isCalendarView, setIsCalendarView] = useState(true); 
   const { user } = useAuth0();
+
+  console.log("user", user)
 
   // Fetch events based on the user.email
   useEffect(() => {
@@ -32,10 +37,9 @@ const Home = () => {
       .catch((error) => console.error('Error fetching events', error));
   }, [user.email]);
 
-
-  // Fetch posts based on the user.email
+  // Fetch communities based on the user.email
   useEffect(() => {
-    fetch(`http://localhost:8080/home/posts?user_id=${user.name}`, {
+    fetch(`http://localhost:8080/home/communities?user_id=${user.email}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,14 +47,43 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setPosts(data); // Update posts state with fetched data
+        setCommunities(data);
       })
-      .catch((error) => console.error('Error fetching posts', error));
-  }, [user.name]);
+      .catch((error) => console.error('Error fetching communities', error));
+  }, [user.email]);
+  
 
 
+  // Fetch posts based on the user.email
+  useEffect(() => {
+  fetch(`http://localhost:8080/home/posts?user_id=${user.name}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setPosts(data);
+    })
+    .catch((error) => console.error('Error fetching communities', error));
+}, [user.name]);
 
-
+// Fetch all posts that user_id belongs to
+useEffect(() => {
+  fetch(`http://localhost:8080/home/AllPosts?user_id=${user.email}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setAllPosts(data);
+    })
+    .catch((error) => console.error('Error fetching communities', error));
+}, [user.email]);
+  
   
 
   const toggleView = () => {
@@ -97,16 +130,31 @@ const tileContent = ({ date, view }) => {
   return (
     <div className='Home'>
       <Navbar />
+      <div className="communities">
+      <h2>Communities</h2>
+      <ul>
+        {communities.map((community, index) => (
+          <li key={index}>
+            <img src={community.picture_url} alt={community.name} />
+            {community.name}
+          </li>
+        ))}
+      </ul>
+    </div>
       <div className="toggle-buttons">
         <button onClick={toggleView}>Calendar View</button>
         <button onClick={toggleView}>Event List View</button>
       </div>
       {renderView()}
-      <HomePosts posts={posts} />
+      <div className="posts">
+  <HomePosts posts={posts} user={user} allPosts={allPosts}/>
+</div>
     </div>
     
   );
 };
+
+
 
 export default Home;
 

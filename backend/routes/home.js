@@ -32,4 +32,32 @@ router.get("/posts", (req, res) => {
     });
 });
 
+router.get("/communities", (req, res) => {
+  const user_id = req.query.user_id;
+  homeQueries
+    .getCommunities(user_id)
+    .then((results) => {
+      res.json(results.rows);
+      console.log("results from route", results.rows);
+      console.log("user", user_id);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.get("/AllPosts", (req, res) => {
+  const user_id = req.query.user_id;
+  homeQueries
+    .getAllPosts(user_id)
+    .then((results) => {
+      res.json(results.rows);
+      console.log("results from route", results.rows);
+      console.log("user", user_id);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;
