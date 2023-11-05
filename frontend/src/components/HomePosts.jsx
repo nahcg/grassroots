@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 
 const HomePosts = ({ posts, allPosts }) => {
-  const [comments, setComments] = useState({});
+  const [comments, setComments] = useState([]);
 
-
-  
   useEffect(() => {
     const fetchCommentsForPosts = async () => {
       try {
@@ -14,7 +12,7 @@ const HomePosts = ({ posts, allPosts }) => {
 
         await Promise.all(
           post_ids.map(async (post_id) => {
-            const response = await fetch(`http://localhost:8080/posts/comments/${post_id}`);
+            const response = await fetch(`http://localhost:8080/home/comments/${post_id}`);
             const data = await response.json();
             commentsData[post_id] = data;
           })
@@ -29,14 +27,9 @@ const HomePosts = ({ posts, allPosts }) => {
     fetchCommentsForPosts();
   }, [posts, allPosts]);
 
-
-
-
-  
-  console.log("posts", posts)
-  console.log("allPosts", allPosts)
-  console.log("comments from HomePost", comments)
-  
+  console.log("posts", posts);
+  console.log("allPosts", allPosts);
+  console.log("comments from HomePost", comments);
 
   return (
     <div className="posts-container">
@@ -45,21 +38,14 @@ const HomePosts = ({ posts, allPosts }) => {
         <div key={index} className="post-item">
           <h3>{post.title}</h3>
           <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
-              <p>Author: {post.user_id}</p>
-              <p>{post.context}</p>
-          {posts.includes(post.post_id) && (
-            <div>
-              <div className="comments">
+          <p>Author: {post.user_id}</p>
+          <p>{post.context}</p>
+          <div className="comments">
             {comments[post.post_id] &&
               comments[post.post_id].map((comment, index) => (
-                <Comment
-                  key={index}
-                  comment={comment}
-                />
+                <Comment key={index} comment={comment} />
               ))}
           </div>
-            </div>
-          )}
         </div>
       ))}
       <div className="all-posts-box">
@@ -68,21 +54,14 @@ const HomePosts = ({ posts, allPosts }) => {
           <div key={index} className="post-item">
             <h3>{post.title}</h3>
             <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
-                <p>Author: {post.user_id}</p>
-                <p>{post.context}</p>
-            {allPosts.includes(post.post_id) && (
-              <div>
-                <div className="comments">
-            {comments[post.post_id] &&
-              comments[post.post_id].map((comment, index) => (
-                <Comment
-                  key={index}
-                  comment={comment}
-                />
-              ))}
-          </div>
-              </div>
-            )}
+            <p>Author: {post.user_id}</p>
+            <p>{post.context}</p>
+            <div className="comments">
+              {comments[post.post_id] &&
+                comments[post.post_id].map((comment, index) => (
+                  <Comment key={index} comment={comment} />
+                ))}
+            </div>
           </div>
         ))}
       </div>
