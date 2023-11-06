@@ -3,20 +3,24 @@ import { useParams, Link } from "react-router-dom";
 import "../styles/Community.css";
 import Navbar from "../components/Navbar";
 import MemberButton from "../components/MemberButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Community = () => {
 	const [community, setCommunity] = useState(null);
 	const { community_id } = useParams();
+	const { user, isLoading } = useAuth0();
 
 	useEffect(() => {
 		// Fetch community by name
+		if (!isLoading && user) {
 		fetch(`http://localhost:8080/communities/community/${community_id}`)
 			.then((response) => response.json())
 			.then((data) => {
 				setCommunity(data[0]);
 			})
 			.catch((error) => console.error("Error fetching community", error));
-	}, [community_id]);
+	}
+}, [isLoading, user, community_id]);
 
   const routes = [
     { path: `/communities/community/${community_id}`, label: 'About' },

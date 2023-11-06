@@ -1,7 +1,6 @@
-const EventList = ({ events, editEvent, deleteEvent }) => {
+const EventList = ({ events }) => {
   return (
     <div className="EventList">
-      <h2>Events:</h2>
       <ul>
         {events.map((event, index) => (
           <li key={index}>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 import "../styles/Post.css";
 import { Link } from 'react-router-dom';
+import '../App.css'
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Post = ({ post, post_id, user_id }) => {
@@ -9,17 +11,20 @@ const Post = ({ post, post_id, user_id }) => {
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
   const [isPinned, setIsPinned] = useState(post.is_pinned);
-  
+  const { user, isLoading } = useAuth0();
 
+  
   useEffect(() => {
-    // Fetch comments for the specific post from the backend when post_id and isActive change
-    if (post_id && isActive) {
-      fetch(`http://localhost:8080/posts/comments/${post_id}`)
-        .then((response) => response.json())
-        .then((data) => setComments(data))
-        .catch((error) => console.error("Error fetching comments:", error));
+    if (!isLoading && user) {
+      // Fetch comments for the specific post from the backend when post_id and isActive change
+      if (post_id && isActive) {
+        fetch(`http://localhost:8080/posts/comments/${post_id}`)
+          .then((response) => response.json())
+          .then((data) => setComments(data))
+          .catch((error) => console.error("Error fetching comments:", error));
+      }
     }
-  }, [post_id, isActive]);
+  }, [post_id, isActive, isLoading, user]);
 
   console.log("comments",comments)
 
@@ -92,30 +97,30 @@ const Post = ({ post, post_id, user_id }) => {
   return (
     <div className={`post ${isActive ? 'active' : ''}`}>
       <div className="post-content-container">
-      <div onClick={togglePin} className={`pin ${isPinned ? 'pinned' : ''}`}></div>
-      </div>
-    <h2 onClick={handlePostClick}>{post.title}</h2>
-    <div className={`post-content ${isActive ? 'active' : ''}`}>
-      <p>{post.context}</p>
-      <p>Authored by: <Link to={`/profile/${user_id}`} key={user_id}>{user_id}</Link></p>
-        <p>{formattedTimestamp}</p>
-      </div>
-      <div className="comments">
-        {comments.map((comment, index) => (
-          <Comment key={index} comment={comment} />
-        ))}
-      </div>
-      {isActive && (
-        <div className="comment-form">
-          <input
-            type="text"
-            placeholder="Add a comment..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <button onClick={handleCommentSubmit}>Add Comment</button>
+        <div onClick={togglePin} className={`pin ${isPinned ? 'pinned' : ''}`}></div>
+        <h2 onClick={handlePostClick}>{post.title}</h2>
+        <div className={`post-content ${isActive ? 'active' : ''}`}>
+          <p>{post.context}</p>
+          <p>Authored by: <Link to={`/profile/${user_id}`} key={user_id}>{user_id}</Link></p>
+          <p>{formattedTimestamp}</p>
         </div>
-      )}
+        {isActive && (
+          <div className="comments">
+            {comments.map((comment, index) => (
+              <Comment key={index} comment={comment} />
+            ))}
+            <div className="comment-form">
+              <input
+                type="text"
+                placeholder="Add a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+              <button onClick={handleCommentSubmit}>Add Comment</button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

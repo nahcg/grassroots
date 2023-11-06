@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CalendarView from '../components/CalendarView';
 import EventList from '../components/EventList';
-import '../styles/Calendar.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from '../components/Navbar';
 import HomePosts from '../components/HomePosts';
@@ -13,12 +12,13 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState([]); 
   const [communities, setCommunities] = useState([]); 
   const [isCalendarView, setIsCalendarView] = useState(true); 
-  const { user } = useAuth0();
+  const { user, isLoading } = useAuth0();
 
-  console.log("user", user)
+
 
   // Fetch events based on the user.email
   useEffect(() => {
+    if (!isLoading && user) {
     fetch(`http://localhost:8080/home/events?user_id=${user.email}`, {
       method: 'GET',
       headers: {
@@ -35,10 +35,13 @@ const Home = () => {
         setEvents(formattedEvents);
       })
       .catch((error) => console.error('Error fetching events', error));
-  }, [user.email]);
+    }
+  }, [isLoading, user]);
+
 
   // Fetch communities based on the user.email
-  useEffect(() => {
+  useEffect(() =>  {
+    if (!isLoading && user) {
     fetch(`http://localhost:8080/home/communities?user_id=${user.email}`, {
       method: 'GET',
       headers: {
@@ -50,12 +53,14 @@ const Home = () => {
         setCommunities(data);
       })
       .catch((error) => console.error('Error fetching communities', error));
-  }, [user.email]);
+  }
+}, [isLoading, user]);
   
 
 
   // Fetch posts based on the user.email
   useEffect(() => {
+    if (!isLoading && user) {
   fetch(`http://localhost:8080/home/posts?user_id=${user.name}`, {
     method: 'GET',
     headers: {
@@ -67,10 +72,12 @@ const Home = () => {
       setPosts(data);
     })
     .catch((error) => console.error('Error fetching communities', error));
-}, [user.name]);
+}
+}, [isLoading, user]);
 
 // Fetch all posts that user_id belongs to
 useEffect(() => {
+  if (!isLoading && user) {
   fetch(`http://localhost:8080/home/AllPosts?user_id=${user.email}`, {
     method: 'GET',
     headers: {
@@ -82,9 +89,10 @@ useEffect(() => {
       setAllPosts(data);
     })
     .catch((error) => console.error('Error fetching communities', error));
-}, [user.email]);
+}
+}, [isLoading, user]);
   
-  
+ 
 
   const toggleView = () => {
     setIsCalendarView(!isCalendarView); // Toggle between calendar and event list view
@@ -127,12 +135,17 @@ const tileContent = ({ date, view }) => {
   return null;
 };
 
+if (isLoading) {
+  // Show loading spinner or message while loading user data
+  return <div>Loading...</div>;
+}
+
 
   return (
     <div className='Home'>
       <Navbar />
-      <div className="communities">
-      <h2>Communities</h2>
+      <div className="home_communities">
+      <h2>Your Communities</h2>
       <ul>
         {communities.map((community, index) => (
           <li key={index}>
@@ -141,19 +154,23 @@ const tileContent = ({ date, view }) => {
           </li>
         ))}
       </ul>
-    </div>
-      <div className="toggle-buttons">
+      </div>
+      <div className="event-calendar">
+        <div className="toggle-buttons">
         <button onClick={toggleView}>Calendar View</button>
         <button onClick={toggleView}>Event List View</button>
       </div>
-      {renderView()}
+        <h2 className="event-calendar-title">Event Calendar</h2>
+        {renderView()}
+      </div>
+      
       <div className="posts">
-  <HomePosts posts={posts} allPosts={allPosts}/>
-</div>
+        <HomePosts posts={posts} allPosts={allPosts} />
+      </div>
     </div>
-    
   );
 };
+
 
 
 

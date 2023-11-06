@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import '../styles/Forum.css';
+import '../App.css'
+
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
@@ -13,7 +15,7 @@ const Forum = () => {
   const [filterTitle, setFilterTitle] = useState("");
 
   const { community_id } = useParams();
-  const { user } = useAuth0();
+  const { user, isLoading } = useAuth0();
 
   const routes = [
     { path: `/community/communities/${community_id}`, label: 'About' },
@@ -22,6 +24,7 @@ const Forum = () => {
   ];
 
   useEffect(() => {
+    if (!isLoading && user) {
     // Fetch posts from the backend when the component mounts
     fetch(`http://localhost:8080/posts/${community_id}`)
       .then((response) => response.json())
@@ -36,8 +39,8 @@ const Forum = () => {
         setFilteredPosts(sortedPosts);
       })
       .catch((error) => console.error("Error fetching posts:", error));
-  }, [community_id]);
-
+  }
+}, [isLoading, user, community_id]);
 
 
 
@@ -98,14 +101,14 @@ const Forum = () => {
 
 
 	return (
-		<div className='routes'>
+		<div className='forum_routes'>
 			<Navbar />
 			{routes.map((route, index) => (
 				<Link key={index} to={route.path}>
-					<button className='button'>{route.label}</button>
+					<button className='forum_button'>{route.label}</button>
 				</Link>
 			))}
-			<div className='forum'>
+			<div className='forum_forum'>
 				<h1>Forum</h1>
 					<input
 						type='text'
@@ -113,7 +116,7 @@ const Forum = () => {
 						value={newPost}
 						onChange={(e) => setNewPost(e.target.value)}
 					/>
-					<div className='post-form content'>
+					<div className='forum_post-form content'>
 						<textarea
 							placeholder='Post Content'
 							value={newContent}
@@ -128,7 +131,7 @@ const Forum = () => {
           value={filterTitle}
           onChange={(e) => setFilterTitle(e.target.value)}
         />
-        <div className="posts">
+        <div className="forum_posts">
           {filteredPosts.map((post, index) => (
             <Post
               key={index}

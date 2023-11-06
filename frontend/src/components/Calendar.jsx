@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/Calendar.css';
+import '../App.css'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const CalendarApp = () => {
   const [date, setDate] = useState(new Date());
@@ -13,15 +15,11 @@ const CalendarApp = () => {
   const [eventDate, setEventDate] = useState('');
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { community_id } = useParams(); // Get the ID parameter from the URL
-  
-  const routes = [
-    { path: `/posts/${community_id}`, label: 'Forum' },
-    { path: `/events/${community_id}`, label: 'Events' },
-  ];
-
+  const { user, isLoading } = useAuth0();
 
   // Return array of objects
   useEffect(() => {
+    if (!isLoading && user) {
     // Fetch events based on the ID parameter from the URL
     fetch(`http://localhost:8080/events/${community_id}`)
     .then((response) => response.json())
@@ -35,7 +33,8 @@ const CalendarApp = () => {
         setEvents(formattedEvents);
       })
       .catch((error) => console.error('Error fetching events', error));
-  }, [community_id]);
+  }
+}, [isLoading, user, community_id, events]);
 
 
   const handleDateChange = newDate => {
@@ -221,17 +220,16 @@ const renderForm = () => {
     return null;
   };
 
+
+
+
+
   return (
-    <div className="routes">
-          {routes.map((route, index) => (
-            <Link key={index} to={route.path}>
-              <button className="button">{route.label}</button>
-            </Link>
-          ))}
-    <div className="Calendar">
+    <div className="CustomCalendar">
       <h1>Event Calendar</h1>
       <div className="calendar-container">
-        <div className="event-form">
+        <div className="custom-event-form">
+          {/* Input fields for event title, details, and location */}
           <input
             type="text"
             placeholder="Event Title..."
@@ -245,34 +243,37 @@ const renderForm = () => {
           />
           <input
             type="text"
-            placeholder="Event Location..." // Input field for event location
+            placeholder="Event Location..."
             value={eventLocation}
             onChange={(e) => setEventLocation(e.target.value)}
           />
           <button onClick={addEvent}>Add Event</button>
         </div>
 
+        {/* Calendar component */}
         <Calendar
           onChange={handleDateChange}
           value={date}
           tileContent={tileContent}
+          className="react-calendar"
         />
 
-        <div className="events">
+        <div className="custom-events">
+          {/* Event list with edit and delete buttons */}
           <h2>Events:</h2>
           {renderForm()}
-          <ul>
-          {events.map((event, index) => (
-  <li key={index}>
-    {new Date(event.date).toDateString()} - {event.title} at {event.location} <br/> {event.description}
-    <button onClick={() => editEvent(event.event_id)}>Edit</button> 
-    <button onClick={() => deleteEvent(event.event_id)}>Delete</button>
-  </li>
-))}
+          <ul className="events">
+            {events.map((event, index) => (
+              <li key={index} className="event-item">
+                {/* Display event date, title, location, and description */}
+                {new Date(event.date).toDateString()} - {event.title} at {event.location} <br /> {event.description}
+                <button onClick={() => editEvent(event.event_id)}>Edit</button> 
+                <button onClick={() => deleteEvent(event.event_id)}>Delete</button>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-    </div>
     </div>
   );
 };
