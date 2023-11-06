@@ -29,17 +29,29 @@ const SkillSwapListItem = ({
 }) => {
 	const [rsvpButtonState, setRsvpButtonState] = useState(false);
 	const [userVolunteerPositions, setUserVolunteerPositions] = useState([]);
+	const [volunteerPositionCount, setVolunteerPositionCount] = useState(0);
 
 	useEffect(() => {
 		axios.get(`http://localhost:8080/volunteer/${user}`).then((res) => {
 			let data = res.data;
 			setUserVolunteerPositions(data.map((obj) => obj.volunteer_board_id));
 		});
+		axios
+			.get(`http://localhost:8080/volunteer/count/${volunteer_board_id}`)
+			.then((res) => {
+				let data = res.data[0].count;
+				setVolunteerPositionCount(parseInt(data));
+			});
 	}, []);
 
-	console.log(userVolunteerPositions);
-
 	const handleJoinClick = () => {};
+
+	const handleCancelClick = () => {};
+
+	const volunteerPositionsNotAvailable =
+		volunteerPositionCount === volunteersNeeded;
+	const isUserSignedUpToPosition =
+		userVolunteerPositions.includes(volunteer_board_id);
 
 	return (
 		<div className='skillswap-list-item__container'>
@@ -59,15 +71,23 @@ const SkillSwapListItem = ({
 				<p>Start: {start_date}</p>
 				<p>End: {end_date}</p>
 			</div>
-			{userVolunteerPositions.includes(volunteer_board_id) && (
+			{volunteerPositionsNotAvailable && (
+				<button
+					className='skillswap-list-item__full-button'
+					onClick={handleJoinClick}
+				>
+					Full
+				</button>
+			)}
+			{isUserSignedUpToPosition && (
 				<button
 					className='skillswap-list-item__cancel-button'
-					onClick={handleJoinClick}
+					onClick={handleCancelClick}
 				>
 					Cancel
 				</button>
 			)}
-			{!userVolunteerPositions.includes(volunteer_board_id) && (
+			{!isUserSignedUpToPosition && !volunteerPositionsNotAvailable && (
 				<button
 					className='skillswap-list-item__join-button'
 					onClick={handleJoinClick}
@@ -76,7 +96,7 @@ const SkillSwapListItem = ({
 				</button>
 			)}
 			<p>
-				{} out of {volunteersNeeded}
+				{volunteerPositionCount} out of {volunteersNeeded}
 			</p>
 		</div>
 	);

@@ -40,6 +40,18 @@ router.get("/:user_id", (req, res) => {
     });
 });
 
+// Endpoint takes volunteer posting id and returns count of volunteers signed up to it
+router.get("/count/:volunteer_board_id", (req, res) => {
+  const volunteer_board_id = req.params.volunteer_board_id;
+  volunteerQueries.getVolunteerCount(volunteer_board_id)
+    .then((positions) => {
+      res.json(positions);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 /* UPDATE */
 
 // Update the name of the community
