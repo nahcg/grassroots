@@ -1,11 +1,11 @@
 .community-list__item {
-	border-style: solid;
-	height: 300px;
-	width: auto;
+	height: 40rem;
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin: 1rem 0rem;
+	background-color: whitesmoke;
 }
 
 .community-list__item:hover {

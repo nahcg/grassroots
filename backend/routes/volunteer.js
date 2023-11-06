@@ -28,6 +28,18 @@ router.get("/", (req, res) => {
     });
 });
 
+// Return positions the user signed up for
+router.get("/:user_id", (req, res) => {
+  const userID = req.params.user_id;
+  volunteerQueries.getAllUserVolunteerPositions(userID)
+    .then((positions) => {
+      res.json(positions);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 /* UPDATE */
 
 // Update the name of the community

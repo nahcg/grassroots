@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/SkillSwapListItem.css";
+import axios from "axios";
 
 // TEST DATA
-const volunteerData = {
-	name: "Test Volunteer Position",
-	description:
-		"Need volunteers to design and build the frontend of our website.",
-	status: "Open",
-	skills: [1, 4],
-	cause: 1,
-	volunteersNeeded: 40,
-	volunteersSignedUp: 23,
-};
+// const volunteerData = {
+// 	name: "Test Volunteer Position",
+// 	description:
+// 		"Need volunteers to design and build the frontend of our website.",
+// 	status: "Open",
+// 	skills: [1, 4],
+// 	cause: 1,
+// 	volunteersNeeded: 40,
+// 	volunteersSignedUp: 23,
+// };
 
 const SkillSwapListItem = ({
+	volunteer_board_id,
 	name,
 	description,
 	status,
@@ -23,7 +25,22 @@ const SkillSwapListItem = ({
 	start_date,
 	end_date,
 	volunteersNeeded,
+	user,
 }) => {
+	const [rsvpButtonState, setRsvpButtonState] = useState(false);
+	const [userVolunteerPositions, setUserVolunteerPositions] = useState([]);
+
+	useEffect(() => {
+		axios.get(`http://localhost:8080/volunteer/${user}`).then((res) => {
+			let data = res.data;
+			setUserVolunteerPositions(data.map((obj) => obj.volunteer_board_id));
+		});
+	}, []);
+
+	console.log(userVolunteerPositions);
+
+	const handleJoinClick = () => {};
+
 	return (
 		<div className='skillswap-list-item__container'>
 			<div className='skillswap-list-item__status'>{status}</div>
@@ -42,7 +59,22 @@ const SkillSwapListItem = ({
 				<p>Start: {start_date}</p>
 				<p>End: {end_date}</p>
 			</div>
-			<button className='skillswap-list-item__join-button'>Join</button>
+			{userVolunteerPositions.includes(volunteer_board_id) && (
+				<button
+					className='skillswap-list-item__cancel-button'
+					onClick={handleJoinClick}
+				>
+					Cancel
+				</button>
+			)}
+			{!userVolunteerPositions.includes(volunteer_board_id) && (
+				<button
+					className='skillswap-list-item__join-button'
+					onClick={handleJoinClick}
+				>
+					Join
+				</button>
+			)}
 			<p>
 				{} out of {volunteersNeeded}
 			</p>

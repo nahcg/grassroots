@@ -2,13 +2,14 @@ import React from "react";
 import SkillSwapListItem from "./SkillSwapListItem";
 import "../styles/SkillSwapList.css";
 
-const SkillSwapList = ({ volunteerData }) => {
+const SkillSwapList = ({ volunteerData, user }) => {
 	return (
 		<div className='skillSwap-list'>
 			{volunteerData.map((volunteerPosition) => {
 				return (
 					<SkillSwapListItem
 						key={volunteerPosition.volunteer_board_id}
+						volunteer_board_id={volunteerPosition.volunteer_board_id}
 						name={volunteerPosition.name}
 						description={volunteerPosition.description}
 						status={volunteerPosition.status}
@@ -18,6 +19,7 @@ const SkillSwapList = ({ volunteerData }) => {
 						start_date={volunteerPosition.start_date}
 						end_date={volunteerPosition.end_date}
 						volunteersNeeded={volunteerPosition.volunteers_needed}
+						user={user}
 					/>
 				);
 			})}
