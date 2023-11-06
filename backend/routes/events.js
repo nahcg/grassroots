@@ -20,11 +20,11 @@ router.get("/:community_id", (req, res) => {
 //add event to community
 router.post("/:community_id", (req, res) => {
   const community_id = req.params.community_id;
-  const { title, details, location, date } = req.body;
+  const { title, description, location, date } = req.body;
   console.log("reqbody", req.body);
 
   eventQueries
-    .addEvent(parseInt(community_id), title, details, date, location)
+    .addEvent(parseInt(community_id), title, description, date, location)
     .then((results) => {
       res.json(results.rows[0]);
       console.log("results from route", results.rows);

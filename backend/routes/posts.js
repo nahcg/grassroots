@@ -19,10 +19,10 @@ router.get("/:community_id", (req, res) => {
 //post new post
 router.post("/:community_id", (req, res) => {
   const community_id = req.params.community_id;
-  const { title, context, timestamp } = req.body;
+  const { user_id, title, context, timestamp } = req.body;
 
   postQueries
-    .addPost(parseInt(community_id), title, context, timestamp)
+    .addPost(user_id, parseInt(community_id), title, context, timestamp)
     .then((results) => {
       res.json(results);
       console.log("results from route", results);
@@ -55,6 +55,21 @@ router.post("/comments/:post_id", (req, res) => {
     .then((results) => {
       res.json(results);
       console.log("results from comment post", results);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.post("/post/:post_id", (req, res) => {
+  const post_id = req.params.post_id;
+  const { isPinned } = req.body;
+
+  postQueries
+    .togglePin(post_id, isPinned)
+    .then((results) => {
+      res.json(results);
+      console.log("Post pinned/unpinned successfully");
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

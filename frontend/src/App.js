@@ -23,14 +23,14 @@ function App() {
         {/* Display the Landing page on the root URL */}
         <Route path="/home" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/events/:community_id" element={<Event />} />
+        <Route path="/events/:community_id/*" element={<Event />} />
         <Route
           path="/communities/community/:community_id"
           element={<Community />}
         />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/posts/:community_id" element={<Forum />} />
+        <Route path="/posts/:community_id/*" element={<Forum />} />
         <Route path="/posts/comments/:post_id" element={<Post />} />
       </Routes>
     </div>

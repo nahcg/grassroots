@@ -12,7 +12,6 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(cors());
-app.use(cors());
 
 // app.set("view engine", "ejs");
 
@@ -49,6 +48,8 @@ const postsRoutes = require("./routes/posts");
 const user_skills_Routes = require("./routes/userskills");
 const profileRoutes = require("./routes/profile");
 const volunteerRoutes = require("./routes/volunteer");
+const memberRoutes = require("./routes/member");
+const homeRoutes = require("./routes/home");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -62,6 +63,8 @@ app.use("/events", eventsRoutes);
 app.use("/user/skills", user_skills_Routes);
 app.use("/profile", profileRoutes);
 app.use("/volunteer", volunteerRoutes);
+app.use("/member", memberRoutes);
+app.use("/home", homeRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!

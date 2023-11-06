@@ -1,4 +1,4 @@
-.post-content,
+/* .post-content,
 .comments {
 	display: none;
 }
@@ -7,3 +7,21 @@
 .post.active .comments {
 	display: block;
 }
+
+.pin {
+  width: 20px;
+  height: 20px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c3/Red_bordered_white_star.svg');
+  background-size: cover;
+  cursor: pointer;
+}
+
+.pin.pinned {
+  background-image: url('https://seeklogo.com/images/R/red-star-logo-2D3327A276-seeklogo.com.png');
+}
+
+.post-content-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+} */

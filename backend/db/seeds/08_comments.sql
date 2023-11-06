@@ -16,4 +16,10 @@ VALUES
   (2, 'Comment for Community', '2023-02-28 14:30:00'),
   (3, 'Comment for Community', '2023-02-28 14:30:00'),
   (3, 'Comment for Community', '2023-02-28 14:30:00'),
-  (3, 'Comment for Community', '2023-02-28 14:30:00');
+  (3, 'Comment for Community', '2023-02-28 14:30:00'),
+  (4, 'Comment for Community', '2023-02-28 14:30:00'),
+  (4, 'Comment for Community', '2023-02-28 14:30:00'),
+  (4, 'Comment for Community', '2023-02-28 14:30:00'),
+  (5, 'Comment for Community', '2023-02-28 14:30:00'),
+  (5, 'Comment for Community', '2023-02-28 14:30:00'),
+  (5, 'Comment for Community', '2023-02-28 14:30:00');
