@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import "../styles/Profile.css";
+import "../styles/profile.css";
+
 const Profile = () => {
 
 	const { user, isAuthenticated, isLoading } = useAuth0();
@@ -110,7 +111,7 @@ const Profile = () => {
 					.get(`http://localhost:8080/profile/event-count`)
 					.then((res) => {
 						console.log(res.data, "community data");
-						setCommunity(res.data[0].count);
+						setCommunity(res.data[0]?.count);
 					});
 			};
 
@@ -157,6 +158,8 @@ const Profile = () => {
 
 	}, [userskillList]);
 
+console.log("user", user)
+
 	if (isLoading) {
 		return <div>Loading ...</div>;
 	}
@@ -176,12 +179,12 @@ const Profile = () => {
 
 				<div>
 					{userskillList.map((skill, index) => (
-						<li key={index}>
+						<div key={index}>
 							<ul>
 								<li>skill experience: {skill.experience_level}</li>
 								<li>skill id : {skill.skill_id}</li>
 							</ul>
-						</li>
+						</div>
 					))}
 				</div>
 
@@ -202,7 +205,7 @@ const Profile = () => {
 					</div>
 					<button className="skill-save" onClick={handleSubmitSkills}>Save</button>
 				</div>
-			</div>
+		</div>
 		)
 	);
 };

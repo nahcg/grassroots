@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 // import { useAuth0 } from "@auth0/auth0-react";
-import { Navigation } from "../components/Navigation";
+import Navigation from "../components/Navigation";
 import { Header } from "../components/header.jsx";
 import { Features } from "../components/features";
 import { About } from "../components/about";
 import { Contact } from "../components/contact";
 import JsonData from "../data/data.json";
+import "../styles/Landing-page.css";
 
 const Landing = () => {
 	// const { isAuthenticated } = useAuth0(); // Check if the user is authenticated

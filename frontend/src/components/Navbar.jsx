@@ -1,15 +1,23 @@
 import React from "react";
 import "../styles/Navbar.css";
-
-import LoginButton from "./Login";
-import LogoutButton from "./Logout";
+import { Link } from "react-router-dom";
+import '../App.css'
 
 const Navbar = () => {
 	return (
-		<nav className='navbar'>
-			<h1>Grassroots</h1>
-			<LoginButton />
-			<LogoutButton />
+		<nav className='app-navbar'>
+			<Link to='/home' className='nav-link'>
+				Home
+			</Link>
+			<Link to='/explore' className='nav-link'>
+				Explore
+			</Link>
+			<Link to='/volunteer' className='nav-link'>
+				Volunteer
+			</Link>
+			<Link to='/profile' className='nav-link'>
+				Profile
+			</Link>
 		</nav>
 	);
 };

@@ -12,6 +12,8 @@
   "author": "Lighthouse Labs",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
     "chalk": "^2.4.2",
     "cors": "^2.8.5",
     "dotenv": "^2.0.0",

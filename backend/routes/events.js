@@ -1,64 +1,94 @@
-/*
- * All routes for Events Data are defined here
- * Since this file is loaded in server.js into /api/events,
- *   these routes are mounted onto /api/events
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
-const express = require('express');
+/* eslint-disable space-before-function-paren */
+const express = require("express");
 const router = express.Router();
-const eventsQueries = require('../db/queries/events');
+const eventQueries = require("../db/queries/events");
 
-/* CREATE */
-
-// Create an event under a given community and store in the database
-router.post('/', (req, res) => {
-  const user_id = req.body.user_id;
-  const community_id = req.body.community_id;
-  const title = req.body.title;
-  const description = req.body.description;
-  const datetime = req.body.datetime;
-  const location = req.body.location;
-
-  eventsQueries.addNewCommunityEvent(user_id, community_id, title, description, datetime, location)
-    .then((data) => {
-      // console.log("data params: ", data);
-      return res.json({ data });
-    })
-    .catch((e) => {
-      console.log("Error: ", e);
-      return res.status(500).send('Error adding new community');
-    });
-});
-
-/* READ */
-
-// Return All events for a given community id
-router.get('/community/:community_id', (req, res) => {
+//express route for getting all events for a community
+router.get("/:community_id", (req, res) => {
   const community_id = req.params.community_id;
-
-  eventsQueries.getAllCommunityEvents(community_id)
-    .then(posts => {
-      res.json({ posts });
+  eventQueries
+    .getEvent(parseInt(community_id))
+    .then((results) => {
+      res.json(results.rows);
+      console.log("results from route", results.rows);
     })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
     });
 });
 
-/* UPDATE */
-//TODO: Update specific event only if it belongs to the user OR we do not let users update events
-router.put('/:id', (req, res) => {
+//add event to community
+router.post("/:community_id", (req, res) => {
+  const community_id = req.params.community_id;
+  const { title, description, location, date } = req.body;
+  console.log("reqbody", req.body);
 
+  eventQueries
+    .addEvent(parseInt(community_id), title, description, date, location)
+    .then((results) => {
+      res.json(results.rows[0]);
+      console.log("results from route", results.rows);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
-/* DELETE */
-// TODO: Allow user to delete event only if the event belongs to them OR we do not let users delete event
-router.delete('/:id', (req, res) => {
-
+//show individual event under community by ID
+router.get("/:community_id/:event_id", (req, res) => {
+  const community_id = req.params.community_id;
+  const event_id = req.params.event_id;
+  eventQueries
+    .getEventById(parseInt(community_id), parseInt(event_id))
+    .then((results) => {
+      res.json(results.rows);
+      console.log("results from route", results.rows);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
+//express route for editing an event
+router.post("/:community_id/:event_id", async (req, res) => {
+  const event_id = req.params.event_id;
+  const community_id = req.params.community_id;
+  const { title, details, date, location } = req.body;
+
+  try {
+    // Update the event and wait for the result
+    const updatedEvent = await eventQueries.editEvent(
+      title,
+      details,
+      date,
+      location,
+      parseInt(event_id),
+      parseInt(community_id)
+    );
+
+    // Get the updated event by its ID
+    const event = await eventQueries.getEventById(community_id, event_id);
+
+    // Send the updated event back as a response
+    res.json(event.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//delete event
+router.delete("/:community_id/:event_id", (req, res) => {
+  const community_id = req.params.community_id;
+  const event_id = req.params.event_id;
+  eventQueries
+    .deleteEvent(parseInt(community_id), parseInt(event_id))
+    .then((results) => {
+      console.log("Deleted event with EventId:", event_id);
+      res.json(results.rows); // expected empty
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
 
 module.exports = router;

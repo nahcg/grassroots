@@ -1,32 +1,36 @@
-/* Updated styles in your Calendar.css file */
-
-.Calendar {
+.CustomCalendar {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 5rem;
 }
 
 .calendar-container {
-  width: 80%; /* Set a percentage width for the calendar container */
-  max-width: 800px; /* Set a maximum width for the calendar container */
-  margin: 20px auto; /* Center the calendar container horizontally */
+  width: 80%;
+  max-width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .react-calendar {
-  width: 100%; /* Make the calendar fill the entire width of its container */
-  max-width: 800px; /* Set a maximum width for the calendar */
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
 }
 
 .react-calendar__tile {
-  height: auto; /* Expand the tile height to accommodate events */
-  padding: 15px; /* Add some padding inside each tile */
-  font-size: 18px; /* Set the font size of the text inside each tile */
+  height: auto;
+  padding: 15px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
 }
 
 .react-calendar__tile--active {
-  background-color: #eaf6ff; /* Change the background color of the active (selected) tile */
+  background-color: #eaf6ff;
 }
 
-.event-form {
+.custom-event-form {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -34,13 +38,24 @@
 
 .events {
   margin-top: 20px;
-}
-
-ul {
   list-style: none;
   padding: 0;
 }
 
-li {
-  margin-bottom: 10px;
+.event-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.event-item button {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
