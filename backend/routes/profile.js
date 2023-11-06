@@ -65,13 +65,10 @@ router.get('/causes', (req, res) => {
 
 //route to save the user's skills
 router.post('/submitSkills/', (req, res) => {
-  console.log(req)
   const { user_id, skills } = req.body;
-  // const { skills } = req.body;
-
+  console.log(JSON.parse(skills));
   profileQueries.saveUserSkills(user_id, JSON.parse(skills))
     .then(savedSkills => {
-      // console.log(savedSkills);
       res.json({ message: 'Skills saved successfully', savedSkills });
     })
     .catch(err => {
@@ -83,6 +80,7 @@ router.post('/submitSkills/', (req, res) => {
 //route to retrieve the user's saved skills
 router.get('/skills', (req, res) => {
   const { user_id } = req.query;
+
   profileQueries.getUserSkills(user_id)
     .then(skills => {
       res.json(skills);

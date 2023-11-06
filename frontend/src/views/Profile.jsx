@@ -8,44 +8,52 @@ const Profile = () => {
 	const [community, setCommunity] = useState("");
 	const [event, setEvent] = useState("");
 	const [checkedSkills, setCheckedSkills] = useState([]);
-
-
-	//todo: ADD experience_level to skillsList 
-	//todo: Grab experience_level from SQL and add a place to show it on this page 
-	// todo: eventually this skillsList will all be from the database and you can remove it from here ... So create a const [skillsList, setSkillsList] = useState([]); <== This data is populated from the SQL server 
+	const [userskillList, setUserSkillList] = useState([]);
 
 	const skillsList = [
+
 		{
-			experience_level: "",
+			experience_level: "2",
 			name: "Frontend - Web Development",
 			description: "Description for Skill A",
 			id: 1
 		},
 		{
+			experience_level: "3",
 			name: "Backend - Web Development",
 			description: "Description for Skill B for Skill B",
-			id: 1
+			id: 2
 		},
-		// {
-		// 	name: "Full Stack - Web Development', 'Description for Skill B",
-		// 	id: 3
-		// },
-		// {
-		// 	name: "Web Design - Web Development', 'Description for Skill B",
-		// 	id: 4
-		// },
-		// {
-		// 	name: "Marketing', 'Description for Skill B",
-		// 	id: 5
-		// },
-		// {
-		// 	name: "Photography', 'Description for Skill B",
-		// 	id: 6
-		// },
-		// {
-		// 	name: "Videography', 'Description for Skill B",
-		// 	id: 7
-		// }
+		{
+			experience_level: "4",
+			name: "Full Stack - Web Development",
+			description: "Description for Skill B",
+			id: 3
+		},
+		{
+			experience_level: "5",
+			name: "Web Design - Web Development",
+			description: "Description for Skill B",
+			id: 4
+		},
+		{
+			experience_level: "1",
+			name: "Marketing",
+			description: "Description for Skill B",
+			id: 5
+		},
+		{
+			experience_level: "1",
+			name: "Photography", 
+			description: "Description for Skill B",
+			id: 6
+		},
+		{
+			experience_level: "1",
+			name: "Videography",
+			description: "Description for Skill B",
+			id: 7
+		}
 	];
 
 	const handleSkillChange = (id) => {
@@ -66,67 +74,89 @@ const Profile = () => {
 		// Extract the selected skill based on the ID 
 		const selectedSkills = skillsList
 			.filter((skill) => checkedSkills.includes(skill.id))
-			.map(({ name, description, id}) => ({name, description, id})) ;
-			
-		// this is a ARRAY let's JSON this 
-
+			.map(({ name, description, id, experience_level }) => ({ name, description, id, experience_level }));
+	
 		const toSendSkills = JSON.stringify(selectedSkills);
-
-		// console.log(user.name)
-
-		axios.post('http://localhost:8080/profile/submitSkills/', 
-		{
-			user_id: user.name,
-			skills: toSendSkills })
+		console.log(toSendSkills);
+		// First, save the new skills
+		axios
+			.post('http://localhost:8080/profile/submitSkills/', {
+				user_id: user.name,
+				skills: toSendSkills
+			})
 			.then(function (response) {
 				// Handle the response from the backend if needed
-				// console.log(response.data);
+				// After successfully saving skills, fetch the updated skills
+				return axios.get(`http://localhost:8080/profile/skills`, {
+					params: {
+						user_id: user.name,
+					},
+				});
+			})
+			.then((res) => {
+				// Update your state or perform further actions with the skills data
+				setUserSkillList(res.data);
 			})
 			.catch(function (error) {
 				console.error('Error:', error);
 			});
-
-	}
-
+	};
+	
 	useEffect(() => {
 
-		// populate user field so it isn't undefined
-		// user = useAuth0();
-		 
-		
-		const fetchData = () => {
-			axios
-				.get(`http://localhost:8080/profile/event-count`)
-				.then((res) => {
-					console.log(res.data, "community data");
-					setCommunity(res.data[0].count);
-				});
-		};
-		const fetchDataEvent = () => {
-			axios
-				.get(`http://localhost:8080/profile/causes`)
-				.then((res) => {
-					console.log(res, "Event data");
-					res.data && setEvent(res.data);
-				});
-		};
+		if (isAuthenticated && user && user.name) {
+			const fetchData = () => {
+				axios
+					.get(`http://localhost:8080/profile/event-count`)
+					.then((res) => {
+						console.log(res.data, "community data");
+						setCommunity(res.data[0].count);
+					});
+			};
 
-		// FIGURE OUT HOW TO PUT THIS BELOW INTO THE WEBSITE SOMEHOW ...
-		// HINT 	const [skillsData, setSkillsData] = useState([]);
- 
-		const fetchSkillsData = () => {
-			axios
-				.get(`http://localhost:8080/profile/skills`)
-				.then((res) => {
-					console.log(res.data, "skills data");
-				});
-		};
+			const fetchDataEvent = () => {
+				axios
+					.get(`http://localhost:8080/profile/causes`)
+					.then((res) => {
+						console.log(res, "Event data");
+						res.data && setEvent(res.data);
+					});
+			};
 
+			// FIGURE OUT HOW TO PUT THIS BELOW INTO THE WEBSITE SOMEHOW ...
+			// HINT 	const [skillsData, setSkillsData] = useState([]);
+			const fetchSkillsData = () => {
+				axios
+					.get(`http://localhost:8080/profile/skills`, {
+						params: {
+							user_id: user.name, // Pass user.name as a query parameter
+						},
+					})
+					.then((res) => {
+						console.log(res.data);
 
-		fetchData();
-		fetchDataEvent();
-		fetchSkillsData();
-	}, [])
+						// Update your state or perform further actions with the skills data
+						setUserSkillList(res.data);
+					})
+					.catch((error) => {
+						console.error('Error fetching skills data:', error);
+					});
+			};
+
+			fetchData();
+			fetchDataEvent();
+			fetchSkillsData();
+
+		}
+	}, [isAuthenticated, user]);
+
+	//
+	useEffect(() => {
+
+		console.log("USER SKILL LIST", userskillList);
+
+	}, [userskillList]);
+
 	if (isLoading) {
 		return <div>Loading ...</div>;
 	}
@@ -143,11 +173,23 @@ const Profile = () => {
 						<div className="profile-count-section"><p># of Events RSVP</p><span>{event}</span></div>
 					</div>
 				</div>
+
+				<div>
+					{userskillList.map((skill, index) => (
+						<li key={index}>
+							<ul>
+								<li>skill experience: {skill.experience_level}</li>
+								<li>skill id : {skill.skill_id}</li>
+							</ul>
+						</li>
+					))}
+				</div>
+
 				<div>
 					<h3 className="skill-header">Volunteering Skills</h3>
 					<p className="skill-text">What skills do you have?</p>
 					<div className="skills-container">
-						{skillsList.map((item, index) => (
+						{skillsList?.map((item, index) => (
 							<div key={index}>
 								<input
 									value={item.name}
