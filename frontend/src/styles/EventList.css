@@ -1,0 +1,25 @@
+.EventList {
+  padding: 20px;
+}
+
+.EventList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.EventList li {
+  border: 1px solid #ccc; 
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.EventList li strong {
+  font-weight: bold; 
+  display: block; 
+  margin-bottom: 5px; 
+}
+
+.EventList li p {
+  margin: 10px 0;
+}

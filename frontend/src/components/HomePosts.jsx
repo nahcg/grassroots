@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import "../styles/HomePosts.css"
+
 
 const HomePosts = ({ posts, allPosts }) => {
   const [comments, setComments] = useState([]);
@@ -24,7 +26,7 @@ const HomePosts = ({ posts, allPosts }) => {
         <button onClick={() => setShowYourPosts(true)}>Your Posts</button>
         <button onClick={() => setShowYourPosts(false)}>All Posts</button>
       </div>
-      {showYourPosts ? <h2>Your Posts: </h2> : <h2>All Posts: </h2>}
+      {showYourPosts ? <h2>Your Posts</h2> : <h2>All Posts</h2>}
       {(showYourPosts ? posts : allPosts).map((post, index) => {
         const postComments = comments.find(
           (comment) => comment[0] && comment[0].post_id === post.post_id
@@ -35,7 +37,7 @@ const HomePosts = ({ posts, allPosts }) => {
             <h3>{post.title}</h3>
             <p>Date: {new Date(post.timestamp).toLocaleString()}</p>
             <p>Author: {post.user_id}</p>
-            <p>{post.context}</p>
+            <h4>{post.context}</h4>
 
             {/* Render comments for this post */}
             <h4>Comments:</h4>

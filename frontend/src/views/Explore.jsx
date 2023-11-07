@@ -149,7 +149,7 @@ const Explore = () => {
 			<div className='explore-page'>
 				<Navbar />
 				<div className='explore-page__head'>
-					<h1>Find a Community</h1>
+					<h1>FIND A COMMUNITY</h1>
 					<button onClick={handleOpen}>Create New</button>
 					<Modal
 						aria-labelledby='transition-modal-title'

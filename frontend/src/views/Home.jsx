@@ -164,7 +164,7 @@ if (isLoading) {
         {renderView()}
       </div>
       
-      <div className="posts">
+      <div className="homeposts">
         <HomePosts posts={posts} allPosts={allPosts} />
       </div>
     </div>
