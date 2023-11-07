@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-// import { useForm } from "react-hook-form";
-
 import "../styles/Explore.css";
 import CommunityGrid from "../components/CommunityGrid";
 import CommunityList from "../components/CommunityList";
 import Navbar from "../components/Navbar";
+import moment from "moment";
 
 // Imports for MaterialUi Modal
 import {
@@ -26,48 +25,6 @@ import {
 	FormHelperText,
 	Radio,
 } from "@mui/material";
-import SelectInput from "@mui/material/Select/SelectInput";
-
-// const testCommunities = [
-// 	{
-// 		name: "Anti-Justin Trudeau",
-// 		description:
-// 			"This community is to apose Justin Trudeau and discuss ways we can stop him from doing what he wants in this country.",
-// 		location: "Toronto, ON",
-// 		cause: 1,
-// 		creation_date: "2023-10-26",
-// 		community_picture:
-// 			"https://www.hilltimes.com/wp-content/uploads/2022/03/DSC04409.t62012ebb.m800.x3E3UulEE-1.jpg.webp",
-// 	},
-// 	{
-// 		name: "Park Cleaners",
-// 		description: "Our goal is to clean the parks of Brampton.",
-// 		location: "Brampton, ON",
-// 		cause: 2,
-// 		creation_date: "2023-10-27",
-// 		community_picture:
-// 			"https://bloximages.chicago2.vip.townnews.com/bramptonguardian.com/content/tncms/assets/v3/editorial/3/a8/3a86a09b-06c6-579b-9c7f-5856b297746a/63d888170450d.image.jpg?resize=1200%2C800",
-// 	},
-// 	{
-// 		name: "Anti-Justin Trudeau",
-// 		description:
-// 			"This community is to apose Justin Trudeau and discuss ways we can stop him from doing what he wants in this country.",
-// 		location: "Toronto, ON",
-// 		cause: 1,
-// 		creation_date: "2023-10-26",
-// 		community_picture:
-// 			"https://www.hilltimes.com/wp-content/uploads/2022/03/DSC04409.t62012ebb.m800.x3E3UulEE-1.jpg.webp",
-// 	},
-// 	{
-// 		name: "Park Cleaners",
-// 		description: "Our goal is to clean the parks of Brampton.",
-// 		location: "Brampton, ON",
-// 		cause: 2,
-// 		creation_date: "2023-10-27",
-// 		community_picture:
-// 			"https://bloximages.chicago2.vip.townnews.com/bramptonguardian.com/content/tncms/assets/v3/editorial/3/a8/3a86a09b-06c6-579b-9c7f-5856b297746a/63d888170450d.image.jpg?resize=1200%2C800",
-// 	},
-// ];
 
 // Style for Modal
 const style = {
@@ -95,8 +52,31 @@ const Explore = () => {
 	// handling submit by doing a put request of the data into the database
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const { name, description, location } = e.target.elements;
-		console.log("Form submitted:", name.value);
+		const { name, description, location, cause, picture_url } =
+			e.target.elements;
+		console.log(
+			"Form values:",
+			name.value,
+			description.value,
+			location.value,
+			cause.value,
+			picture_url.value
+		);
+		axios
+			.post("http://localhost:8080/communities/", {
+				params: {
+					name: name.value,
+					description: description.value,
+					location: location.value,
+					cause: cause.value,
+					creation_date: moment().format("YYYY-MM-DD"),
+					picture_url: picture_url.value,
+				},
+			})
+			.then(() => {
+				setOpen(false);
+				window.location.reload(true);
+			});
 	};
 
 	useEffect(() => {
@@ -177,9 +157,9 @@ const Explore = () => {
 										</Select>
 										<InputLabel>Cause</InputLabel>
 										<Select name='cause'>
-											<MenuItem value='Political'>Political</MenuItem>
-											<MenuItem value='Environmental'>Environmental</MenuItem>
-											<MenuItem value='Social'>Social</MenuItem>
+											<MenuItem value={1}>Political</MenuItem>
+											<MenuItem value={2}>Environmental</MenuItem>
+											<MenuItem value={3}>Social</MenuItem>
 										</Select>
 										<Input
 											type='text'

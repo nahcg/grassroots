@@ -45,7 +45,6 @@ function Volunteer() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const data = e.target.elements;
-		console.log(moment().format("YYYY-MM-DD"));
 		axios
 			.post("http://localhost:8080/volunteer/new", {
 				params: {

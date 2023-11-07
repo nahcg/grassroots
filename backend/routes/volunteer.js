@@ -22,7 +22,6 @@ router.post("/:user_id/:volunteer_board_id", (req, res) => {
 // Create a new volunteer posting
 router.post("/new", (req, res) => {
   const { name, description, status, location, cause, creation_date, start_date, end_date, volunteers_needed } = req.body.params;
-  console.log(description);
   volunteerQueries.addNewVolunteerPosting(name, description, status, location, cause, creation_date, start_date, end_date, volunteers_needed)
     .then((position) => res.send(position));
 });
