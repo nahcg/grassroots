@@ -52,7 +52,7 @@ const CalendarApp = () => {
 // add event
 const addEvent = () => {
   if (eventTitle.trim() === '' || eventDescription.trim() === '' || eventLocation.trim() === '') return;
-  
+
   // Format the date to YYYY-MM-DD
   const formattedDate = date.toISOString().split('T')[0];
 
@@ -60,12 +60,12 @@ const addEvent = () => {
     community_id: community_id,
     title: eventTitle,
     description: eventDescription,
-    date: formattedDate, 
-    location: eventLocation
+    date: formattedDate,
+    location: eventLocation,
   };
-  console.log("newEvent", newEvent)
+  console.log("newEvent", newEvent);
 
-  // Send a PUT request to update the events table with the new event
+  // Send a POST request to add the new event to the database
   fetch(`http://localhost:8080/events/${community_id}`, {
     method: 'POST',
     headers: {
@@ -75,7 +75,7 @@ const addEvent = () => {
   })
     .then((response) => response.json())
     .then((updatedEvent) => {
-      console.log("updatedEvent", updatedEvent)
+      console.log("updatedEvent", updatedEvent);
       // Update the state with the new event returned from the server
       setEvents([...events, updatedEvent]);
       setEventTitle('');
