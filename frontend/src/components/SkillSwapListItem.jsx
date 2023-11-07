@@ -29,7 +29,7 @@ const SkillSwapListItem = ({
 				let data = res.data[0].count;
 				setVolunteerPositionCount(parseInt(data));
 			});
-	}, [volunteerPositionCount]);
+	}, [volunteerPositionCount, user, volunteer_board_id]);
 
 	const handleJoinClick = () => {
 		axios
@@ -71,9 +71,7 @@ const SkillSwapListItem = ({
 				<p>End: {end_date.slice(0, 10)}</p>
 			</div>
 			{volunteerPositionsNotAvailable && (
-				<button className='skillswap-list-item__full-button'>
-					Not Available
-				</button>
+				<div className='skillswap-list-item__full-button'>Not Available</div>
 			)}
 			{isUserSignedUpToPosition && (
 				<button

@@ -8,7 +8,6 @@ import moment from "moment";
 
 // Imports for MaterialUi Modal
 import {
-	TextField,
 	Backdrop,
 	Box,
 	Modal,
@@ -16,13 +15,10 @@ import {
 	Button,
 	Typography,
 	Stack,
-	FormControl,
 	InputLabel,
 	Select,
 	MenuItem,
 	Input,
-	FormHelperText,
-	Radio,
 } from "@mui/material";
 
 function Volunteer() {
