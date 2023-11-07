@@ -1,0 +1,21 @@
+.member-button {
+  background-color: #007bff; /* Darker blue for the button */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 25px; /* Rounded corners */
+  padding: 15px 30px; /* Adjust padding for larger size */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.member-button:hover {
+  background-color: #0056b3; /* Slightly lighter blue on hover */
+}
+
+.member-button.member {
+  background-color: #0056b3; /* Lighter blue when isMember */
+}
+
+.member-button.member:hover {
+  background-color: #003366; /* Slightly darker blue on hover when isMember */
+}

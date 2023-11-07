@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/Calendar.css';
@@ -16,7 +16,12 @@ const CalendarApp = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { community_id } = useParams(); // Get the ID parameter from the URL
   const { user, isLoading } = useAuth0();
-  
+
+  const routes = [
+    { path: `/community/communities/${community_id}`, label: 'About' },
+    { path: `/posts/${community_id}`, label: 'Forum' },
+    { path: `/events/${community_id}`, label: 'Events' },
+  ];
 
   // Return array of objects
   useEffect(() => {
@@ -36,7 +41,6 @@ const CalendarApp = () => {
       .catch((error) => console.error('Error fetching events', error));
   }
 }, [isLoading, user, community_id]);
-
 
 
   const handleDateChange = newDate => {
@@ -228,6 +232,13 @@ const renderForm = () => {
 
   return (
     <div className="CustomCalendar">
+      <div className="calendar_links">
+        {routes.map((route, index) => (
+          <Link key={index} to={route.path}>
+            <span className="route-link">{route.label}</span>
+          </Link>
+        ))}
+      </div>
       <h1>Event Calendar</h1>
       <div className="calendar-container">
         <div className="custom-event-form">

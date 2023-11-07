@@ -1,0 +1,35 @@
+.posts-container {
+  padding: 0px;
+  margin: 0px;
+}
+
+.toggle-buttons {
+  margin-bottom: 20px;
+}
+
+.post-item {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-item h3,
+.post-item p {
+  padding: 0px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.post-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.post-item li {
+  background-color: #f2f2f2; /* Light grey background for comments */
+  padding: 5px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
