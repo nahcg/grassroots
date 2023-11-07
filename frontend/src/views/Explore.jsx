@@ -91,23 +91,8 @@ const Explore = () => {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	//React Hook Form State
-	// const { register, handleSubmit } = useForm();
 
-	// const [formData, setFormData] = useState({
-	// 	name: "",
-	// 	email: "",
-	// });
-
-	// const handleChange = (e) => {
-	// 	const { name, value } = e.target;
-	// 	setFormData({
-	// 		...formData,
-	// 		[name]: value,
-	// 	});
-	// };
-
-	// TODO: Complete handling submit by doing a put request of the data into the database
+	// handling submit by doing a put request of the data into the database
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { name, description, location } = e.target.elements;

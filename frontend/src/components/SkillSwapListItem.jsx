@@ -2,18 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../styles/SkillSwapListItem.css";
 import axios from "axios";
 
-// TEST DATA
-// const volunteerData = {
-// 	name: "Test Volunteer Position",
-// 	description:
-// 		"Need volunteers to design and build the frontend of our website.",
-// 	status: "Open",
-// 	skills: [1, 4],
-// 	cause: 1,
-// 	volunteersNeeded: 40,
-// 	volunteersSignedUp: 23,
-// };
-
 const SkillSwapListItem = ({
 	volunteer_board_id,
 	name,
@@ -27,7 +15,6 @@ const SkillSwapListItem = ({
 	volunteersNeeded,
 	user,
 }) => {
-	const [rsvpButtonState, setRsvpButtonState] = useState(false);
 	const [userVolunteerPositions, setUserVolunteerPositions] = useState([]);
 	const [volunteerPositionCount, setVolunteerPositionCount] = useState(0);
 
@@ -42,11 +29,23 @@ const SkillSwapListItem = ({
 				let data = res.data[0].count;
 				setVolunteerPositionCount(parseInt(data));
 			});
-	}, []);
+	}, [volunteerPositionCount]);
 
-	const handleJoinClick = () => {};
+	const handleJoinClick = () => {
+		axios
+			.post(`http://localhost:8080/volunteer/${user}/${volunteer_board_id}`)
+			.then(() => {
+				setVolunteerPositionCount(volunteerPositionCount + 1);
+			});
+	};
 
-	const handleCancelClick = () => {};
+	const handleCancelClick = () => {
+		axios
+			.delete(`http://localhost:8080/volunteer/${user}/${volunteer_board_id}`)
+			.then(() => {
+				setVolunteerPositionCount(volunteerPositionCount - 1);
+			});
+	};
 
 	const volunteerPositionsNotAvailable =
 		volunteerPositionCount === volunteersNeeded;
@@ -67,16 +66,13 @@ const SkillSwapListItem = ({
 				{cause === 3 && <p>Social</p>}
 			</div>
 			<div className='skillswap-list-item__dates'>
-				<p>Posted On: {creation_date}</p>
-				<p>Start: {start_date}</p>
-				<p>End: {end_date}</p>
+				<p>Posted On: {creation_date.slice(0, 10)}</p>
+				<p>Start: {start_date.slice(0, 10)}</p>
+				<p>End: {end_date.slice(0, 10)}</p>
 			</div>
 			{volunteerPositionsNotAvailable && (
-				<button
-					className='skillswap-list-item__full-button'
-					onClick={handleJoinClick}
-				>
-					Full
+				<button className='skillswap-list-item__full-button'>
+					Not Available
 				</button>
 			)}
 			{isUserSignedUpToPosition && (
