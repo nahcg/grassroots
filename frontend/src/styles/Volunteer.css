@@ -1,0 +1,65 @@
+.tabs {
+	overflow: hidden;
+}
+
+.tabs menu {
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+.tabs button {
+	font: inherit;
+	font-size: 2rem;
+	background-color: rgba(2, 0, 36, 1);
+	border: none;
+	border-bottom-color: #48d9f3;
+	color: #e0eff1;
+	border-radius: 8px 8px 0 0;
+	padding: 1rem 2rem;
+	margin: 0rem 0.25rem;
+	transition: all 0.2s ease-out;
+}
+
+.tabs button:hover,
+.tabs button.active {
+	background-color: rgba(0, 212, 255, 1);
+	color: rgba(2, 0, 36, 1);
+}
+
+.tab-content {
+	/* background-color: #48d9f3; */
+	background: rgb(2, 0, 36);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 0, 36, 1) 0%,
+		rgba(9, 9, 121, 1) 35%,
+		rgba(0, 212, 255, 1) 100%
+	);
+	border-radius: 8px 8px 0 0;
+	padding: 1rem;
+	height: auto;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+		rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+	margin-bottom: 5rem;
+	overflow-y: scroll;
+}
+
+.tab-content li {
+	margin: 0.75rem 0;
+}
+
+.volunteer-add-new__button {
+	background-color: green;
+	color: white;
+	border-radius: 8px 8px;
+	margin: 2rem 0;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.volunteer-add-new_container {
+	display: flex;
+	justify-content: flex-end;
+}

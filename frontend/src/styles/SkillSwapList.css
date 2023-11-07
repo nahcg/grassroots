@@ -1,0 +1,8 @@
+.skillSwap-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 5rem;
+	margin: 5rem 0;
+}

@@ -2,29 +2,26 @@
 	padding: 0px 5vw;
 } */
 
-
 .explore-page__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(216, 226, 237); 
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgb(216, 226, 237);
 	margin-bottom: -20px;
 	padding-left: 50px;
 	padding-right: 50px;
 }
 
-
 .explore-page_search-bar .search {
-  width: 100%; /* Set the search input width to 100% */
-  background-color: rgb(216, 226, 237); 
+	width: 100%; /* Set the search input width to 100% */
+	background-color: rgb(216, 226, 237);
 	padding-left: 50px;
 	padding-right: 50px;
 }
 
-
 .viewToggle {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	gap: 10px;
 	padding-right: 50px;
 	padding-bottom: 10px;
@@ -53,5 +50,3 @@
 	padding-left: 10px;
 	padding-right: 10px;
 }
-
-

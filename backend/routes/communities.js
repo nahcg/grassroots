@@ -1,7 +1,7 @@
 /*
  * All routes for Communities Data are defined here
- * Since this file is loaded in server.js into /api/communities,
- *   these routes are mounted onto /api/communities
+ * Since this file is loaded in server.js into /communities,
+ *   these routes are mounted onto /communities
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -12,12 +12,7 @@ const communitiesQueries = require("../db/queries/communities");
 /* CREATE */
 
 router.post("/", (req, res) => {
-  const name = req.body.name;
-  const description = req.body.description;
-  const location = req.body.location;
-  const cause = req.body.cause;
-  const creation_date = req.body.creation_date;
-  const picture_url = req.body.picture_url;
+  const { name, description, location, cause, creation_date, picture_url } = req.body.params;
 
   communitiesQueries
     .addNewCommunity(
@@ -29,8 +24,7 @@ router.post("/", (req, res) => {
       picture_url
     )
     .then((data) => {
-      // console.log("data params: ", data);
-      return res.json({ data });
+      return res.json(data);
     })
     .catch((e) => {
       console.log("Error: ", e);

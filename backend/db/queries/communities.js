@@ -88,7 +88,7 @@ const addNewCommunity = (
     RETURNING *
   `;
   return db
-    .query(qs, [name, description, location, cause, creation_date, picture_url])
+    .query(qs, [name, description, location, parseInt(cause), creation_date, picture_url])
     .then((res) => res.rows)
     .catch((err) => {
       return err;

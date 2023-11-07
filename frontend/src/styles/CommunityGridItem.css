@@ -5,7 +5,9 @@
 	width: 400px;
 	display: flex;
 	flex-direction: column;
-	margin-top: 50px;
+	margin: 2rem;
+	border-radius: 8px 8px;
+	background-color: whitesmoke;
 }
 
 .community-grid__item:hover {

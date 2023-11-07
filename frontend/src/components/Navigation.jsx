@@ -6,29 +6,28 @@ import "../styles/Navigation.css";
 import growth from "./growth.png";
 
 const Navigation = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+	const { user, isAuthenticated, isLoading } = useAuth0();
 
-  return (
-    <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
-      <div className='container'>
-        <div className='navbar-header'>
-          <div className='navbar_brand'>
-            GrassRoots
-						<div className="brand_icon">
-						<img src={growth} alt="" />
+	return (
+		<nav id='menu' className='navbar navbar-default navbar-fixed-top'>
+			<div className='container'>
+				<div className='navbar-header'>
+					<div className='navbar_brand'>
+						GrassRoots
+						<div className='brand_icon'>
+							<img src={growth} alt='' />
 						</div>
-          </div>
-
-        </div>
-        <div className='navbar_buttons'>
-          <ul>
-            {!isAuthenticated && <LoginButton />}
-            {isAuthenticated && <LogoutButton />}
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
+					</div>
+				</div>
+				<div className='navbar_buttons'>
+					<ul>
+						{!isAuthenticated && <LoginButton />}
+						{isAuthenticated && <LogoutButton />}
+					</ul>
+				</div>
+			</div>
+		</nav>
+	);
 };
 
 export default Navigation;
