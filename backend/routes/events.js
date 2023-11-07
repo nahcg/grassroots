@@ -53,13 +53,13 @@ router.get("/:community_id/:event_id", (req, res) => {
 router.post("/:community_id/:event_id", async (req, res) => {
   const event_id = req.params.event_id;
   const community_id = req.params.community_id;
-  const { title, details, date, location } = req.body;
+  const { title, description, date, location } = req.body;
 
   try {
     // Update the event and wait for the result
     const updatedEvent = await eventQueries.editEvent(
       title,
-      details,
+      description,
       date,
       location,
       parseInt(event_id),
