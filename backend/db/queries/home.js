@@ -16,6 +16,23 @@ const getEvents = async (user_id) => {
   }
 };
 
+//get events by user and community_id
+const getEventsByCommunity = async (user_id, community_id) => {
+  try {
+    const event = await db.query(
+      `SELECT * FROM community_members JOIN events ON events.community_id = community_members.community_id WHERE user_id = $1 AND community_members.community_id = $2`,
+      [user_id, community_id]
+    );
+    console.log("Fetched events:", event); // Log the fetched events
+    console.log("user", user_id);
+    console.log("community", community_id);
+    return event;
+  } catch (error) {
+    console.error("Error fetching events:", error); // Log any errors
+    throw error;
+  }
+};
+
 // get all posts authored by user_id
 const getPosts = async (user_id) => {
   try {
@@ -36,7 +53,7 @@ const getPosts = async (user_id) => {
 const getCommunities = async (user_id) => {
   try {
     const communities = await db.query(
-      `SELECT name, picture_url FROM communities JOIN community_members ON communities.community_id = community_members.community_id WHERE community_members.user_id = $1;`,
+      `SELECT name, picture_url, communities.community_id AS community_id FROM communities JOIN community_members ON communities.community_id = community_members.community_id WHERE community_members.user_id = $1;`,
       [user_id]
     );
     console.log("Fetched communities", communities); // Log the fetched events
@@ -87,4 +104,5 @@ module.exports = {
   getCommunities,
   getAllPosts,
   getAllComments,
+  getEventsByCommunity,
 };

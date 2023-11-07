@@ -12,31 +12,54 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState([]); 
   const [communities, setCommunities] = useState([]); 
   const [isCalendarView, setIsCalendarView] = useState(true); 
+  const [selectedCommunity, setSelectedCommunity] = useState(null); 
   const { user, isLoading } = useAuth0();
 
-
-
-  // Fetch events based on the user.email
-  useEffect(() => {
-    if (!isLoading && user) {
-    fetch(`http://localhost:8080/home/events?user_id=${user.email}`, {
+// Fetch events based on the user.email and selected community
+useEffect(() => {
+  if (!isLoading && user && selectedCommunity) {
+    console.log("Selected Community:", selectedCommunity);
+    console.log("User Email:", user.email);
+    fetch(`http://localhost:8080/home/allEvents?user_id=${user.email}&community_id=${selectedCommunity.community_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // Format dates before setting state
-        const formattedEvents = data.map((event) => ({
-          ...event,
-          date: new Date(event.date),
-        }));
-        setEvents(formattedEvents);
-      })
-      .catch((error) => console.error('Error fetching events', error));
-    }
-  }, [isLoading, user]);
+    .then((response) => response.json())
+    .then((data) => {
+      // Format dates before setting state
+      const formattedEvents = data.map((event) => ({
+        ...event,
+        date: new Date(event.date),
+      }));
+      setEvents(formattedEvents);
+    })
+    .catch((error) => console.error('Error fetching events', error));
+  }
+}, [isLoading, user, selectedCommunity]);
+
+  // // Fetch events based on the user.email
+  // useEffect(() => {
+  //   if (!isLoading && user)
+  //   fetch(`http://localhost:8080/home/events?user_id=${user.email}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // Format dates before setting state
+  //       const formattedEvents = data.map((event) => ({
+  //         ...event,
+  //         date: new Date(event.date),
+  //       }));
+  //       setEvents(formattedEvents);
+  //     })
+  //     .catch((error) => console.error('Error fetching events', error));
+  //   }
+  // }, [isLoading, user]);
 
 
   // Fetch communities based on the user.email
@@ -145,15 +168,15 @@ if (isLoading) {
     <div className='Home'>
       <Navbar />
       <div className="home_communities">
-      <h2>Your Communities</h2>
-      <ul>
-        {communities.map((community, index) => (
-          <li key={index}>
-            <img src={community.picture_url} alt={community.name} />
-            {community.name}
-          </li>
-        ))}
-      </ul>
+        <h2>Your Communities</h2>
+        <ul>
+          {communities.map((community, index) => (
+            <li key={index} onClick={() => setSelectedCommunity(community)}>
+              <img src={community.picture_url} alt={community.name} />
+              {community.name}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="event-calendar">
         <div className="toggle-buttons">

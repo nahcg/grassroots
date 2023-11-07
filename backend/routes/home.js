@@ -73,4 +73,27 @@ router.get("/comments/:post_id", (req, res) => {
     });
 });
 
+// Express route for getting all events for a user and community
+router.get("/allEvents", (req, res) => {
+  const user_id = req.query.user_id; // Access user_id from query parameters
+  const community_id = req.query.community_id; // Access community_id from query parameters
+
+  // Check if community_id is provided in the query parameters
+  if (!community_id) {
+    return res.status(400).json({ error: "Community ID is required." });
+  }
+
+  homeQueries
+    .getEventsByCommunity(user_id, community_id)
+    .then((results) => {
+      res.json(results.rows);
+      console.log("results from route", results.rows);
+      console.log("user", user_id);
+      console.log("community", community_id);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;
