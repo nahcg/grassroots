@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from 'react-router-dom';
+import "../styles/MemberButton.css";
+
 
 const MemberButton = () => {
   const { user } = useAuth0();
@@ -68,7 +70,7 @@ const MemberButton = () => {
 
   return (
     <div>
-      <button onClick={handleMemberStatus}>
+      <button className={`member-button ${isMember ? 'member' : ''}`} onClick={handleMemberStatus}>
         {isMember ? 'You are a member!' : 'Join Community'}
       </button>
     </div>

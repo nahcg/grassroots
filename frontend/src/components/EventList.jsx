@@ -1,3 +1,5 @@
+import "../styles/EventList.css";
+
 const EventList = ({ events }) => {
   return (
     <div className="EventList">

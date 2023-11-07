@@ -41,21 +41,27 @@ const Community = () => {
 	}
 
 	return (
-		<div className='routes'>
-			<Navbar />
-			<MemberButton />
-			{routes.map((route, index) => (
-				<Link key={index} to={route.path}>
-					<button className='button'>{route.label}</button>
-				</Link>
-			))}
-			<div className='community-container'>
+		<div className="community_about">
+      <Navbar />
+			<div className="community_page">
+				<div className="member_button">
+      <MemberButton/>
+			</div>
+      <div className="routes">
+        {routes.map((route, index) => (
+          <Link key={index} to={route.path}>
+            <button className="button">{route.label}</button>
+          </Link>
+        ))}
+      </div>
+      <div className="community_container">
 				<h1>{community.name}</h1>
 				<img src={community.picture_url} alt={community.name} />
 				<p>{community.description}</p>
 				<p>Location: {community.location}</p>
 			</div>
-		</div>
+			</div>
+			</div>
 	);
 };
 

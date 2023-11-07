@@ -1,6 +1,21 @@
 .CustomCalendar {
 	text-align: center;
 	margin-top: 5rem;
+	text-align: center;
+	margin-top: 12rem;
+}
+
+.calendar_links {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.route-link {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+	margin: 0 10px;
+	cursor: pointer;
 }
 
 .calendar-container {
@@ -10,12 +25,21 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 80%;
+	max-width: 1000px;
+	margin: 15px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .react-calendar {
 	width: 100%;
 	max-width: 1000px;
 	margin-top: 20px;
+	width: 100%;
+	max-width: 1000px;
+	margin-top: 15px;
 }
 
 .react-calendar__tile {
@@ -24,16 +48,36 @@
 	font-size: 18px;
 	display: flex;
 	flex-direction: column;
+	height: auto;
+	padding: 10px;
+	font-size: 12px;
+	display: flex;
+	flex-direction: column;
+}
+
+.react-calendar__tile li {
+	list-style: none;
+	margin-left: -30px;
 }
 
 .react-calendar__tile--active {
 	background-color: #eaf6ff;
+	background-color: #eaf6ff;
+	list-style: none;
 }
 
 .custom-event-form {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	width: 80%;
+}
+
+.custom-event-form textarea {
+	height: 50px;
 }
 
 .events {

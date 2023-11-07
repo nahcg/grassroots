@@ -1,11 +1,66 @@
-/* .post-content,
-.comments {
-	display: none;
+/* Post.css */
+.post {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px; /* Add left margin */
+  margin-right: 10px; /* Add right margin */
 }
 
-.post.active .post-content,
-.post.active .comments {
-	display: block;
+.post.active {
+  border: 1px solid #007bff; /* Highlight active post with blue border */
+}
+
+.post h2 {
+  margin: 0;
+  font-weight: bold; /* Make the title bold */
+  margin-bottom: 10px;
+}
+
+.post-content {
+  margin: 5px;
+}
+
+.post-content p {
+  margin: 10px;
+}
+
+.comments {
+  background-color: #f2f2f2; /* Light grey background for comments */
+  padding: 10px;
+  margin:10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.comment-form input {
+  flex: 1;
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.comment-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #0056b3;
 }
 
 .pin {
@@ -19,9 +74,3 @@
 .pin.pinned {
   background-image: url('https://seeklogo.com/images/R/red-star-logo-2D3327A276-seeklogo.com.png');
 }
-
-.post-content-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-} */

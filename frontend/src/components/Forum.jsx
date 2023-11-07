@@ -101,13 +101,15 @@ const Forum = () => {
 
 
 	return (
-		<div className='forum_routes'>
+		<div className='forum_page'>
 			<Navbar />
-			{routes.map((route, index) => (
-				<Link key={index} to={route.path}>
-					<button className='forum_button'>{route.label}</button>
-				</Link>
-			))}
+			<div className="forum_routes">
+  {routes.map((route, index) => (
+    <Link key={index} to={route.path} className="link">
+      {route.label}
+    </Link>
+  ))}
+</div>
 			<div className='forum_forum'>
 				<h1>Forum</h1>
 					<input
@@ -125,12 +127,14 @@ const Forum = () => {
 					</div>
 					<button onClick={addPost}>Add Post</button>
 				</div>
+        <div className='forum_filter'>
 <input
           type='text'
           placeholder='Filter by Title'
           value={filterTitle}
           onChange={(e) => setFilterTitle(e.target.value)}
         />
+        </div>
         <div className="forum_posts">
           {filteredPosts.map((post, index) => (
             <Post

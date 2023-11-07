@@ -1,0 +1,49 @@
+.profile-section {
+  display: flex;
+	padding: 4% 6%;
+}
+.profile-section img {
+  margin-right: 26px; 
+}
+.profile-count-section {
+  display: flex;
+  justify-content: space-between;
+}
+.profile-section h2 {
+	font-weight: 500;
+	font-size: 18px;
+	text-transform: lowercase;
+	padding: 14px 0;
+	margin-bottom: 0;
+}
+.profile-wrapper {
+	margin: 0 auto;
+	width:50%;
+}
+.checkbox-label {
+	font-size: 15px;
+	color: #000;
+	padding-left: 12px;
+}
+.skills-container {
+	padding-left: 17%;
+}
+.skill-save {
+	border: 0;
+	background-color: #48d9f3;
+	color: #000;
+	font-weight: bold;
+	padding: 4px 15px;
+	float: right;
+	margin-top: 36px;
+}
+.skill-text {
+	color: #000;
+	margin: 19px 0;
+}
+.skill-header {
+	margin-bottom: 30px;
+}
+.profile-details {
+	width:50%;
+}

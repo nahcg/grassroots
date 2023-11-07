@@ -62,6 +62,8 @@ app.use("/posts", postsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/user/skills", user_skills_Routes);
 app.use("/profile", profileRoutes);
+app.use("/profile/skills", user_skills_Routes);
+app.use("/profile/submitSkills", profileRoutes);
 app.use("/volunteer", volunteerRoutes);
 app.use("/member", memberRoutes);
 app.use("/home", homeRoutes);
