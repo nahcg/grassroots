@@ -6,6 +6,7 @@
 	height: 100%;
 	background: url("./background.jpeg");
 	z-index: -1;
+	background-repeat: repeat-x;
 }
 
 .app-navbar {
