@@ -17,12 +17,15 @@ const Home = () => {
 	// Fetch events based on the user.email
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`/home/events?user_id=${user.email}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
+			fetch(
+				`${process.env.REACT_APP_BASEURL}/home/events?user_id=${user.email}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
 				.then((response) => response.json())
 				.then((data) => {
 					// Format dates before setting state
@@ -39,12 +42,15 @@ const Home = () => {
 	// Fetch communities based on the user.email
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`/home/communities?user_id=${user.email}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
+			fetch(
+				`${process.env.REACT_APP_BASEURL}/home/communities?user_id=${user.email}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
 				.then((response) => response.json())
 				.then((data) => {
 					setCommunities(data);
@@ -56,12 +62,15 @@ const Home = () => {
 	// Fetch posts based on the user.email
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`/home/posts?user_id=${user.name}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
+			fetch(
+				`${process.env.REACT_APP_BASEURL}/home/posts?user_id=${user.name}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
 				.then((response) => response.json())
 				.then((data) => {
 					setPosts(data);
@@ -73,12 +82,15 @@ const Home = () => {
 	// Fetch all posts that user_id belongs to
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`/home/AllPosts?user_id=${user.email}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
+			fetch(
+				`${process.env.REACT_APP_BASEURL}/home/AllPosts?user_id=${user.email}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
 				.then((response) => response.json())
 				.then((data) => {
 					setAllPosts(data);

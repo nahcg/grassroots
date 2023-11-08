@@ -14,7 +14,7 @@ const MemberButton = () => {
 
 	useEffect(() => {
 		// Fetch users array from the server
-		fetch(`/member/${community_id}`)
+		fetch(`${process.env.REACT_APP_BASEURL}/member/${community_id}`)
 			.then((response) => response.json())
 			.then((members) => {
 				setIsMember(members.some((member) => member.user_id === user.email));

@@ -25,7 +25,7 @@ const Forum = () => {
 	useEffect(() => {
 		if (!isLoading && user) {
 			// Fetch posts from the backend when the component mounts
-			fetch(`/posts/${community_id}`)
+			fetch(`${process.env.REACT_APP_BASEURL}/posts/${community_id}`)
 				.then((response) => response.json())
 				.then((data) => {
 					// Sort posts by pinned status (pinned posts first) and then by date
@@ -64,7 +64,7 @@ const Forum = () => {
 		setPosts((prevPosts) => [...prevPosts, postData]);
 
 		// Send a POST request to add the new post
-		fetch(`/posts/${community_id}`, {
+		fetch(`${process.env.REACT_APP_BASEURL}/posts/${community_id}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

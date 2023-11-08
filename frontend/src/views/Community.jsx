@@ -13,7 +13,9 @@ const Community = () => {
 	useEffect(() => {
 		// Fetch community by name
 		if (!isLoading && user) {
-			fetch(`/communities/community/${community_id}`)
+			fetch(
+				`${process.env.REACT_APP_BASEURL}/communities/community/${community_id}`
+			)
 				.then((response) => response.json())
 				.then((data) => {
 					setCommunity(data[0]);

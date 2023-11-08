@@ -16,7 +16,7 @@ const Post = ({ post, post_id, user_id }) => {
 		if (!isLoading && user) {
 			// Fetch comments for the specific post from the backend when post_id and isActive change
 			if (post_id && isActive) {
-				fetch(`/posts/comments/${post_id}`)
+				fetch(`${process.env.REACT_APP_BASEURL}/posts/comments/${post_id}`)
 					.then((response) => response.json())
 					.then((data) => setComments(data))
 					.catch((error) => console.error("Error fetching comments:", error));
@@ -45,7 +45,7 @@ const Post = ({ post, post_id, user_id }) => {
 		// console.log("commentData", newCommentData);
 
 		// Send a POST request to add the new comment
-		fetch(`/posts/comments/${post_id}`, {
+		fetch(`${process.env.REACT_APP_BASEURL}/posts/comments/${post_id}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -62,7 +62,7 @@ const Post = ({ post, post_id, user_id }) => {
 				setNewComment("");
 
 				// Fetch updated comments after adding a new comment
-				fetch(`/posts/comments/${post_id}`)
+				fetch(`${process.env.REACT_APP_BASEURL}/posts/comments/${post_id}`)
 					.then((response) => response.json())
 					.then((data) => {
 						// Update the comments state with the updated comments
@@ -76,7 +76,7 @@ const Post = ({ post, post_id, user_id }) => {
 	};
 
 	const togglePin = () => {
-		fetch(`/posts/post/${post_id}`, {
+		fetch(`${process.env.REACT_APP_BASEURL}/posts/post/${post_id}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

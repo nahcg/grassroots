@@ -11,7 +11,9 @@ const HomePosts = ({ posts, allPosts }) => {
 				(post) => post.post_id
 			);
 			const commentPromises = postIds.map((post_id) =>
-				fetch(`/home/comments/${post_id}`).then((response) => response.json())
+				fetch(`${process.env.REACT_APP_BASEURL}/home/comments/${post_id}`).then(
+					(response) => response.json()
+				)
 			);
 			const commentsData = await Promise.all(commentPromises);
 			setComments(commentsData);

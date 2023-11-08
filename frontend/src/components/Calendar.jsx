@@ -27,7 +27,7 @@ const CalendarApp = () => {
 	useEffect(() => {
 		if (!isLoading && user) {
 			// Fetch events based on the ID parameter from the URL
-			fetch(`/events/${community_id}`)
+			fetch(`${process.env.REACT_APP_BASEURL}/events/${community_id}`)
 				.then((response) => response.json())
 				.then((data) => {
 					// Format dates before setting state
@@ -68,7 +68,7 @@ const CalendarApp = () => {
 		// console.log("newEvent", newEvent);
 
 		// Send a POST request to add the new event to the database
-		fetch(`/events/${community_id}`, {
+		fetch(`${process.env.REACT_APP_BASEURL}/events/${community_id}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -119,13 +119,16 @@ const CalendarApp = () => {
 		// console.log("updatedEvent1", updatedEvent);
 
 		// Send a PUT request to update the event in the database
-		fetch(`/events/${community_id}/${updatedEvent.event_id}`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(updatedEvent),
-		})
+		fetch(
+			`${process.env.REACT_APP_BASEURL}/events/${community_id}/${updatedEvent.event_id}`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(updatedEvent),
+			}
+		)
 			.then((response) => response.json())
 			.then((data) => {
 				// console.log("updatedEventOld", data);
@@ -154,9 +157,12 @@ const CalendarApp = () => {
 
 	const deleteEvent = (event_id) => {
 		// Send a DELETE request to delete the event
-		fetch(`/events/${community_id}/${event_id}`, {
-			method: "DELETE",
-		})
+		fetch(
+			`${process.env.REACT_APP_BASEURL}/events/${community_id}/${event_id}`,
+			{
+				method: "DELETE",
+			}
+		)
 			.then((response) => response.json())
 			.then(() => {
 				// Update the state to remove the deleted event from the events list
