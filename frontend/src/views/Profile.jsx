@@ -80,7 +80,7 @@ const Profile = () => {
 			}));
 
 		const toSendSkills = JSON.stringify(selectedSkills);
-		console.log(toSendSkills);
+		// console.log(toSendSkills);
 		// First, save the new skills
 		axios
 			.post("http://localhost:8080/profile/submitSkills/", {
@@ -109,14 +109,14 @@ const Profile = () => {
 		if (isAuthenticated && user && user.name) {
 			const fetchData = () => {
 				axios.get(`http://localhost:8080/profile/event-count`).then((res) => {
-					console.log(res.data, "community data");
+					// console.log(res.data, "community data");
 					setCommunity(res.data[0]?.count);
 				});
 			};
 
 			const fetchDataEvent = () => {
 				axios.get(`http://localhost:8080/profile/causes`).then((res) => {
-					console.log(res, "Event data");
+					// console.log(res, "Event data");
 					res.data && setEvent(res.data);
 				});
 			};
@@ -131,7 +131,7 @@ const Profile = () => {
 						},
 					})
 					.then((res) => {
-						console.log(res.data);
+						// console.log(res.data);
 
 						// Update your state or perform further actions with the skills data
 						setUserSkillList(res.data);
@@ -148,11 +148,11 @@ const Profile = () => {
 	}, [isAuthenticated, user]);
 
 	//
-	useEffect(() => {
-		console.log("USER SKILL LIST", userskillList);
-	}, [userskillList]);
+	// useEffect(() => {
+	// 	// console.log("USER SKILL LIST", userskillList);
+	// }, [userskillList]);
 
-	console.log("user", user);
+	// console.log("user", user);
 
 	if (isLoading) {
 		return <div>Loading ...</div>;

@@ -13,55 +13,54 @@ const Community = () => {
 	useEffect(() => {
 		// Fetch community by name
 		if (!isLoading && user) {
-		fetch(`http://localhost:8080/communities/community/${community_id}`)
-			.then((response) => response.json())
-			.then((data) => {
-				setCommunity(data[0]);
-			})
-			.catch((error) => console.error("Error fetching community", error));
-	}
-}, [isLoading, user, community_id]);
+			fetch(`http://localhost:8080/communities/community/${community_id}`)
+				.then((response) => response.json())
+				.then((data) => {
+					setCommunity(data[0]);
+				})
+				.catch((error) => console.error("Error fetching community", error));
+		}
+	}, [isLoading, user, community_id]);
 
-  const routes = [
-    { path: `/communities/community/${community_id}`, label: 'About' },
-    { path: `/posts/${community_id}`, label: 'Forum' },
-    { path: `/events/${community_id}`, label: 'Events' },
-  ];
-  
-  
-  // Log the community data when it changes
-  useEffect(() => {
-    if (community) {
-      console.log('Community data:', community);
-    }
-  }, [community]);
+	const routes = [
+		{ path: `/communities/community/${community_id}`, label: "About" },
+		{ path: `/posts/${community_id}`, label: "Forum" },
+		{ path: `/events/${community_id}`, label: "Events" },
+	];
+
+	// Log the community data when it changes
+	useEffect(() => {
+		if (community) {
+			// console.log('Community data:', community);
+		}
+	}, [community]);
 
 	if (!community) {
 		return <div>Loading community information...</div>;
 	}
 
 	return (
-		<div className="community_about">
-      <Navbar />
-			<div className="community_page">
-				<div className="member_button">
-      <MemberButton/>
+		<div className='community_about'>
+			<Navbar />
+			<div className='community_page'>
+				<div className='member_button'>
+					<MemberButton />
+				</div>
+				<div className='routes'>
+					{routes.map((route, index) => (
+						<Link key={index} to={route.path}>
+							<button className='button'>{route.label}</button>
+						</Link>
+					))}
+				</div>
+				<div className='community_container'>
+					<h1>{community.name}</h1>
+					<img src={community.picture_url} alt={community.name} />
+					<p>{community.description}</p>
+					<p>Location: {community.location}</p>
+				</div>
 			</div>
-      <div className="routes">
-        {routes.map((route, index) => (
-          <Link key={index} to={route.path}>
-            <button className="button">{route.label}</button>
-          </Link>
-        ))}
-      </div>
-      <div className="community_container">
-				<h1>{community.name}</h1>
-				<img src={community.picture_url} alt={community.name} />
-				<p>{community.description}</p>
-				<p>Location: {community.location}</p>
-			</div>
-			</div>
-			</div>
+		</div>
 	);
 };
 

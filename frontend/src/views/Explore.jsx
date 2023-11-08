@@ -51,14 +51,14 @@ const Explore = () => {
 		e.preventDefault();
 		const { name, description, location, cause, picture_url } =
 			e.target.elements;
-		console.log(
-			"Form values:",
-			name.value,
-			description.value,
-			location.value,
-			cause.value,
-			picture_url.value
-		);
+		// console.log(
+		// 	"Form values:",
+		// 	name.value,
+		// 	description.value,
+		// 	location.value,
+		// 	cause.value,
+		// 	picture_url.value
+		// );
 		axios
 			.post("http://localhost:8080/communities/", {
 				params: {
@@ -148,7 +148,7 @@ const Explore = () => {
 											<Input name='name' placeholder='Community Name' />
 											<Input name='description' placeholder='Description' />
 											<InputLabel>Location</InputLabel>
-											<Select name='location'>
+											<Select name='location' defaultValue=''>
 												<MenuItem value='Toronto'>Toronto</MenuItem>
 												<MenuItem value='Brampton'> Brampton</MenuItem>
 												<MenuItem value='Mississauga'> Mississauga</MenuItem>
@@ -161,7 +161,7 @@ const Explore = () => {
 												<MenuItem value='North York'> North York</MenuItem>
 											</Select>
 											<InputLabel>Cause</InputLabel>
-											<Select name='cause'>
+											<Select name='cause' defaultValue=''>
 												<MenuItem value={1}>Political</MenuItem>
 												<MenuItem value={2}>Environmental</MenuItem>
 												<MenuItem value={3}>Social</MenuItem>
