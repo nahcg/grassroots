@@ -83,14 +83,14 @@ const Profile = () => {
 		// console.log(toSendSkills);
 		// First, save the new skills
 		axios
-			.post("http://localhost:8080/profile/submitSkills/", {
+			.post("/profile/submitSkills/", {
 				user_id: user.name,
 				skills: toSendSkills,
 			})
 			.then(function (response) {
 				// Handle the response from the backend if needed
 				// After successfully saving skills, fetch the updated skills
-				return axios.get(`http://localhost:8080/profile/skills`, {
+				return axios.get(`/profile/skills`, {
 					params: {
 						user_id: user.name,
 					},
@@ -108,14 +108,14 @@ const Profile = () => {
 	useEffect(() => {
 		if (isAuthenticated && user && user.name) {
 			const fetchData = () => {
-				axios.get(`http://localhost:8080/profile/event-count`).then((res) => {
+				axios.get(`/profile/event-count`).then((res) => {
 					// console.log(res.data, "community data");
 					setCommunity(res.data[0]?.count);
 				});
 			};
 
 			const fetchDataEvent = () => {
-				axios.get(`http://localhost:8080/profile/causes`).then((res) => {
+				axios.get(`/profile/causes`).then((res) => {
 					// console.log(res, "Event data");
 					res.data && setEvent(res.data);
 				});
@@ -125,7 +125,7 @@ const Profile = () => {
 			// HINT 	const [skillsData, setSkillsData] = useState([]);
 			const fetchSkillsData = () => {
 				axios
-					.get(`http://localhost:8080/profile/skills`, {
+					.get(`/profile/skills`, {
 						params: {
 							user_id: user.name, // Pass user.name as a query parameter
 						},

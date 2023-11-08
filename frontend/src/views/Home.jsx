@@ -17,7 +17,7 @@ const Home = () => {
 	// Fetch events based on the user.email
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`http://localhost:8080/home/events?user_id=${user.email}`, {
+			fetch(`/home/events?user_id=${user.email}`, {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
@@ -39,7 +39,7 @@ const Home = () => {
 	// Fetch communities based on the user.email
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`http://localhost:8080/home/communities?user_id=${user.email}`, {
+			fetch(`/home/communities?user_id=${user.email}`, {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
@@ -56,7 +56,7 @@ const Home = () => {
 	// Fetch posts based on the user.email
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`http://localhost:8080/home/posts?user_id=${user.name}`, {
+			fetch(`/home/posts?user_id=${user.name}`, {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
@@ -73,7 +73,7 @@ const Home = () => {
 	// Fetch all posts that user_id belongs to
 	useEffect(() => {
 		if (!isLoading && user) {
-			fetch(`http://localhost:8080/home/AllPosts?user_id=${user.email}`, {
+			fetch(`/home/AllPosts?user_id=${user.email}`, {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",

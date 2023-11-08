@@ -14,7 +14,7 @@ const MemberButton = () => {
 
 	useEffect(() => {
 		// Fetch users array from the server
-		fetch(`http://localhost:8080/member/${community_id}`)
+		fetch(`/member/${community_id}`)
 			.then((response) => response.json())
 			.then((members) => {
 				setIsMember(members.some((member) => member.user_id === user.email));
@@ -25,7 +25,7 @@ const MemberButton = () => {
 	}, [user.email, community_id]);
 
 	const handleMemberStatus = () => {
-		const apiUrl = `http://localhost:8080/member/${community_id}`;
+		const apiUrl = `/member/${community_id}`;
 
 		if (isMember) {
 			// If the user is already a member, remove them from the community

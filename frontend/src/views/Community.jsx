@@ -13,7 +13,7 @@ const Community = () => {
 	useEffect(() => {
 		// Fetch community by name
 		if (!isLoading && user) {
-			fetch(`http://localhost:8080/communities/community/${community_id}`)
+			fetch(`/communities/community/${community_id}`)
 				.then((response) => response.json())
 				.then((data) => {
 					setCommunity(data[0]);

@@ -29,7 +29,7 @@ The following steps are only for _one_ of the group members to perform.
 
 - Note: nodemon is used, so you should not have to restart your server
 
-8. Visit `http://localhost:8080/`
+8. Visit `/`
 
 ## Warnings & Tips
 

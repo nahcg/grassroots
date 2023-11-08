@@ -19,32 +19,26 @@ const SkillSwapListItem = ({
 	const [volunteerPositionCount, setVolunteerPositionCount] = useState(0);
 
 	useEffect(() => {
-		axios.get(`http://localhost:8080/volunteer/${user}`).then((res) => {
+		axios.get(`/volunteer/${user}`).then((res) => {
 			let data = res.data;
 			setUserVolunteerPositions(data.map((obj) => obj.volunteer_board_id));
 		});
-		axios
-			.get(`http://localhost:8080/volunteer/count/${volunteer_board_id}`)
-			.then((res) => {
-				let data = res.data[0].count;
-				setVolunteerPositionCount(parseInt(data));
-			});
+		axios.get(`/volunteer/count/${volunteer_board_id}`).then((res) => {
+			let data = res.data[0].count;
+			setVolunteerPositionCount(parseInt(data));
+		});
 	}, [volunteerPositionCount, user, volunteer_board_id]);
 
 	const handleJoinClick = () => {
-		axios
-			.post(`http://localhost:8080/volunteer/${user}/${volunteer_board_id}`)
-			.then(() => {
-				setVolunteerPositionCount(volunteerPositionCount + 1);
-			});
+		axios.post(`/volunteer/${user}/${volunteer_board_id}`).then(() => {
+			setVolunteerPositionCount(volunteerPositionCount + 1);
+		});
 	};
 
 	const handleCancelClick = () => {
-		axios
-			.delete(`http://localhost:8080/volunteer/${user}/${volunteer_board_id}`)
-			.then(() => {
-				setVolunteerPositionCount(volunteerPositionCount - 1);
-			});
+		axios.delete(`/volunteer/${user}/${volunteer_board_id}`).then(() => {
+			setVolunteerPositionCount(volunteerPositionCount - 1);
+		});
 	};
 
 	const volunteerPositionsNotAvailable =

@@ -60,7 +60,7 @@ const Explore = () => {
 		// 	picture_url.value
 		// );
 		axios
-			.post("http://localhost:8080/communities/", {
+			.post("/communities/", {
 				params: {
 					name: name.value,
 					description: description.value,
@@ -78,19 +78,17 @@ const Explore = () => {
 
 	useEffect(() => {
 		const fetchData = () => {
-			axios
-				.get(`http://localhost:8080/communities/${causeFilterSelection}`)
-				.then((res) => {
-					// console.log(res.data.communities);
-					setCommunitiesData(res.data.communities);
-				});
+			axios.get(`/communities/${causeFilterSelection}`).then((res) => {
+				// console.log(res.data.communities);
+				setCommunitiesData(res.data.communities);
+			});
 		};
 		fetchData(causeFilterSelection);
 	}, [causeFilterSelection]);
 
 	const fetchDataSearchFilter = (inputText) => {
 		axios
-			.get(`http://localhost:8080/communities/`, {
+			.get(`/communities/`, {
 				params: {
 					name: inputText,
 				},

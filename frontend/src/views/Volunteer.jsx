@@ -32,7 +32,7 @@ function Volunteer() {
 	const handleClose = () => setOpen(false);
 
 	useEffect(() => {
-		axios.get(`http://localhost:8080/volunteer`).then((res) => {
+		axios.get(`/volunteer`).then((res) => {
 			setVolunteerData(res.data);
 		});
 	}, [activeContentIndex]);
@@ -42,7 +42,7 @@ function Volunteer() {
 		e.preventDefault();
 		const data = e.target.elements;
 		axios
-			.post("http://localhost:8080/volunteer/new", {
+			.post("/volunteer/new", {
 				params: {
 					name: data.name.value,
 					description: data.description.value,
