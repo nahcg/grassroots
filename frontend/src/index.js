@@ -19,7 +19,7 @@ root.render(
       clientId={clientId}
       authorizationParams={{
         // redirect_uri: window.location.origin,
-        redirect_uri: "/home",
+        redirect_uri: process.env.REACT_APP_PRODUCTION_URL ? process.env.REACT_APP_PRODUCTION_URL + "/home" : "http://localhost:3000/home",
       }}
     >
       <App />
