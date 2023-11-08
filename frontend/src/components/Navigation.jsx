@@ -5,8 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "../styles/Navigation.css";
 import growth from "./growth.png";
 
-const Navigation = (props) => {
-	const { user, isAuthenticated, isLoading } = useAuth0();
+const Navigation = () => {
+	const { isAuthenticated } = useAuth0();
 
 	return (
 		<nav id='menu' className='navbar navbar-default navbar-fixed-top'>
