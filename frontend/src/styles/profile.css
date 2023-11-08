@@ -1,13 +1,13 @@
 .profile-section {
-  display: flex;
-	padding: 4% 6%;
+	display: flex;
+	padding: 10% 6%;
 }
 .profile-section img {
-  margin-right: 26px; 
+	margin-right: 26px;
 }
 .profile-count-section {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 .profile-section h2 {
 	font-weight: 500;
@@ -18,7 +18,7 @@
 }
 .profile-wrapper {
 	margin: 0 auto;
-	width:50%;
+	width: 50%;
 }
 .checkbox-label {
 	font-size: 15px;
@@ -45,5 +45,5 @@
 	margin-bottom: 30px;
 }
 .profile-details {
-	width:50%;
+	width: 50%;
 }

@@ -61,9 +61,9 @@ const SkillSwapListItem = ({
 			</div>
 			<div className='skillswap-list-item__info'>
 				<p>📍 {location}</p>
-				{cause === 1 && <p>Politics</p>}
-				{cause === 2 && <p>Environment</p>}
-				{cause === 3 && <p>Social</p>}
+				{cause === 1 && <p>🏛️ Politics</p>}
+				{cause === 2 && <p>🌱 Environment</p>}
+				{cause === 3 && <p>⚖️ Social</p>}
 			</div>
 			<div className='skillswap-list-item__dates'>
 				<p>Posted On: {creation_date.slice(0, 10)}</p>

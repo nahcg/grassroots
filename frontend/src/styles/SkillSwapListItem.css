@@ -16,57 +16,71 @@
 
 .skillswap-list-item__header {
 	text-align: center;
+	font-size: 1.5rem;
+	max-width: 75%;
 }
 
 .skillswap-list-item__info {
 	display: flex;
 	align-items: center;
 	gap: 5rem;
-	margin-top: 4rem;
+	margin-top: 2rem;
+	font-size: 1.5rem;
 }
 
 .skillswap-list-item__dates {
 	display: flex;
 	gap: 5rem;
-	margin: 5rem 0;
+	margin: 0.25rem 0;
+	font-size: 1rem;
 }
 
 .skillswap-list-item__status {
 	width: fit-content;
 	height: auto;
-	background-color: yellow;
+	background-color: #48d9f3;
+	color: black;
+	font-size: 1.25rem;
 	padding: 1rem 2rem;
-	border: solid;
-}
-
-.skillswap-list-item__status {
+	border: none;
 	position: absolute;
 	top: 0;
-	left: 0;
+	right: 0;
+	border-radius: 8px 0px 0px 8px;
+	margin-top: 2rem;
 }
+
+/* .skillswap-list-item__status {
+	position: absolute;
+	top: 0;
+	right: 0;
+} */
 
 button.skillswap-list-item__join-button {
 	background-color: green;
 	border-radius: 8px 8px;
-	margin: 2rem 0;
+	margin-top: 2rem;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
 		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
 		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+	font-size: 1.5rem;
 }
 
 button.skillswap-list-item__cancel-button {
 	background-color: red;
 	border-radius: 8px 8px;
-	margin: 2rem 0;
+	margin-top: 2rem;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
 		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
 		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+	font-size: 1.5rem;
 }
 
 .skillswap-list-item__full-button {
 	background-color: grey;
 	color: black;
 	padding: 1rem 2rem;
-	margin-bottom: 2rem;
+	margin-top: 2rem;
 	border-radius: 8px 8px;
+	font-size: 1.5rem;
 }

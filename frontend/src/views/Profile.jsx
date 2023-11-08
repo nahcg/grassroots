@@ -159,53 +159,56 @@ const Profile = () => {
 	}
 	return (
 		isAuthenticated && (
-			<div className='profile-wrapper'>
-				<div className='profile-section'>
+			<div>
+				<Navbar />
+				<div className='profile-wrapper'>
+					<div className='profile-section'>
+						<div>
+							<img src={user.picture} alt={user.name} />
+						</div>
+						<div className='profile-details'>
+							<h2>{user.name}</h2>
+							<div className='profile-count-section'>
+								<p># of Communities Joined</p>
+								<span>{community}</span>
+							</div>
+							<div className='profile-count-section'>
+								<p># of Events RSVP</p>
+								<span>{event}</span>
+							</div>
+						</div>
+					</div>
+
 					<div>
-						<img src={user.picture} alt={user.name} />
-					</div>
-					<div className='profile-details'>
-						<h2>{user.name}</h2>
-						<div className='profile-count-section'>
-							<p># of Communities Joined</p>
-							<span>{community}</span>
-						</div>
-						<div className='profile-count-section'>
-							<p># of Events RSVP</p>
-							<span>{event}</span>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					{userskillList.map((skill, index) => (
-						<div key={index}>
-							<ul>
-								<li>skill experience: {skill.experience_level}</li>
-								<li>skill id : {skill.skill_id}</li>
-							</ul>
-						</div>
-					))}
-				</div>
-
-				<div>
-					<h3 className='skill-header'>Volunteering Skills</h3>
-					<p className='skill-text'>What skills do you have?</p>
-					<div className='skills-container'>
-						{skillsList?.map((item, index) => (
+						{userskillList.map((skill, index) => (
 							<div key={index}>
-								<input
-									value={item.name}
-									type='checkbox'
-									onChange={() => handleSkillChange(item.id)}
-								/>
-								<span className='checkbox-label'>{item.name}</span>
+								<ul>
+									<li>skill experience: {skill.experience_level}</li>
+									<li>skill id : {skill.skill_id}</li>
+								</ul>
 							</div>
 						))}
 					</div>
-					<button className='skill-save' onClick={handleSubmitSkills}>
-						Save
-					</button>
+
+					<div>
+						<h3 className='skill-header'>Volunteering Skills</h3>
+						<p className='skill-text'>What skills do you have?</p>
+						<div className='skills-container'>
+							{skillsList?.map((item, index) => (
+								<div key={index}>
+									<input
+										value={item.name}
+										type='checkbox'
+										onChange={() => handleSkillChange(item.id)}
+									/>
+									<span className='checkbox-label'>{item.name}</span>
+								</div>
+							))}
+						</div>
+						<button className='skill-save' onClick={handleSubmitSkills}>
+							Save
+						</button>
+					</div>
 				</div>
 			</div>
 		)
