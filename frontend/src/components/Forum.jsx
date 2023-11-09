@@ -95,8 +95,8 @@ const Forum = () => {
 			<Navbar />
 			<div className='forum_routes'>
 				{routes.map((route, index) => (
-					<Link key={index} to={route.path} className='link'>
-						{route.label}
+					<Link key={index} to={route.path}>
+						<span className='route-link'>{route.label}</span>
 					</Link>
 				))}
 			</div>
