@@ -9,10 +9,10 @@ div.forum {
 	text-align: center;
 }
 
-.forum_routes a {
+/* .forum_routes a {
 font-weight: bold;
 margin: 0 15px;
-}
+} */
 
 .forum_forum {
 	max-width: 600px;
