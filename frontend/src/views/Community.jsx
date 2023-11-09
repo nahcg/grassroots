@@ -48,13 +48,13 @@ const Community = () => {
 				<div className='member_button'>
 					<MemberButton />
 				</div>
-				<div className='routes'>
-					{routes.map((route, index) => (
-						<Link key={index} to={route.path}>
-							<button className='button'>{route.label}</button>
-						</Link>
-					))}
-				</div>
+				<div className="community_routes">
+  {routes.map((route, index) => (
+    <Link key={index} to={route.path} className="route-link">
+      {route.label}
+    </Link>
+  ))}
+</div>
 				<div className='community_container'>
 					<h1>{community.name}</h1>
 					<img src={community.picture_url} alt={community.name} />

@@ -108,3 +108,20 @@ margin: 0 15px;
 .forum_comment-form button {
 	margin-top: 10px;
 }
+
+.route-link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin: 0 20px;
+  cursor: pointer;
+  text-transform: capitalize; /* Capitalize the text */
+  transition: all 0.3s ease; /* Add smooth transition effect */
+  font-size: 36px;
+}
+
+
+.route-link:hover {
+  border: 2px solid rgb(48, 48, 193); /* Add border on hover */
+  padding: 5px 10px; /* Optional: Add padding to the border */
+}
