@@ -6,6 +6,7 @@ const Comment = ({ comment }) => {
 	return (
 		<div className='comment'>
 			<p>{comment.comment}</p>
+      <p>By: {comment.user_id}</p>
 		</div>
 	);
 };
