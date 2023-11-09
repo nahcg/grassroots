@@ -4,6 +4,5 @@ CREATE TABLE comments (
   comment_id serial PRIMARY KEY NOT NULL,
   post_id int REFERENCES posts(post_id),
   comment TEXT,
-  timestamp TIMESTAMP,
-  user_id TEXT
+  timestamp TIMESTAMP
 );

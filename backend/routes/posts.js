@@ -48,10 +48,10 @@ router.get("/comments/:post_id", (req, res) => {
 
 router.post("/comments/:post_id", (req, res) => {
   const post_id = req.params.post_id;
-  const { user_id, comment, timestamp } = req.body;
+  const { comment, timestamp } = req.body;
 
   postQueries
-    .addComment(post_id, comment, timestamp, user_id)
+    .addComment(post_id, comment, timestamp)
     .then((results) => {
       res.json(results);
       console.log("results from comment post", results);

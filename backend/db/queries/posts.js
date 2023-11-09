@@ -55,11 +55,11 @@ const getComments = async (post_id) => {
   }
 };
 
-const addComment = async (post_id, comment, timestamp, user_id) => {
+const addComment = async (post_id, comment, timestamp) => {
   try {
     const newComment = await db.query(
-      `INSERT INTO comments (post_id, comment, timestamp, user_id) VALUES($1, $2, $3, $4) RETURNING *`,
-      [post_id, comment, timestamp, user_id]
+      `INSERT INTO comments (post_id, comment, timestamp) VALUES($1, $2, $3) RETURNING *`,
+      [post_id, comment, timestamp]
     );
     console.log("Fetched added comment:", newComment); // Log the fetched comments
     return newComment;

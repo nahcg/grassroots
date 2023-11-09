@@ -41,7 +41,6 @@ const Post = ({ post, post_id, user_id }) => {
 			post_id: post_id,
 			comment: newComment,
 			timestamp: currentTimestamp.toISOString(),
-      user_id: user.name,
 		};
 		// console.log("commentData", newCommentData);
 
