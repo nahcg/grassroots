@@ -18,7 +18,7 @@ const CalendarApp = () => {
 	const { user, isLoading } = useAuth0();
 
 	const routes = [
-		{ path: `/community/communities/${community_id}`, label: "About" },
+		{ path: `/communities/community/${community_id}`, label: "About" },
 		{ path: `/posts/${community_id}`, label: "Forum" },
 		{ path: `/events/${community_id}`, label: "Events" },
 	];
