@@ -13,10 +13,21 @@
   margin-bottom: 10px;
 }
 
+
 .community_container img {
-  max-width: 70%;
+  max-width: 80%;
+  height: auto;
   margin-bottom: 20px;
+  border-radius: 20px; 
+  transition: transform 0.5s ease; 
 }
+
+
+/* Add scaling effect on hover for the image */
+.community_container img:hover {
+  transform: scale(1.05); 
+}
+
 
 .community_container p {
   font-size: 16px;
@@ -64,4 +75,33 @@
 .route-link:hover {
   border: 2px solid rgb(48, 48, 193); /* Add border on hover */
   padding: 5px 10px; /* Optional: Add padding to the border */
+}
+
+
+.community_missions_goals {
+  margin-top: 40px;
+}
+
+.community_missions_goals h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.community_missions_goals ul {
+  list-style: none;
+  padding: 0;
+}
+
+.community_missions_goals li {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.community_missions_goals li:before {
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
