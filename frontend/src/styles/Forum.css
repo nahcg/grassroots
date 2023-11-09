@@ -124,4 +124,5 @@ margin: 0 15px;
 .route-link:hover {
   border: 2px solid rgb(48, 48, 193); /* Add border on hover */
   padding: 5px 10px; /* Optional: Add padding to the border */
+
 }
