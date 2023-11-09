@@ -61,7 +61,22 @@ const Community = () => {
 				</div>
 				<p>{community.description}</p>
 				<p>Location: {community.location}</p>
-			</div>
+				<div className="community_missions_goals">
+    <h2>Missions</h2>
+    <ul>
+      <li>Sample Mission 1</li>
+      <li>Sample Mission 2</li>
+      <li>Sample Mission 3</li>
+    </ul>
+
+    <h2>Goals</h2>
+    <ul>
+      <li>Sample Goal 1</li>
+      <li>Sample Goal 2</li>
+      <li>Sample Goal 3</li>
+    </ul>
+  </div>
+</div>
 			</div>
 			</div>
 	);
