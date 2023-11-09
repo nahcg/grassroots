@@ -1,6 +1,4 @@
-.community-grid__item {
-	/* background-color: rgb(221, 221, 221);
-	border-style: solid; */
+/* .community-grid__item {
 	height: 350px;
 	width: 400px;
 	display: flex;
@@ -11,8 +9,6 @@
 }
 
 .community-grid__item:hover {
-	/* background-color: rgb(221, 221, 221); */
-	/* border-style: solid; */
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
 		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
@@ -26,4 +22,66 @@
 
 .community-grid__info {
 	text-align: center;
+} */
+
+.community-grid__item {
+  height: 350px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+
+.community-grid__item:hover {
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+  border-color: #594caf;
+}
+
+
+.community-grid__image {
+  clip-path: circle();
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  margin: 5px;
+}
+
+
+.community-grid__info {
+  text-align: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+
+.community-grid__info h4 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #333;
+  transition: color 0.4s ease;
+}
+
+
+.community-grid__info h4:hover {
+  color: rgb(76, 97, 175);
+  cursor: pointer;
+}
+
+
+.community-grid__info span {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 8px;
+  display: block;
+}
+
+
+.community-grid__info div {
+  font-size: 18px;
+  color: #4c51af;
 }

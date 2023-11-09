@@ -1,4 +1,4 @@
-.community-grid {
+/* .community-grid {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -6,4 +6,15 @@
 	list-style-type: none;
 	margin: 50px auto;
 	padding: 0;
+} */
+
+
+.community-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: none;
+  margin: 80px 80px;
+  padding: 10px;
 }
