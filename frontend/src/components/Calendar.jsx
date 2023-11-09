@@ -273,17 +273,25 @@ const renderForm = () => {
 
         <div className="custom-events">
           {/* Event list with edit and delete buttons */}
-          <h2>Events:</h2>
+          <h1>Events:</h1>
           {renderForm()}
           <ul className="events">
-            {events.map((event, index) => (
-              <li key={index} className="event-item">
-                {/* Display event date, title, location, and description */}
-                {new Date(event.date).toDateString()} - {event.title} at {event.location} <br /> {event.description}
-                <button onClick={() => editEvent(event.event_id)}>Edit</button> 
-                <button onClick={() => deleteEvent(event.event_id)}>Delete</button>
-              </li>
-            ))}
+          {events.map((event, index) => (
+  <li key={index} className="event-item">
+    <h3>{event.title}</h3>
+    <p>{event.location}</p>
+    <p>{event.description}</p>
+    <p>Date: {new Date(event.date).toDateString()}</p>
+    <div>
+      <button className="edit-button" onClick={() => editEvent(event.event_id)}>
+        Edit
+      </button>
+      <button className="delete-button" onClick={() => deleteEvent(event.event_id)}>
+        Delete
+      </button>
+    </div>
+  </li>
+))}
           </ul>
         </div>
       </div>
