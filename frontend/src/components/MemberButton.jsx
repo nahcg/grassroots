@@ -25,7 +25,7 @@ const MemberButton = () => {
 	}, [user.email, community_id]);
 
 	const handleMemberStatus = () => {
-		const apiUrl = `/member/${community_id}`;
+		const apiUrl = `${process.env.REACT_APP_BASEURL}/member/${community_id}`;
 
 		if (isMember) {
 			// If the user is already a member, remove them from the community
