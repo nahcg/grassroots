@@ -6,7 +6,7 @@ import "../styles/Navigation.css";
 import growth from "./growth.png";
 
 const Navigation = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated} = useAuth0();
 
   return (
     <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
