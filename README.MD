@@ -7,7 +7,6 @@ Insert a blurb about this app.
 ### Contributors
 
 <div align="center">
-<img src="https://github.com/swathij943.png" width="60px;"/>
 <img src="https://github.com/nahcg.png" width="60px;"/>
 <img src="https://github.com/MithraPerera.png" width="60px;"/>
 </div>
