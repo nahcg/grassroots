@@ -93,4 +93,57 @@ const deleteEvent = async (event_id, community_id) => {
   }
 };
 
-module.exports = { getEvent, editEvent, getEventById, addEvent, deleteEvent };
+const addEventAttendee = async (member_id, user_id, event_id) => {
+  try {
+    const user = await db.query(
+      `INSERT INTO event_members (member_id, user_id, event_id) VALUES($1, $2, $3) RETURNING *`,
+      [member_id, user_id, event_id]
+    );
+    console.log("Fetched user:", user); // Log the fetched events
+    return user;
+  } catch (error) {
+    console.error("Error fetching user:", error); // Log any errors
+    throw error;
+  }
+};
+
+const deleteEventAttendee = async (event_id, user_id) => {
+  try {
+    const user = await db.query(
+      `DELETE FROM event_attendees WHERE event_id = $1 AND user_id = $2`,
+      [event_id, user_id]
+    );
+    return user;
+  } catch (error) {
+    console.error("Error deleting user:", error); // Log any errors
+    throw error;
+  }
+};
+
+// get event attendee names and event name
+const getEventAttendee = async (event_id) => {
+  try {
+    const event = await db.query(
+      `SELECT *
+       FROM event_members
+       WHERE event_id = $1`,
+      [event_id]
+    );
+    console.log("Fetched events:", event); // Log the fetched events
+    return event;
+  } catch (error) {
+    console.error("Error fetching events:", error); // Log any errors
+    throw error;
+  }
+};
+
+module.exports = {
+  getEvent,
+  editEvent,
+  getEventById,
+  addEvent,
+  deleteEvent,
+  addEventAttendee,
+  deleteEventAttendee,
+  getEventAttendee,
+};

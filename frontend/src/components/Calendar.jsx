@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/Calendar.css';
 import '../App.css'
+import EventButton from "../components/EventButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const CalendarApp = () => {
@@ -289,6 +290,7 @@ const renderForm = () => {
       <button className="delete-button" onClick={() => deleteEvent(event.event_id)}>
         Delete
       </button>
+      <EventButton event_id={event.event_id} user_id={user.email} />
     </div>
   </li>
 ))}

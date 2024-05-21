@@ -45,11 +45,11 @@ const usersRoutes = require("./routes/users");
 const eventsRoutes = require("./routes/events");
 const communitiesRoutes = require("./routes/communities");
 const postsRoutes = require("./routes/posts");
-const user_skills_Routes = require("./routes/userskills");
 const profileRoutes = require("./routes/profile");
 const volunteerRoutes = require("./routes/volunteer");
 const memberRoutes = require("./routes/member");
 const homeRoutes = require("./routes/home");
+const eventMemberRoutes = require("./routes/eventmembers");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -60,13 +60,11 @@ app.use("/events", eventsRoutes);
 app.use("/communities", communitiesRoutes);
 app.use("/posts", postsRoutes);
 app.use("/events", eventsRoutes);
-app.use("/user/skills", user_skills_Routes);
 app.use("/profile", profileRoutes);
-app.use("/profile/skills", user_skills_Routes);
-app.use("/profile/submitSkills", profileRoutes);
 app.use("/volunteer", volunteerRoutes);
 app.use("/member", memberRoutes);
 app.use("/home", homeRoutes);
+app.use("/eventmembers", eventMemberRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!

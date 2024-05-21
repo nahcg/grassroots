@@ -8,7 +8,7 @@ import Home from "./views/Home";
 import Community from "./views/Community";
 import Event from "./views/Event";
 import Volunteer from "./views/Volunteer";
-import Profile from "./views/Profile";
+import Skills from "./views/Skills";
 import Forum from "./components/Forum";
 import Post from "./components/Post";
 import Explore from "./views/Explore";
@@ -29,7 +29,7 @@ function App() {
           element={<Community />}
         />
         <Route path="/volunteer" element={<Volunteer />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/skills" element={<Skills />} />
         <Route path="/posts/:community_id/*" element={<Forum />} />
         <Route path="/posts/comments/:post_id" element={<Post />} />
       </Routes>
