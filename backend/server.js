@@ -48,7 +48,7 @@ const eventMemberRoutes = require("./routes/eventmembers");
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 // app.use("/api/users", userApiRoutes);
-app.use("/skills", skillsRoutes);
+app.use("/profile", skillsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/communities", communitiesRoutes);
 app.use("/posts", postsRoutes);
