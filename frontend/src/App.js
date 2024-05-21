@@ -32,6 +32,7 @@ function App() {
         <Route path="/skills" element={<Skills />} />
         <Route path="/posts/:community_id/*" element={<Forum />} />
         <Route path="/posts/comments/:post_id" element={<Post />} />
+        <Route path="/profile/:email" element={<Skills />} />
       </Routes>
     </div>
   );
