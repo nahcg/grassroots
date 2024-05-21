@@ -137,6 +137,22 @@ const getEventAttendee = async (event_id) => {
   }
 };
 
+//get events that user_id has joined
+const getUserEvents = async (user_id) => {
+  try {
+    const event = await db.query(
+      `SELECT * FROM Events JOIN event_members ON event_members.event_id = Events.event_id WHERE event_members.user_id = $1;`,
+      [user_id]
+    );
+    console.log("Fetched events:", event); // Log the fetched events
+    console.log("user", user_id);
+    return event;
+  } catch (error) {
+    console.error("Error fetching events:", error); // Log any errors
+    throw error;
+  }
+};
+
 module.exports = {
   getEvent,
   editEvent,
@@ -146,4 +162,5 @@ module.exports = {
   addEventAttendee,
   deleteEventAttendee,
   getEventAttendee,
+  getUserEvents,
 };

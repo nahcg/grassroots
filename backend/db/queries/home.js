@@ -1,6 +1,6 @@
 const db = require("../connection");
 
-//get all events of a user_id;
+//get all events of communities that a user_id is a part of;
 const getEvents = async (user_id) => {
   try {
     const event = await db.query(

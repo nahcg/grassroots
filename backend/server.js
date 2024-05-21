@@ -35,17 +35,10 @@ app.use(cors());
 // Serve static files from the 'public' directory
 // app.use(express.static("public"));
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-// const userApiRoutes = require("./routes/users-api");
-// const widgetApiRoutes = require("./routes/widgets-api");
-// const usersRoutes = require("./routes/users");
-// const userApiRoutes = require("./routes/users");
-const usersRoutes = require("./routes/users");
+const skillsRoutes = require("./routes/skills");
 const eventsRoutes = require("./routes/events");
 const communitiesRoutes = require("./routes/communities");
 const postsRoutes = require("./routes/posts");
-const profileRoutes = require("./routes/profile");
 const volunteerRoutes = require("./routes/volunteer");
 const memberRoutes = require("./routes/member");
 const homeRoutes = require("./routes/home");
@@ -55,12 +48,11 @@ const eventMemberRoutes = require("./routes/eventmembers");
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 // app.use("/api/users", userApiRoutes);
-app.use("/users", usersRoutes);
+app.use("/skills", skillsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/communities", communitiesRoutes);
 app.use("/posts", postsRoutes);
 app.use("/events", eventsRoutes);
-app.use("/profile", profileRoutes);
 app.use("/volunteer", volunteerRoutes);
 app.use("/member", memberRoutes);
 app.use("/home", homeRoutes);

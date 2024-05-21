@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const homeQueries = require("../db/queries/home");
 
-// Express route for getting all events for a user
+// Express route for getting all events for a user for the communities they are a part of
 router.get("/events", (req, res) => {
   const user_id = req.query.user_id; // Access user_id from query parameters
   homeQueries
