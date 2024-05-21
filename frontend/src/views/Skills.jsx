@@ -13,7 +13,6 @@ const Skills = () => {
 	const { email } = useParams();
 
 	useEffect(() => {
-	console.log("email", email);
 		// Fetch user skills by email
 		if (!isLoading) {
 		fetch(`http://localhost:8080/profile/events?user_id=${email}`)
@@ -43,15 +42,34 @@ const handleEditModeToggle = () => {
 
 const handleSaveSkills = () => {
 	// Send PUT request to update the edited skill
-	fetch(`http://localhost:8080/profile/user/${email}/skill/${editedSkill.user_skills_id}`, {
-			method: "PUT",
-			headers: {
-					"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
+	console.log("editedSkill2", editedSkill)
+
+  fetch(`http://localhost:8080/profile/skills`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: editedSkill.name }),
+  })
+    .then((response) => {
+      if (!response.ok && response.status !== 409) {
+        throw new Error("Failed to insert skill");
+      }
+      return response.json();
+    })
+    .then(() => {
+      // Send PUT request to update the edited skill
+      return fetch(`http://localhost:8080/profile/user/${email}/skill/${editedSkill.user_skills_id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
 					level: editedSkill.level,
+					name: editedSkill.name
 			}),
-	})
+	});
+})
 			.then((response) => {
 					if (!response.ok) {
 							throw new Error("Failed to update skill");
@@ -63,7 +81,12 @@ const handleSaveSkills = () => {
 					// You can add additional logic here based on your requirement
 					setEditedSkill(null); // Clear edited skill state
 					setEditMode(false); // Exit edit mode after saving
-			})
+					setSkills((prevSkills) => 
+						prevSkills.map(skill => 
+							skill.user_skills_id === editedSkill.user_skills_id ? data : skill
+						)
+					);
+				})
 			.catch((error) => {
 					console.error("Error updating skill:", error);
 			});
@@ -74,11 +97,17 @@ const handleEditSkill = (skill) => {
 	setEditMode(true); // Enter edit mode
 };
 
+const handleLevelChange = (e) => {
+	if (!editedSkill) return; // Check if there is an edited skill
+	setEditedSkill((prevEditedSkill) => ({
+			...prevEditedSkill,
+			level: e.target.value,
+	})); // Update the level in editedSkill
+};
 
 if (isLoading || !skills || !events ) {
 	return <div>Loading...</div>; // Show loading state while fetching data
 }
-console.log("editedSkills", editedSkill)
 
 return (
 	<div className="profile">
@@ -95,7 +124,7 @@ return (
                                         defaultValue={editedSkill.name}
                                         onChange={(e) => setEditedSkill({ ...editedSkill, name: e.target.value })}
                                     />
-                                    <select>
+                                    <select value={editedSkill.level} onChange={handleLevelChange}>
                                         <option value="Beginner">Beginner</option>
                                         <option value="Intermediate">Intermediate</option>
                                         <option value="Advanced">Advanced</option>

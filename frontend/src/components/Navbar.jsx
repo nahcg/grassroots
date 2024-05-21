@@ -12,7 +12,6 @@ const Navbar = () => {
     return <div>Loading...</div>;
   }
 
-	console.log("navbar", user)
 	return (
 		<nav className='app-navbar'>
 			<div className="background_nav"><img src={background} alt="" /></div>
