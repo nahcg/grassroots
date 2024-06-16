@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-//import "../styles/profile.css";
+import "../styles/Profile.css";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
@@ -85,16 +85,21 @@ if (isLoading || !skills || !events) {
 	return <div>Loading...</div>; // Show loading state while fetching data
 }
 
+// user.email and user in params are the same
+const canEdit = user && user.email === email;
+
 return (
 	<div className="profile">
 		<Navbar />
 		<div className="skills">
+		<h2>Skills</h2>
 			<ul>
 				{skills.map((skill) => (
 					<li key={skill.user_skills_id}>
-						{skill.name} - {skill.level}
+						<span className="skill-name">{skill.name}</span>
+						<span className="skill-level">{skill.level}</span>
 						{editMode && editedSkill && editedSkill.user_skills_id === skill.user_skills_id ? (
-							<div>
+							<div className="edit-mode">
 								<select value={editedSkill.level} onChange={handleLevelChange}>
 									<option value="Beginner">Beginner</option>
 									<option value="Intermediate">Intermediate</option>
@@ -103,13 +108,14 @@ return (
 								<button onClick={handleSaveSkills}>Save</button>
 							</div>
 						) : (
-							<button onClick={() => handleEditSkill(skill)}>Change Level</button>
+							canEdit && <button onClick={() => handleEditSkill(skill)}>Change Level</button>
 						)}
 					</li>
 				))}
 			</ul>
 		</div>
 		<div className="events">
+		<h2>Events</h2>
 			<ul>
 				{events.map((event) => (
 					<li key={event.event_id}>

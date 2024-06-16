@@ -1,0 +1,48 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.skills li {
+  display: flex;
+  align-items: flex-start; 
+  justify-content: center; 
+  margin-bottom: 10px; 
+}
+
+.skill-name {
+  margin-right: 100px; /* Adjusted space between skill name and level */
+}
+
+.skill-level {
+  margin-right: 10px; /* Adjusted space between skill level and edit button */
+}
+
+.edit-mode {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.edit-mode select {
+  margin-right: 10px; /* Adjusted space between select and button */
+}
+
+.skills,
+.events {
+  text-align: center;
+}
+
+.skills {
+  padding-top: 50px;
+}
+
+.events {
+  padding-bottom: 50px;
+}
+
+.skills h2,
+.events h2 {
+  font-size: 24px; 
+  font-weight: bold; 
+  margin-bottom: 20px;
+}
