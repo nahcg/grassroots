@@ -3,40 +3,43 @@ ul {
   padding: 0;
 }
 
+.skills {
+  text-align: center;
+  padding-top: 50px;
+  padding-right: 250px;
+  padding-left: 250px;
+}
+
 .skills li {
-  display: flex;
-  align-items: flex-start; 
-  justify-content: center; 
-  margin-bottom: 10px; 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Adjust columns as needed */
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 10px;
 }
 
 .skill-name {
-  margin-right: 100px; /* Adjusted space between skill name and level */
+  grid-column: 1; /* Align skill name in the first column */
+  text-align: left; /* Adjust text alignment */
 }
 
 .skill-level {
-  margin-right: 10px; /* Adjusted space between skill level and edit button */
+  grid-column: 2; /* Align skill level in the second column */
+  text-align: center; /* Adjust text alignment */
 }
 
 .edit-mode {
   display: flex;
-  align-items: center; /* Align items vertically */
+  align-items: center;
 }
 
 .edit-mode select {
-  margin-right: 10px; /* Adjusted space between select and button */
+  margin-right: 10px; /* Adjust spacing */
 }
 
-.skills,
+
 .events {
   text-align: center;
-}
-
-.skills {
-  padding-top: 50px;
-}
-
-.events {
   padding-bottom: 50px;
 }
 
