@@ -46,4 +46,29 @@ router.get("/user", (req, res) => {
     });
 });
 
+router.put("/user/:user_id/skill/:user_skills_id", (req, res) => {
+  const { user_id, user_skills_id } = req.params;
+  const { level } = req.body;
+  skillsQueries
+    .updateUserSkillLevel(level, user_id, parseInt(user_skills_id, 10))
+    .then((updatedSkill) => {
+      res.json(updatedSkill);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.post("/skills", (req, res) => {
+  const { name } = req.body;
+  skillsQueries
+    .insertSkill(name)
+    .then((newSkill) => {
+      res.json(newSkill);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;
