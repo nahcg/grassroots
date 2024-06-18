@@ -12,6 +12,8 @@ const Skills = () => {
 	const [editedSkill, setEditedSkill] = useState(null);
 	const { email } = useParams();
 
+	console.log(user)
+
 	useEffect(() => {
 		// Fetch user events by email
 		if (!isLoading) {
@@ -115,11 +117,11 @@ return (
 			</ul>
 		</div>
 		<div className="events">
-		<h2>Events</h2>
+		<h2>Events {user.given_name} is Attending</h2> 
 			<ul>
 				{events.map((event) => (
 					<li key={event.event_id}>
-						{event.title} - {event.description}
+						{event.title}: {event.description} at {event.location}
 					</li>
 				))}
 			</ul>

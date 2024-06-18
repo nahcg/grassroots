@@ -8,6 +8,7 @@ ul {
   padding-top: 50px;
   padding-right: 250px;
   padding-left: 250px;
+  padding-bottom: 50px;
 }
 
 .skills li {
@@ -48,4 +49,8 @@ ul {
   font-size: 24px; 
   font-weight: bold; 
   margin-bottom: 20px;
+}
+
+.events li {
+  margin-bottom: 5px;
 }
