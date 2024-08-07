@@ -2,7 +2,7 @@
 
 ## ℹ️ About
 
-Insert a blurb about this app.
+Social network website focused on connecting people around social issues and driving action through events and discussion.
 
 ### Contributors
 
@@ -14,8 +14,7 @@ Insert a blurb about this app.
 ## 💻 App Demo
 
 ### Features
-
-## 👾 Tech
+Forum, Volunteer Board, Groups, Profiles
 
 ### Tech Stack
 
@@ -27,8 +26,6 @@ Insert a blurb about this app.
 
 ### Dependencies
 
-### PostgreSQL ERD
-
-## 🏁 Getting Started
+### Getting Started
 
 ### Database & Application Setup
