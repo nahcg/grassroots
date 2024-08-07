@@ -2,7 +2,7 @@
 
 ## ℹ️ About
 
-Social network website focused on connecting people around social issues and driving action through events and discussion.
+Social network website focused on connecting people and forming communities through common interests around social issues, driving action from the ground up through events and discussion.
 
 ### Contributors
 
@@ -14,7 +14,11 @@ Social network website focused on connecting people around social issues and dri
 ## 💻 App Demo
 
 ### Features
-Forum, Volunteer Board, Groups, Profiles
+User Home Page:
+Forum:
+Volunteer Board:
+Groups:
+Profiles:
 
 ### Tech Stack
 
@@ -24,8 +28,8 @@ Forum, Volunteer Board, Groups, Profiles
   </a>
 </p>
 
-### Dependencies
-
 ### Getting Started
 
 ### Database & Application Setup
+
+### Dependencies
