@@ -14,7 +14,8 @@ Social network website focused on connecting people and forming communities thro
 ## 💻 App Demo
 
 ### Features
-User Home Page:
+**User Home Page:
+
 Forum:
 Volunteer Board:
 Groups:
