@@ -16,7 +16,7 @@ Social network website focused on connecting people and forming communities thro
 ### Features
 **User Home Page:** Logged in user sees the groups they belong to, the events and posts specific to their groups, and the post they've authored.
 
-**Forum:** In each group, users can create posts and comment on others posts. Users can star posts to pin them to the top for visibility.
+**Forum:** In each group, users can create posts and comment on others' posts. Users can star posts to pin them to the top for visibility.
 
 **Volunteer Board:** Users can see, post and join volunteer positions past and present.
 
@@ -34,6 +34,9 @@ Social network website focused on connecting people and forming communities thro
 
 ### Getting Started
 
+
 ### Database & Application Setup
 
+
 ### Dependencies
+
