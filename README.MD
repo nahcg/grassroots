@@ -32,11 +32,31 @@ Social network website focused on connecting people and forming communities thro
   </a>
 </p>
 
-### Getting Started
-
-
 ### Database & Application Setup
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
 
+Create the .env by using .env.example as a reference: cp .env.example .env
+Update the .env file with your correct local information
+username: labber
+password: labber
+database: midterm
+host: localhost
+
+Install dependencies: npm i
+Fix to binaries for sass: npm rebuild node-sass
+
+Start the PostgreSQL server by using the psql command in terminal
+Create database and tables using node-postgres
+  CREATE DATABASE midterm;
+  \c midterm 
+Reset database: npm run db:reset
+
+cd frontend
+Run the server: npm run local
+
+cd backend
+Run the server: npm run start
 
 ### Dependencies
 
