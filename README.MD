@@ -40,7 +40,7 @@ Social network website focused on connecting people and forming communities thro
 Create the .env by using .env.example as a reference <br />
 Update the .env file with your correct local information
 
-Install dependencies: `npm i` <\br>
+Install dependencies: `npm i` <br />
 Fix to binaries for sass: `npm rebuild node-sass`
 
 Start the PostgreSQL server by using the psql command in terminal <\br>
