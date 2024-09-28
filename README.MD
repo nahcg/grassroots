@@ -34,7 +34,7 @@ Social network website focused on connecting people and forming communities thro
 
 ### Database & Application Setup
 
-`git clone https://github.com/nahcg/grassroots.git` <\br>
+`git clone https://github.com/nahcg/grassroots.git` <br />
 `cd grassroots`
 
 Create the .env by using .env.example as a reference <br />
