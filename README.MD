@@ -34,26 +34,26 @@ Social network website focused on connecting people and forming communities thro
 
 ### Database & Application Setup
 
-git clone https://github.com/nahcg/grassroots.git
+git clone https://github.com/nahcg/grassroots.git <br />
 cd grassroots
 
-Create the .env by using .env.example as a reference
+Create the .env by using .env.example as a reference <br />
 Update the .env file with your correct local information
 
-Install dependencies: npm i
+Install dependencies: npm i <br />
 Fix to binaries for sass: npm rebuild node-sass
 
-Start the PostgreSQL server by using the psql command in terminal
-Create database and tables using node-postgres
-  CREATE DATABASE grassroots;
+Start the PostgreSQL server by using the psql command in terminal <br />
+Create database and tables using node-postgres <br />
+  CREATE DATABASE grassroots; <br />
   \c grassroots 
 
-Reset database: npm run db:reset
+Reset database: npm run db:reset 
 
-cd frontend
+cd frontend <br />
 Run the server: npm run start
 
-cd backend
+cd backend <br />
 Run the server: npm run start
 
 ### Dependencies
