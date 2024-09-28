@@ -37,12 +37,8 @@ Social network website focused on connecting people and forming communities thro
 git clone https://github.com/nahcg/grassroots.git
 cd grassroots
 
-Create the .env by using .env.example as a reference: cp .env.example .env
+Create the .env by using .env.example as a reference
 Update the .env file with your correct local information
-username: labber
-password: labber
-database: grassroots
-host: localhost
 
 Install dependencies: npm i
 Fix to binaries for sass: npm rebuild node-sass
@@ -51,6 +47,7 @@ Start the PostgreSQL server by using the psql command in terminal
 Create database and tables using node-postgres
   CREATE DATABASE grassroots;
   \c grassroots 
+
 Reset database: npm run db:reset
 
 cd frontend
