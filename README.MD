@@ -43,10 +43,10 @@ Update the .env file with your correct local information
 Install dependencies: `npm i` <br />
 Fix to binaries for sass: `npm rebuild node-sass`
 
-Start the PostgreSQL server by using the psql command in terminal <\br>
-Create database and tables using node-postgres 
-  ```CREATE DATABASE grassroots;```
-  ```\c grassroots``` 
+Start the PostgreSQL server by using the psql command in terminal <br />
+Create database and tables using node-postgres <br />
+  ```CREATE DATABASE grassroots;``` <br />
+  ```\c grassroots``` <br />
 
 Reset database: `npm run db:reset`
 
