@@ -15,9 +15,11 @@ Social network website focused on connecting people and forming communities thro
 
 ### Features
 **User Home Page:** Logged in user sees the groups they belong to, the events and posts specific to their groups, and the post they've authored.
+<video src="https://github.com/user-attachments/assets/6800739e-5562-4795-8534-5caf011d6c71"></video>
 
 
 **Groups:** Users can search and filter groups by interest, read about their relevant causes and join to get updates. Groups can be filtered by general interest such as social or political. Users can create new groups.
+<video src="https://github.com/user-attachments/assets/0daca352-a602-40df-871c-f57e560c57d8"></video>
 
 
 **Forum:** In each group, users can create posts and comment on others' posts. Users can star posts to pin them to the top for visibility.
