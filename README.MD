@@ -24,7 +24,7 @@ Social network website focused on connecting people and forming communities thro
 <br />
 
 **Forum:** In each group, users can create posts and comment on others' posts. Users can star posts to pin them to the top for visibility.
-<video src="https://github.com/user-attachments/assets/b114496e-308a-4666-8e49-9ef9ab33c84d" width=width="740" height="360"></video>
+<video src="https://github.com/user-attachments/assets/b114496e-308a-4666-8e49-9ef9ab33c84d" width="740" height="360"></video>
 <br />
 
 **Volunteer Board:** Users can see, post and join volunteer positions past and present.
