@@ -64,3 +64,8 @@ Run the server: `npm run start`
 
 ### Dependencies
 
+React
+Express
+Axios
+PG
+Material UI
