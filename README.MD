@@ -33,6 +33,7 @@ Social network website focused on connecting people and forming communities thro
 
 **Profiles:** Users can edit their own profile to include skills, interests and contact information. They can browse other profiles to see others' skills and groups they have joined.
 <video src="https://github.com/user-attachments/assets/9e4aeb31-a522-4503-80fe-968626243a8b" width="740" height="360"></video>
+<br />
 
 ### Tech Stack
 
